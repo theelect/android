@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CardButtonView">
+        <attr name="btnTitleText" format="reference" localization="suggested" />
+        <attr name="imageSrc" format="reference" localization="suggested" />
+        <attr name="btnTextColor" format="reference" localization="suggested" />
+        <attr name="btnBackgroundColor" format="reference" localization="suggested" />
+        <attr name="btnElevation" format="dimension" localization="suggested" />
+        <attr name="btnContentPadding" format="dimension" localization="suggested" />
+        <attr name="btnContentVerticalPadding" format="dimension" localization="suggested" />
+        <attr name="btnContentHorizontalPadding" format="dimension" localization="suggested" />
+        <attr name="btnTextSize" format="dimension" localization="suggested" />
+    </declare-styleable>
+
+
+    <declare-styleable name="TitledEditText">
+        <attr name="editTextHint" format="reference" localization="suggested" />
+        <attr name="editTextImageSrc" format="reference" localization="suggested" />
+        <attr name="editTextTitle" format="reference" localization="suggested" />
+        <attr name="isPasswordField" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CollapsingCardBehavior">
+        <attr name="collapsedTarget" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="LocationCardBehavior">
+        <attr name="finalYPosition" format="dimension"/>
+        <attr name="startXPosition" format="dimension"/>
+        <attr name="startToolbarPosition" format="dimension"/>
+        <attr name="startHeight" format="dimension"/>
+        <attr name="finalHeight" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="DateLabel">
+        <attr name="hint" format="string" />
+        <attr name="cta" format="string" />
+    </declare-styleable>
+
+    <attr name="superBottomSheet_dim" format="float"/>
+    <attr name="superBottomSheet_backgroundColor" format="color"/>
+    <attr name="superBottomSheet_cornerRadius" format="dimension"/>
+    <attr name="superBottomSheet_animateCornerRadius" format="boolean"/>
+    <attr name="superBottomSheet_animateStatusBar" format="boolean"/>
+    <attr name="superBottomSheet_alwaysExpanded" format="boolean"/>
+    <attr name="superBottomSheet_cancelableOnTouchOutside" format="boolean"/>
+    <attr name="superBottomSheet_cancelable" format="boolean"/>
+    <attr name="superBottomSheet_statusBarColor" format="color"/>
+    <attr name="superBottomSheet_peekHeight" format="dimension"/>
+
+</resources>

@@ -1,0 +1,107 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.electionapp.android"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    def appDependencies = rootProject.ext.appDependencies
+    def testDependencies = rootProject.ext.testDependencies
+    implementation 'mobi.gspd:segmentedbarview:1.1.6@aar'
+
+    compile(
+            appDependencies.dagger,
+            appDependencies.daggerAndroidSupport,
+            appDependencies.recyclerView,
+            appDependencies.rxJava,
+            appDependencies.rxAndroid,
+            appDependencies.fresco,
+            appDependencies.design,
+            appDependencies.leakCanary,
+            appDependencies.fragmentArgs,
+            appDependencies.cardView,
+            appDependencies.constraintLayout,
+            appDependencies.retrofit,
+            appDependencies.retrofitGson,
+            appDependencies.retrofitRxAdapter,
+            appDependencies.picassoImageLoader,
+            appDependencies.customTabs,
+            appDependencies.searchableSpinner,
+            appDependencies.multiDex,
+            appDependencies.ankoSDK25,
+            appDependencies.ankoCommons,
+            appDependencies.segmentedButton,
+            appDependencies.ankoSDK25Coroutines,
+            appDependencies.materialDesignSpecs,
+            appDependencies.ratingBar,
+            appDependencies.chipsLayoutManager,
+            appDependencies.lifeCycleExtensions,
+            appDependencies.picassoTransformations,
+            appDependencies.everNoteAndroidJobs,
+            appDependencies.stetho,
+            appDependencies.facebookLoginSDK,
+            appDependencies.playServicesAuth,
+            appDependencies.playServicesMaps,
+            appDependencies.androidMapUtils,
+            appDependencies.playServicesLocation,
+            appDependencies.spinnerDatePicker,
+            appDependencies.ratingBarLib,
+            appDependencies.circleImageview,
+            project(':domain'),
+            project(':data'),
+            project(':constants')
+    )
+
+    testCompile(
+            testDependencies.junit,
+            testDependencies.assertj,
+            testDependencies.mockito,
+            testDependencies.mockWebServer,
+            testDependencies.leakCanaryNoOp,
+    )
+
+    androidTestCompile(testDependencies.espressoContrib) {
+        exclude module: "support-annotations"
+        exclude module: "support-v4"
+        exclude module: "design"
+        exclude module: "recyclerview-v7"
+    }
+
+    compile( appDependencies.crashLytics) {
+        transitive = true
+    }
+
+    kapt appDependencies.daggerCompiler
+    kapt appDependencies.daggerAndroidCompiler
+   // annotationProcessor appDependencies.daggerAndroidCompiler
+    kapt appDependencies.roomCompiler
+    kapt appDependencies.butterKnifeCompiler
+    provided appDependencies.javaxAnnotation
+}

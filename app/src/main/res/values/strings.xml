@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Election PVC Tool</string>
+
+    <array name="tab_name">
+        <item>Home</item>
+        <item>Favorites</item>
+        <item>Trips</item>
+        <item>Messages</item>
+        <item>Profile</item>
+    </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_text">Donec facilisis tortor ut augue lacinia, at viverra est semper.</string>
+    <string name="login">Login</string>
+    <string name="connect_with_her_community">Connect with her community</string>
+    <string name="get_started">Get Started</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="email">Email</string>
+    <string name="example_email">priscilla@gmail.com</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up_with_email">Sign Up with Email</string>
+    <string name="next">Next</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="facebook_app_id">261400627638854</string>
+    <string name="check_internet">Please check your internet connection</string>
+    <string name="create_account">Create Account</string>
+    <string name="input_email_error">Please input your email address</string>
+    <string name="input_password_error">Please enter your password</string>
+    <string name="input_first_name_error">Please Input your first name</string>
+    <string name="input_last_name_error">Please input last name</string>
+    <string name="input_valid_email">Input a valid email address</string>
+    <string name="pick_your_date_of_birth">Pick your date of birth</string>
+    <string name="check_availablity">Check Availability</string>
+    <string name="hi_just_use_the_femmebnb_instant_booking_if_we_do_not_respond_immediately_please_note_that_sometimes_this_is_not_possible_we_do_respond_reasonably_quick_and_are_always_prepared_to_accommodate_guests_what_brings_you_to_the_area_who_are_you_coming_with_when_do_you_think_you_ll_arrive_could_you_please_drop_me_a_quick_notice_before_booking_so_that_we_make_sure_that_all_is_set">Hi, just use the FemmeBnB instant booking. If we do not respond immediately please note that sometimes this is not possible. We do respond reasonably quick and are always prepared to accommodate guests. • What brings you to the area? • Who are you coming with? • When do you think you’ll arrive? Could you please drop me a quick notice before booking so that we make sure that all is set?</string>
+    <string name="write_your_message_here">Write your message here…</string>
+    <string name="save">Save</string>
+    <string name="email_hint_text">EMAIL</string>
+    <string name="password_hint_text">PASSWORD</string>
+    <string name="first_name_hint_text">FIRST NAME</string>
+    <string name="last_name_hint_text">LAST NAME</string>
+    <string name="ward_hint_text">WARD</string>
+
+</resources>

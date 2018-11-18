@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_text_size">13sp</dimen>
+
+    <!-- dimensions -->
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="final_width">32dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+
+    <dimen name="super_bottom_sheet_width">0dp</dimen>
+    <dimen name="super_bottom_sheet_radius">16dp</dimen>
+    <dimen name="super_bottom_sheet_peek_height">64dp</dimen>
+    <dimen name="bottom_sheet_rounded_corner">16dp</dimen>
+    <dimen name="appbar_elevation">5dp</dimen>
+    <item name="super_bottom_sheet_dim" format="float" type="dimen">0.8</item>
+
+</resources>

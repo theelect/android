@@ -1,0 +1,71 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", '\"https://femmebnb-v2.herokuapp.com/api/v1/\"'
+        }
+        debug {
+            buildConfigField "String", "API_URL", '\"https://femmebnb-v2.herokuapp.com/api/v1/\"'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def appDependencies = rootProject.ext.appDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //compile "com.fatboyindustrial.gson-jodatime-serialisers:gson-jodatime-serialisers:1.6.0"
+
+    compile(
+            appDependencies.dagger,
+            appDependencies.gson,
+            appDependencies.rxJava,
+            appDependencies.rxAndroid,
+            appDependencies.okhttp3LogginInterceptor,
+            appDependencies.androidAnnotations,
+            appDependencies.roomDB,
+            appDependencies.roomRxJava2,
+            appDependencies.retrofit,
+            appDependencies.retrofitGson,
+            appDependencies.pagingLibrary,
+            appDependencies.pagingRxJava2,
+            appDependencies.retrofitRxAdapter,
+            appDependencies.ankoSDK25,
+            appDependencies.workManager,
+            //appDependencies.jodaTime,
+            project(':constants')
+    )
+
+    kapt appDependencies.daggerCompiler
+    kapt appDependencies.roomCompiler
+    provided appDependencies.javaxAnnotation
+
+    testCompile(
+            testDependencies.junit,
+            testDependencies.mockWebServer,
+            testDependencies.assertj,
+            testDependencies.mockito,
+    )
+}
