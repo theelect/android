@@ -31,14 +31,17 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name="com.electionapp.android.ui.main.MainActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="com.electionapp.android.ui.auth.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity android:name="com.electionapp.android.ui.auth.SplashActivity"
+            android:screenOrientation="portrait">
+
         </activity>
 
         <activity android:name="com.electionapp.android.ui.auth.AuthActivity"

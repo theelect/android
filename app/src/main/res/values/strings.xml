@@ -47,5 +47,7 @@
     <string name="phone_hint_text">PHONE</string>
     <string name="vin_hint_text">VOTER IDENTIFICATION NUMBER</string>
     <string name="input_phone_error">Please input your phone number</string>
+    <string name="navigation_drawer_open">OPEN</string>
+    <string name="navigation_drawer_close">CLOSED</string>
 
 </resources>

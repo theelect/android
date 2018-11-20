@@ -9,7 +9,6 @@
     app:layout_scrollFlags="scroll|enterAlways"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:titleTextColor="@color/black"
-    android:visibility="gone"
     tools:showIn="@layout/activity_main">
 
     <LinearLayout
@@ -17,12 +16,6 @@
         android:layout_marginEnd="16dp"
         android:id="@+id/title_layout"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:id="@+id/bell_icon"
-            android:src="@drawable/tab_home" />
 
         <TextView
             android:layout_weight="1"
@@ -32,11 +25,6 @@
             android:textColor="@color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/tab_search" />
     </LinearLayout>
 
 </android.support.v7.widget.Toolbar>

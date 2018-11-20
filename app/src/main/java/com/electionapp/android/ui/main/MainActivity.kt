@@ -2,9 +2,11 @@ package com.electionapp.android.ui.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -52,6 +54,7 @@ class MainActivity : BaseActivity(),
             R.drawable.tab_search,
             R.drawable.tab_profile)
 
+    var toggle: ActionBarDrawerToggle? = null
 
     lateinit var tabs: Array<String>
 
@@ -109,7 +112,28 @@ class MainActivity : BaseActivity(),
             }
         })
 
+
+        setSupportActionBar(toolbar)
+
+        toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle!!)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+
     }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        toggle?.syncState()
+    }
+
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        toggle?.onConfigurationChanged(newConfig)
+    }
+
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
@@ -180,6 +204,9 @@ class MainActivity : BaseActivity(),
             }
         }
 
+        if (toggle?.onOptionsItemSelected(item) == true) {
+            return true
+        }
 
         return super.onOptionsItemSelected(item)
 
@@ -255,13 +282,6 @@ class MainActivity : BaseActivity(),
         supportActionBar!!.setDisplayShowHomeEnabled(!navController!!.isRootFragment)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         //TransitionManager.beginDelayedTransition(title_layout, ChangeBounds())
-        if (!navController!!.isRootFragment) {
-            toolbar_title_view.gravity = Gravity.START
-            bell_icon.visibility = View.GONE
-        } else {
-            toolbar_title_view.gravity = Gravity.CENTER
-            bell_icon.visibility = View.VISIBLE
-        }
     }
 
 
@@ -289,7 +309,6 @@ class MainActivity : BaseActivity(),
 
     fun updateToolbarTitle(title: String) {
         supportActionBar!!.title = title
-        toolbar_title_view.text = title
     }
 
 
