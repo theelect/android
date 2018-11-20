@@ -1,6 +1,7 @@
 package com.electionapp.data.network
 
 
+import com.electionapp.data.model.PVCData
 import com.electionapp.data.network.reponses.GenericResponse
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -18,7 +19,7 @@ interface ApiService {
     fun requestPasswordReset(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<Void>>
 
     @POST("pvc/verifyViaApp")
-    fun verifyPVCViaApp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<Void>>
+    fun verifyPVCViaApp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<PVCData>>
 
     @POST("pvc")
     fun getAllVerifiedPVCWithFilters(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<Void>>
