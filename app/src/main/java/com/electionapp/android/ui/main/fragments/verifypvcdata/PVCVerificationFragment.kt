@@ -1,16 +1,11 @@
 package com.electionapp.android.ui.main.fragments.verifypvcdata
 
 
-import `in`.galaxyofandroid.spinerdialog.IdentifiableObject
-import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.os.Bundle
 import android.view.View
 import com.electionapp.android.R
-import com.electionapp.android.model.locale.Ward
 import com.electionapp.android.ui.auth.fragments.BaseAuthFragment
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.email_sign_up.*
-import java.util.ArrayList
 import javax.inject.Inject
 
 

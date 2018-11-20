@@ -11,13 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/femmme_bnb_logo"
             app:layout_constraintBottom_toTopOf="@+id/cardView"
@@ -35,7 +40,8 @@
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.3" />
 
 
         <TextView
@@ -46,7 +52,6 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
 
 
         <android.support.v7.widget.CardView
@@ -73,56 +78,70 @@
                     <EditText
                         android:id="@+id/vin_edit_text"
                         android:layout_width="match_parent"
-                        android:padding="16dp"
                         android:layout_height="wrap_content"
+                        android:background="@color/transparent"
                         android:hint="@string/vin_hint_text"
-                        android:inputType="phone" />
+                        android:inputType="phone"
+                        android:padding="16dp" />
 
                 </android.support.design.widget.TextInputLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/mds_grey_400" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/first_name_edit_text"
                         android:layout_width="match_parent"
-                        android:padding="16dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/first_name_hint_text" />
+                        android:background="@color/transparent"
+                        android:hint="@string/first_name_hint_text"
+                        android:padding="16dp" />
 
                 </android.support.design.widget.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/mds_grey_400" />
 
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/last_name_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:hint="@string/last_name_hint_text" />
+                        android:background="@color/transparent"
+                        android:hint="@string/last_name_hint_text"
+                        android:padding="16dp" />
 
                 </android.support.design.widget.TextInputLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/mds_grey_400" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/phone_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/phone_hint_text"
-                        android:padding="16dp"
                         android:background="@color/transparent"
-                        android:inputType="phone" />
+                        android:hint="@string/phone_hint_text"
+                        android:inputType="phone"
+                        android:padding="16dp" />
 
                 </android.support.design.widget.TextInputLayout>
 
