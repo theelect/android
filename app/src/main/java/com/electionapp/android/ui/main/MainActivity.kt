@@ -26,7 +26,6 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.weird_toolbar.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(),
@@ -113,12 +112,7 @@ class MainActivity : BaseActivity(),
         })
 
 
-        setSupportActionBar(toolbar)
 
-        toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle!!)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
 
 
     }
@@ -136,8 +130,12 @@ class MainActivity : BaseActivity(),
 
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
 
+        setSupportActionBar(toolbar_main)
+        toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar_main, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle!!)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
 
     }
 
