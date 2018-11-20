@@ -9,7 +9,7 @@ class UserSettingsManager constructor(val context: Context) : CoreSharedPrefMana
 
 
     companion object {
-        const val TICKET_VALIDATION_MODE = "TICKET_VALIDATION_MODE"
+
     }
 
 }

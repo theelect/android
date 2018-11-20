@@ -18,11 +18,8 @@ class OnBoardingViewModel(authNavigator: IAuthNavigator) : BaseAuthViewModel(aut
     }
 
 
-    fun goToSignUp() {
-        authNavigator.goToLogin()
+    fun goToEntry() {
+        authNavigator.goToEntry()
     }
 
-    fun goToLogin() {
-        authNavigator.goToLogin()
-    }
 }

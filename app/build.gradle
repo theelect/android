@@ -74,6 +74,7 @@ dependencies {
             appDependencies.spinnerDatePicker,
             appDependencies.ratingBarLib,
             appDependencies.circleImageview,
+            appDependencies.searchableSpinner,
             project(':domain'),
             project(':data'),
             project(':constants')

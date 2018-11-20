@@ -11,31 +11,9 @@ class AuthService @Inject constructor(var userCache: IUserCache,
                                       var tokenManager: ITokenManager,
                                       var apiService: ApiService) : IAuthService {
 
-    override fun saveUserFacebookAuthToken(hashMap: Map<String, Any>): Observable<Boolean> {
-        return apiService.sendUserFacebookAuthToken(hashMap).map {
-            if (it.token == null) {
-                return@map false
-            } else {
-                tokenManager.saveToken(it.token)
-                return@map true
-            }
-        }
-    }
 
-    override fun saveUserGoogleAuthToken(hashMap: Map<String, Any>): Observable<Boolean> {
-        return apiService.sendUserGoogleAuthToken(hashMap).map {
-            if (it.token == null) {
-                return@map false
-
-            } else {
-                tokenManager.saveToken(it.token)
-                return@map true
-            }
-        }
-    }
-
-    override fun registerUser(hashMap: Map<String, Any>): Observable<Boolean> {
-        return apiService.signUserUp(hashMap).map {
+    override fun registerWC(hashMap: Map<String, Any>): Observable<Boolean> {
+        return apiService.signWCUp(hashMap).map {
             if (it.token == null) {
                 return@map false
 

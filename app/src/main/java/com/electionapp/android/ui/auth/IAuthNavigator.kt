@@ -2,6 +2,7 @@ package com.electionapp.android.ui.auth
 
 import android.support.v4.app.FragmentManager
 import com.electionapp.android.R
+import com.electionapp.android.ui.auth.fragments.entry.EntryFragment
 import com.electionapp.android.ui.auth.fragments.login.LoginFragment
 import com.electionapp.android.ui.auth.fragments.onboarding.OnBoardingFragment
 import com.electionapp.android.ui.auth.fragments.resetpassword.PasswordResetFragment
@@ -23,9 +24,18 @@ interface IAuthNavigator {
     fun goToMain()
 
     fun goBack()
+
+    fun goToEntry()
 }
 
 class AuthNavigator @Inject constructor(val authActivity: AuthActivity) : IAuthNavigator, BaseNavigator() {
+    override fun goToEntry() {
+        var fragment = findFragmentInstance(EntryFragment.TAG)
+        if (fragment == null) {
+            fragment = EntryFragment.newInstance()
+        }
+        addFragmentWithBackStack(fragment)
+    }
 
 
     override fun goBack() {

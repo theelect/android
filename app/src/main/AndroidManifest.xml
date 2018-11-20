@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.electionapp.android.ApplicationClass"
+        android:name=".ApplicationClass"
         tools:ignore="GoogleAppIndexingWarning">
 
         <uses-library
@@ -37,7 +37,6 @@
 
         <activity android:name="com.electionapp.android.ui.auth.AuthActivity"
             android:screenOrientation="portrait"/>
-
 
     </application>
 

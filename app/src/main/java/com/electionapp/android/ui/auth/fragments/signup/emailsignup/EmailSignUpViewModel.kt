@@ -13,15 +13,23 @@ import com.electionapp.domain.usecase.auth.SignUserUpViaEmailUseCase
  * Created by aliumujib on 08/06/2018.
  */
 
-class EmailSignUpViewModel(private val signUserUpUseCase: SignUserUpViaEmailUseCase, authNavigator: IAuthNavigator) : BaseAuthViewModel(authNavigator) {
+class EmailSignUpViewModel(val signUserUpUseCase: SignUserUpViaEmailUseCase,
+                           authNavigator: IAuthNavigator) : BaseAuthViewModel(authNavigator) {
 
     val loginParams = Params.create()
 
-    fun signUserUp(email: String, firstName: String, lastName: String, password: String) {
+    fun signUserUp(email: String, firstName: String,
+                   lastName: String, password: String,
+                   phoneNumber: String, ward: String,
+                   lga: String, vin: String) {
         loginParams.putData(Constants.AUTH_CONSTANTS.EMAIL, email)
         loginParams.putData(Constants.AUTH_CONSTANTS.PASSWORD, password)
         loginParams.putData(Constants.AUTH_CONSTANTS.FIRST_NAME, firstName)
         loginParams.putData(Constants.AUTH_CONSTANTS.LAST_NAME, lastName)
+        loginParams.putData(Constants.AUTH_CONSTANTS.PHONE, phoneNumber)
+        loginParams.putData(Constants.AUTH_CONSTANTS.WARD, ward)
+        loginParams.putData(Constants.AUTH_CONSTANTS.LGA, lga)
+        loginParams.putData(Constants.AUTH_CONSTANTS.VIN, vin)
 
         if (validateData(loginParams)) {
             addDisposable(signUserUpUseCase.execute(loginParams)
@@ -37,7 +45,7 @@ class EmailSignUpViewModel(private val signUserUpUseCase: SignUserUpViaEmailUseC
         return if (!params.notEmptyString(Constants.AUTH_CONSTANTS.EMAIL)) {
             displayError(R.string.input_email_error)
             false
-        }  else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.PASSWORD)) {
+        } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.PASSWORD)) {
             displayError(R.string.input_password_error)
             false
         } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.FIRST_NAME)) {
@@ -46,10 +54,10 @@ class EmailSignUpViewModel(private val signUserUpUseCase: SignUserUpViaEmailUseC
         } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.LAST_NAME)) {
             displayError(R.string.input_last_name_error)
             false
-        } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.BIRTHDAY)) {
-            displayError(R.string.pick_your_date_of_birth)
+        } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.WARD)) {
+            displayError(R.string.pick_your_ward)
             false
-        }  else {
+        } else {
             super.validateData(params)
         }
     }

@@ -12,10 +12,9 @@ import com.electionapp.domain.entities.UserModel
 class UserModelMapper : Mapper<UserEntity, UserModel>() {
 
     override fun mapFrom(from: UserEntity): UserModel {
-        return UserModel(from.id, validate(from.bio), validate(from.city), validate(from.country),
-                from.created_at, validate(from.currency), validate(from.education), validate(from.email), validate(from.facebookId),
-                validate(from.firstname), validate(from.gender), validate(from.image_url), validate(from.language), validate(from.lastname),
-                validate(from.occupation),validate(from.phone_number))
+        return UserModel(from.id, validate(from.email), validate(from.role), validate(from.is_active),
+                validate(from.vin), validate(from.ward), validate(from.firstname), validate(from.lastname), validate(from.occupation),
+                validate(from.phone_number), validate(from.isCurrentUser))
     }
 
 }

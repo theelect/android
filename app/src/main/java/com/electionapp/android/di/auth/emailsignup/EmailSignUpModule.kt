@@ -16,7 +16,7 @@ import dagger.Provides
  */
 
 @Module
-class EmailSignUpModule() {
+class EmailSignUpModule {
 
     @FragmentScope
     @Provides

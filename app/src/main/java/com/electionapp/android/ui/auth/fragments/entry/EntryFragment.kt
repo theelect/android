@@ -1,19 +1,18 @@
-package com.electionapp.android.ui.auth.fragments.login
+package com.electionapp.android.ui.auth.fragments.entry
 
 import android.os.Bundle
 import android.view.View
 import com.electionapp.android.R
 import com.electionapp.android.ui.auth.fragments.BaseAuthFragment
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_entry.*
 import javax.inject.Inject
 
 
-class LoginFragment : BaseAuthFragment<LoginViewModel>() {
-
+class EntryFragment : BaseAuthFragment<EntryViewModel>() {
 
     override val layoutResID: Int
-        get() = R.layout.fragment_login
+        get() = R.layout.fragment_entry
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +22,7 @@ class LoginFragment : BaseAuthFragment<LoginViewModel>() {
     }
 
     @Inject
-    override fun injectViewModel(viewModel: LoginViewModel) {
+    override fun injectViewModel(viewModel: EntryViewModel) {
         super.injectViewModel(viewModel)
     }
 
@@ -36,15 +35,13 @@ class LoginFragment : BaseAuthFragment<LoginViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        forgot_password_btn.setOnClickListener {
-            getViewModel().goToPasswordReset()
+        sign_up_button.setOnClickListener {
+            getViewModel().gotoSignUp()
         }
 
         login_button.setOnClickListener {
-            getViewModel().logUserIn(email_edit_text.text.toString(), password_edit_text.text.toString())
+            getViewModel().gotoLogin()
         }
-
-
     }
 
 
@@ -54,7 +51,7 @@ class LoginFragment : BaseAuthFragment<LoginViewModel>() {
 
         @JvmStatic
         fun newInstance() =
-                LoginFragment().apply {
+                EntryFragment().apply {
                     arguments = Bundle().apply {
 
                     }

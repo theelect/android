@@ -16,7 +16,7 @@ class SignUserUpViaEmailUseCase @Inject constructor(schedulers: Schedulers, var 
     : UseCase<Params, Boolean>(schedulers) {
 
     override fun buildObservable(params: Params?): Observable<Boolean> {
-       return authenticationService.registerUser(params!!.getParameters())
+       return authenticationService.registerWC(params!!.getParameters())
     }
 
 }

@@ -26,6 +26,10 @@ abstract class Mapper<in E, T> {
         return from ?: "N/A"
     }
 
+    fun validate(from: Boolean?): Boolean {
+        return from ?: false
+    }
+
     fun<E> validate(from: List<E> ?): List<E> {
         return if (from == null) {
             mutableListOf()

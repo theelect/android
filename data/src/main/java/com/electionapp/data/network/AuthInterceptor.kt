@@ -23,10 +23,11 @@ class AuthInterceptor(private var tokenManager: ITokenManager) : Interceptor {
 
         val requestBuilder = request.newBuilder()
 
+        requestBuilder.addHeader("apiKey", "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD")
 
-       if(tokenManager.getToken()!=null){
-           requestBuilder.addHeader("Authorization", tokenManager.getToken()!!)
-       }
+        if (tokenManager.getToken() != null) {
+            requestBuilder.addHeader("Authorization", tokenManager.getToken()!!)
+        }
 
         var response: Response? = null
 

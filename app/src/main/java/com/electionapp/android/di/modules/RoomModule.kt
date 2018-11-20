@@ -3,7 +3,7 @@ package com.electionapp.android.di.modules
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.electionapp.data.room.dao.UserDao
-import com.electionapp.data.room.FemmeBnBDatabase
+import com.electionapp.data.room.ElectionAppDatabase
 import com.electionapp.data.room.migrations.MIGRATION_1_2
 
 import com.electionapp.android.di.scopes.ApplicationScope
@@ -19,11 +19,11 @@ class RoomModule {
 
     @ApplicationScope
     @Provides
-    fun providesRoomDatabase(context: Context): FemmeBnBDatabase {
+    fun providesRoomDatabase(context: Context): ElectionAppDatabase {
         return Room.databaseBuilder(
                 context,
-                FemmeBnBDatabase::class.java,
-                "LIGHT_RAIL_DB")
+                ElectionAppDatabase::class.java,
+                "ELECTION_DB")
                 .addMigrations(MIGRATION_1_2)
                 //.fallbackToDestructiveMigration()
                 .build()
@@ -31,7 +31,7 @@ class RoomModule {
 
     @ApplicationScope
     @Provides
-    fun providesUsersDao(database: FemmeBnBDatabase): UserDao {
+    fun providesUsersDao(database: ElectionAppDatabase): UserDao {
         return database.getUserDao()
     }
 

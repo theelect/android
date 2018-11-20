@@ -33,7 +33,7 @@
     <string name="input_first_name_error">Please Input your first name</string>
     <string name="input_last_name_error">Please input last name</string>
     <string name="input_valid_email">Input a valid email address</string>
-    <string name="pick_your_date_of_birth">Pick your date of birth</string>
+    <string name="pick_your_ward">Pick your ward</string>
     <string name="check_availablity">Check Availability</string>
     <string name="hi_just_use_the_femmebnb_instant_booking_if_we_do_not_respond_immediately_please_note_that_sometimes_this_is_not_possible_we_do_respond_reasonably_quick_and_are_always_prepared_to_accommodate_guests_what_brings_you_to_the_area_who_are_you_coming_with_when_do_you_think_you_ll_arrive_could_you_please_drop_me_a_quick_notice_before_booking_so_that_we_make_sure_that_all_is_set">Hi, just use the FemmeBnB instant booking. If we do not respond immediately please note that sometimes this is not possible. We do respond reasonably quick and are always prepared to accommodate guests. • What brings you to the area? • Who are you coming with? • When do you think you’ll arrive? Could you please drop me a quick notice before booking so that we make sure that all is set?</string>
     <string name="write_your_message_here">Write your message here…</string>
@@ -43,5 +43,8 @@
     <string name="first_name_hint_text">FIRST NAME</string>
     <string name="last_name_hint_text">LAST NAME</string>
     <string name="ward_hint_text">WARD</string>
+    <string name="lga_hint_text">LGA</string>
+    <string name="phone_hint_text">PHONE</string>
+    <string name="vin_hint_text">VOTER IDENTIFICATION NUMBER</string>
 
 </resources>

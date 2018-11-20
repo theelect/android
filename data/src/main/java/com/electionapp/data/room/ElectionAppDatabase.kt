@@ -11,7 +11,7 @@ import com.electionapp.data.room.dao.UserDao
  */
 
 @Database(entities = [(UserEntity::class)], version = 1, exportSchema = true)
-abstract class FemmeBnBDatabase : RoomDatabase() {
+abstract class ElectionAppDatabase : RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
 

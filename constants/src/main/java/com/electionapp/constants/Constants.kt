@@ -150,6 +150,11 @@ interface Constants {
             val PHONE = "phone"
             val EMAIL = "email"
             val PASSWORD = "password"
+            val WARD = "ward"
+            val LGA = "lga"
+            val VIN = "vin"
+
+
             val USERNAME = "password"
             val PREFERENCES = "user_pref"
             val PASSWORD_CONFIRM = "password_confirmation"
