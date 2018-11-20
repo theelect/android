@@ -764,9 +764,9 @@ public class FragNavController {
     //region SavedInstanceState
 
     /**
-     * Call this in your Activity's onSaveInstanceState(Bundle outState) method to save the instance's state.
+     * Call this in your Activity's onSaveInstanceState(Bundle outState) method to save the instance's stateEntity.
      *
-     * @param outState The Bundle to save state information to
+     * @param outState The Bundle to save stateEntity information to
      */
     public void onSaveInstanceState(@NonNull Bundle outState) {
 
@@ -802,7 +802,7 @@ public class FragNavController {
     }
 
     /**
-     * Restores this instance to the state specified by the contents of savedInstanceState
+     * Restores this instance to the stateEntity specified by the contents of savedInstanceState
      *
      * @param savedInstanceState The bundle to restore from
      * @param rootFragments      List of root fragments from which to initialize empty stacks. If null, pull fragments from RootFragmentListener.
@@ -880,7 +880,7 @@ public class FragNavController {
                     break;
             }
 
-            //Successfully restored state
+            //Successfully restored stateEntity
             return true;
         } catch (Throwable t) {
             return false;

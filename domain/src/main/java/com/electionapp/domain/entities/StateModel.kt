@@ -1,6 +1,6 @@
-package com.electionapp.data.model
+package com.electionapp.domain.entities
 
-data class State(
+data class StateModel(
         val abbreviation: String,
         val id: String,
         val name: String

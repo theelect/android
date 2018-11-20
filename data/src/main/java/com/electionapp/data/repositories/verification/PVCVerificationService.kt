@@ -5,10 +5,11 @@ import com.electionapp.constants.Constants
 import com.electionapp.data.contracts.IPVCVerificationService
 import com.electionapp.data.network.ApiService
 import io.reactivex.Observable
+import javax.inject.Inject
 
 
-class PVCVerificationService(var apiService: ApiService,
-                             var smsManager: SmsManager) : IPVCVerificationService {
+class PVCVerificationService @Inject constructor(var apiService: ApiService,
+                                                     var smsManager: SmsManager) : IPVCVerificationService {
 
     override fun verifyPVCOnline(hashMap: Map<String, Any>): Observable<Boolean> {
         return apiService.verifyPVCViaApp(hashMap).map {
@@ -26,11 +27,8 @@ class PVCVerificationService(var apiService: ApiService,
             val state = 33
 
             val message = "$vin,$lastname,$phone,$state"
-            val smsManager = SmsManager.getDefault()
             val parts = smsManager.divideMessage(message)
             smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null)
-
-
         }
     }
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- ListView item pressed state -->
+    <!-- ListView item pressed stateEntity -->
     <item
         android:state_activated="true"
         android:drawable="@drawable/rectangle_shadowed_rounder_corners_accent"
         />
-    <!-- ListView item selected state -->
+    <!-- ListView item selected stateEntity -->
     <item
         android:state_activated="false"
         android:drawable="@drawable/rectangle_rounder_corners_dark_grey"

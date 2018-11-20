@@ -1,4 +1,4 @@
-package com.electionapp.data.model
+package com.electionapp.android.model.pvc
 
 data class PollingUnit(
         val delim: String,

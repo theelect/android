@@ -26,6 +26,7 @@ class LoginViewModel(private val authProvider: LogInUseCase,
         val loginParams = Params.create()
         loginParams.putData(Constants.AUTH_CONSTANTS.EMAIL, email)
         loginParams.putData(Constants.AUTH_CONSTANTS.PASSWORD, password)
+        loginParams.putData("device", "android")
 
         if (validateData(params = loginParams)) {
             addDisposable(authProvider.execute(loginParams)

@@ -1,12 +1,16 @@
 package com.electionapp.android.ui.main.fragments.verifypvcdata
 
 import com.electionapp.android.R
+import com.electionapp.android.model.user.User
 import com.electionapp.android.ui.base.BaseViewModel
 import com.electionapp.android.ui.main.IMainNavigator
+import com.electionapp.android.utils.extensions.mutableLiveDataOf
+import com.electionapp.android.utils.mapper.UserMapper
 import com.electionapp.constants.Constants
 import com.electionapp.domain.base.DefaultObserver
 import com.electionapp.domain.base.Params
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
+import com.electionapp.domain.usecase.usecase.FetchCurrentUserUseCase
 
 
 /**
@@ -14,9 +18,25 @@ import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
  */
 
 class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
+                               private val fetchCurrentUserUseCase: FetchCurrentUserUseCase,
+                               private val userMapper: UserMapper,
                                mainNavigator: IMainNavigator) : BaseViewModel() {
 
     val verifyParams = Params.create()
+
+    val userData = mutableLiveDataOf<User>()
+
+    override fun setUp() {
+        super.setUp()
+
+        addDisposable(fetchCurrentUserUseCase.execute(Params.EMPTY)
+                .map {
+                    userMapper.mapFrom(it)
+                }
+                .subscribeWith(UserDataObserver()))
+
+
+    }
 
     fun verifyPVCWithDetails(firstName: String,
                              lastName: String,
@@ -34,6 +54,7 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
                     }
                     .subscribeWith(VerificationObserver()))
         }
+
     }
 
 
@@ -55,6 +76,16 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
         }
     }
 
+
+    private fun onUserDataFetched(t: User) {
+        userData.value = t
+    }
+
+    private fun onUserDataFailedToFetch(exception: Throwable) {
+        hideLoading()
+        handleError(exception)
+    }
+
     private fun onVerificationCompleted(t: Boolean) {
         hideLoading()
     }
@@ -74,6 +105,20 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
         override fun onError(exception: Throwable) {
             super.onError(exception)
             onVerificationFailed(exception)
+        }
+
+    }
+
+
+    inner class UserDataObserver : DefaultObserver<User>() {
+        override fun onNext(t: User) {
+            super.onNext(t)
+            onUserDataFetched(t)
+        }
+
+        override fun onError(exception: Throwable) {
+            super.onError(exception)
+            onUserDataFailedToFetch(exception)
         }
 
     }

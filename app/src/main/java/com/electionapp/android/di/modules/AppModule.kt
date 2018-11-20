@@ -3,6 +3,7 @@ package com.electionapp.android.di.modules
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
+import android.telephony.SmsManager
 import android.util.Log
 import com.electionapp.android.utils.AppSchedulers
 import com.electionapp.android.utils.imageloader.ImageLoader
@@ -28,6 +29,11 @@ class AppModule {
         return application
     }
 
+    @ApplicationScope
+    @Provides
+    fun provideSmsManager(): SmsManager {
+        return SmsManager.getDefault()
+    }
 
     @ApplicationScope
     @Provides

@@ -11,6 +11,17 @@ class AuthService @Inject constructor(var userCache: IUserCache,
                                       var tokenManager: ITokenManager,
                                       var apiService: ApiService) : IAuthService {
 
+    override fun fetchUserWithToken(hashMap: Map<String, Any>): Observable<Boolean> {
+        return apiService.fetchUserData(hashMap).map {
+            if(it.success==200){
+                userCache.saveCurrentUser(it.data)
+            }else{
+                return@map false
+            }
+            true
+        }
+    }
+
 
     override fun registerWC(hashMap: Map<String, Any>): Observable<Boolean> {
         return apiService.signWCUp(hashMap).map {

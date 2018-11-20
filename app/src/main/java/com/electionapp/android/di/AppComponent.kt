@@ -3,9 +3,7 @@ package com.electionapp.android.di
 import android.app.Application
 import com.electionapp.domain.base.Schedulers
 import com.electionapp.android.ApplicationClass
-import com.electionapp.android.di.modules.AppModule
-import com.electionapp.android.di.modules.NetworkModule
-import com.electionapp.android.di.modules.RepositoryModule
+import com.electionapp.android.di.modules.*
 import com.electionapp.android.di.scopes.ApplicationScope
 import dagger.BindsInstance
 import dagger.Component
@@ -21,6 +19,8 @@ import dagger.android.support.AndroidSupportInjectionModule
     (ActivityBuilder::class),
     (AndroidSupportInjectionModule::class),
     (AppModule::class),
+    (DomainMapperModule::class),
+    (PresentationMapperModule::class),
     (NetworkModule::class),
     (RepositoryModule::class)])
 
