@@ -143,6 +143,11 @@ interface Constants {
      * password_confirmation  [confirm-password]
      */
 
+
+    object PVC_VERIFICATION_CONSTANTS {
+        val IS_VERIFICATION_ONLINE = "IS_VERIFICATION_ONLINE"
+    }
+
     interface AUTH_CONSTANTS {
         companion object {
             val FIRST_NAME = "firstname"

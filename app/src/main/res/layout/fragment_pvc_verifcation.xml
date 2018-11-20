@@ -24,7 +24,7 @@
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/femmme_bnb_logo"
+            android:src="@drawable/ic_account_circle_grey600_48dp"
             app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

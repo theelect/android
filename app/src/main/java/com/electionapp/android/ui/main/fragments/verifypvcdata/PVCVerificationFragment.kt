@@ -4,15 +4,16 @@ package com.electionapp.android.ui.main.fragments.verifypvcdata
 import android.os.Bundle
 import android.view.View
 import com.electionapp.android.R
-import com.electionapp.android.ui.auth.fragments.BaseAuthFragment
+import com.electionapp.android.ui.base.BaseMVVMFragment
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_pvc_verifcation.*
 import javax.inject.Inject
 
 
-class PVCVerificationFragment : BaseAuthFragment<PVCVerificationViewModel>() {
+class PVCVerificationFragment : BaseMVVMFragment<PVCVerificationViewModel>() {
 
     override val layoutResID: Int
-        get() = R.layout.pvc_verifcation_sign_up
+        get() = R.layout.fragment_pvc_verifcation
 
     @Inject
     override fun injectViewModel(viewModel: PVCVerificationViewModel) {
@@ -36,7 +37,11 @@ class PVCVerificationFragment : BaseAuthFragment<PVCVerificationViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        verify_by_app_button.setOnClickListener {
+            getViewModel().verifyPVCWithDetails(first_name_edit_text.text.toString(), last_name_edit_text.text.toString(),
+                    phone_edit_text.text.toString(), vin_edit_text.text.toString())
 
+        }
 
     }
 

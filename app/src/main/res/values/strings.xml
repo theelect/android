@@ -46,5 +46,6 @@
     <string name="lga_hint_text">LGA</string>
     <string name="phone_hint_text">PHONE</string>
     <string name="vin_hint_text">VOTER IDENTIFICATION NUMBER</string>
+    <string name="input_phone_error">Please input your phone number</string>
 
 </resources>

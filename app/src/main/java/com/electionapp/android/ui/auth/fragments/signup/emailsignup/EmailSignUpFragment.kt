@@ -69,7 +69,7 @@ class EmailSignUpFragment : BaseAuthFragment<EmailSignUpViewModel>() {
         }
 
 
-        val spinnerDialog = SpinnerDialog(this.activity, lgas, "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.email_grey, R.drawable.email_grey)
+        val spinnerDialog = SpinnerDialog(this.activity, lgas, "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.ic_source_commit_start_next_local_grey600_36dp, R.drawable.ic_source_commit_start_next_local_grey600_24dp)
 
         spinnerDialog.bindOnSpinerListener { item, position ->
             lga_edit_text.setText(item.title)
@@ -88,7 +88,7 @@ class EmailSignUpFragment : BaseAuthFragment<EmailSignUpViewModel>() {
         }
 
 
-        val spinnerDialog = SpinnerDialog(this.activity, wards, "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.email_grey, R.drawable.email_grey)
+        val spinnerDialog = SpinnerDialog(this.activity, wards, "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.ic_city_grey600_24dp, R.drawable.ic_city_grey600_24dp)
 
         spinnerDialog.bindOnSpinerListener { item, position ->
             ward_edit_text.setText(item.title + " Position: " + item.subtitle)

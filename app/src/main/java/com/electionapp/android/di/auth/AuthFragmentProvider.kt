@@ -22,7 +22,6 @@ abstract class AuthFragmentProvider {
     @ContributesAndroidInjector(modules = [LoginModule::class])
     internal abstract fun bindsLoginFragment(): LoginFragment
 
-
     @FragmentScope
     @ContributesAndroidInjector(modules = [OnBoardingModule::class])
     internal abstract fun bindOnBoardingFragment(): OnBoardingFragment
