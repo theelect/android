@@ -99,7 +99,11 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
                 showDialogMessage("VIN IS VALID!!")
             }
         }else{
-            showDialogMessage("VIN IS INVALID!!")
+            if (!isOnline){
+                showDialogMessage("Verification via SMS failed!!!")
+            }else{
+                showDialogMessage("VIN IS INVALID!!")
+            }
         }
     }
 

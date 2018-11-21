@@ -6,9 +6,10 @@ import com.electionapp.data.model.PVCDataEntity
 import com.electionapp.data.network.ApiService
 import com.electionapp.data.room.dao.PVCDao
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class PVCDataRepository(var apiService: ApiService,
-                        var pvcDao: PVCDao) : IPVCDataRepository {
+class PVCDataRepository @Inject constructor(var apiService: ApiService,
+                                            var pvcDao: PVCDao) : IPVCDataRepository {
 
 
     override fun fetchAllPVCDataWithFiltersFromDB(hashMap: Map<String, Any>): Observable<List<PVCDataEntity>> {

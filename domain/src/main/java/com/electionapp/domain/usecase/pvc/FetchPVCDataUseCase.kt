@@ -2,10 +2,11 @@ package com.electionapp.domain.usecase.pvc
 
 
 import com.electionapp.data.contracts.IPVCDataRepository
-import com.electionapp.data.model.PVCDataEntity
 import com.electionapp.domain.base.Params
 import com.electionapp.domain.base.Schedulers
 import com.electionapp.domain.base.UseCase
+import com.electionapp.domain.entities.PVCDataModel
+import com.electionapp.domain.mapper.PVCDataModelMapper
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -14,12 +15,14 @@ import javax.inject.Inject
  */
 
 class FetchPVCDataUseCase @Inject constructor(schedulers: Schedulers,
+                                              var pvcDataModelMapper: PVCDataModelMapper,
                                               var repository: IPVCDataRepository)
-    : UseCase<Params, List<PVCDataEntity>>(schedulers) {
+    : UseCase<Params, List<PVCDataModel>>(schedulers) {
 
-    //TODO, make mapper and domain models
-    override fun buildObservable(params: Params?): Observable<List<PVCDataEntity>> {
-        return repository.fetchAllPVCDataWithFiltersFromServer(params!!.getParameters())
+    override fun buildObservable(params: Params?): Observable<List<PVCDataModel>> {
+        return repository.fetchAllPVCDataWithFiltersFromDB(params!!.getParameters()).map {
+            pvcDataModelMapper.mapFromList(it)
+        }
     }
 
 }

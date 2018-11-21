@@ -7,6 +7,7 @@ import com.electionapp.data.room.ElectionAppDatabase
 import com.electionapp.data.room.migrations.MIGRATION_1_2
 
 import com.electionapp.android.di.scopes.ApplicationScope
+import com.electionapp.data.room.dao.PVCDao
 import dagger.Module
 import dagger.Provides
 
@@ -33,6 +34,12 @@ class RoomModule {
     @Provides
     fun providesUsersDao(database: ElectionAppDatabase): UserDao {
         return database.getUserDao()
+    }
+
+    @ApplicationScope
+    @Provides
+    fun providesPVCDao(database: ElectionAppDatabase): PVCDao {
+        return database.getPVCDao()
     }
 
 }

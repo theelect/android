@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.electionapp.android.R
 import com.electionapp.android.fragments.DummyFragment
+import com.electionapp.android.ui.main.fragments.pvcdatalist.PVCVerificationListFragment
 import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationFragment
 import com.electionapp.android.utils.FragmentHistory
 import com.electionapp.android.views.FragNavController
@@ -22,12 +23,17 @@ interface IMainFragmentNavigation {
     fun switchTab(position: Int)
     fun popFragment()
     fun handleBackPress()
+    fun goToPVCValidationList()
 }
 
 class MainFragmentNavigation(private var activity: MainActivity,
                              private var bundle: Bundle) : IMainFragmentNavigation,
         FragNavController.TransactionListener,
         FragNavController.RootFragmentListener {
+
+    override fun goToPVCValidationList() {
+        switchTab(1)
+    }
 
 
     override fun handleBackPress() {
@@ -37,7 +43,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
         } else {
 
             if (fragmentHistory.isEmpty) {
-                activity.onBackPressed()
+                //activity.onBackPressed()
             } else {
 
 
@@ -61,7 +67,6 @@ class MainFragmentNavigation(private var activity: MainActivity,
     private fun updateTabSelection(currentTab: Int) {
 
     }
-
 
 
     override val isRootFragment: Boolean
@@ -134,7 +139,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
     override fun getRootFragment(index: Int): Fragment {
         when (index) {
             FragNavController.TAB1 -> return PVCVerificationFragment.newInstance()
-            FragNavController.TAB2 -> return DummyFragment()
+            FragNavController.TAB2 -> return PVCVerificationListFragment.newInstance()
             FragNavController.TAB3 -> return DummyFragment()
             FragNavController.TAB4 -> return DummyFragment()
             FragNavController.TAB5 -> return DummyFragment()
@@ -144,7 +149,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
 
 
     override fun goToPVCVerification() {
-
+        switchTab(0)
     }
 
 

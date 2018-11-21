@@ -22,14 +22,14 @@ class PVCVerificationModule {
 
     @FragmentScope
     @Provides
-    fun providesLoginVMFactory(useCase: VerifyPVCUseCase, fetchCurrentUserUseCase: FetchCurrentUserUseCase, userMapper: UserMapper, navigator: IMainFragmentNavigation): ViewModelFactory<PVCVerificationViewModel> {
+    fun providesVMFactory(useCase: VerifyPVCUseCase, fetchCurrentUserUseCase: FetchCurrentUserUseCase, userMapper: UserMapper, navigator: IMainFragmentNavigation): ViewModelFactory<PVCVerificationViewModel> {
         return ViewModelFactory(lazyOf(PVCVerificationViewModel(useCase, fetchCurrentUserUseCase,
                 userMapper, navigator)))
     }
 
     @FragmentScope
     @Provides
-    fun providesLoginVM(viewModelFactory: ViewModelFactory<PVCVerificationViewModel>, fragment: PVCVerificationFragment): PVCVerificationViewModel {
+    fun providesVM(viewModelFactory: ViewModelFactory<PVCVerificationViewModel>, fragment: PVCVerificationFragment): PVCVerificationViewModel {
         return ViewModelProviders.of(fragment, viewModelFactory).get(PVCVerificationViewModel::class.java)
     }
 

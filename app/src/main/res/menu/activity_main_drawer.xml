@@ -2,14 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
         <item
-            android:id="@+id/nav_item_one"
+            android:id="@+id/nav_item_verify"
             android:title="PVC Verify" />
         <item
-            android:id="@+id/nav_item_two"
+            android:id="@+id/nav_item_data"
             android:title="PVC Data" />
-        <item
-            android:id="@+id/nav_item_three"
-            android:title="PVC Add Agent" />
     </group>
 
 </menu>

@@ -21,10 +21,8 @@ import dagger.android.support.HasSupportFragmentInjector
 
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-import android.Manifest.permission
-import android.Manifest.permission.SEND_SMS
-import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale
 import android.content.pm.PackageManager
+import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 
@@ -64,12 +62,13 @@ class MainActivity : BaseActivity(),
 
         initTab()
 
-        requestpermisson()
+        requestPermisson()
+
         switchFragment(0)
     }
 
 
-    fun requestpermisson() {
+    fun requestPermisson() {
         if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -101,6 +100,8 @@ class MainActivity : BaseActivity(),
         drawer_layout.addDrawerListener(toggle!!)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+
+        nav_view.setNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
     }
 
@@ -175,6 +176,21 @@ class MainActivity : BaseActivity(),
         mainFragmentNavigation.handleBackPress()
     }
 
+
+    val onNavigationItemSelectedListener : NavigationView.OnNavigationItemSelectedListener = object :NavigationView.OnNavigationItemSelectedListener{
+        override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+            when (item.itemId) {
+                R.id.nav_item_verify ->{
+                    mainFragmentNavigation.goToPVCVerification()
+                }
+                R.id.nav_item_data -> {
+                    mainFragmentNavigation.goToPVCValidationList()
+                }
+            }
+            return true
+        }
+    }
 
     fun updateToolbarTitle(title: String) {
         supportActionBar!!.title = title

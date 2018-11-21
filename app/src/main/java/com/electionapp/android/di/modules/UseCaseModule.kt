@@ -2,12 +2,16 @@ package com.electionapp.android.di.modules
 
 
 import com.electionapp.data.contracts.IAuthService
+import com.electionapp.data.contracts.IPVCDataRepository
 import com.electionapp.data.contracts.IPVCVerificationService
 import com.electionapp.data.contracts.IUserCache
+import com.electionapp.data.repositories.verification.PVCDataRepository
 import com.electionapp.data.repositories.verification.PVCVerificationService
 import com.electionapp.domain.base.Schedulers
+import com.electionapp.domain.mapper.PVCDataModelMapper
 import com.electionapp.domain.mapper.UserModelMapper
 import com.electionapp.domain.usecase.auth.*
+import com.electionapp.domain.usecase.pvc.FetchPVCDataUseCase
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
 import com.electionapp.domain.usecase.usecase.FetchCurrentUserUseCase
 import com.softcom.abujametrodata.contracts.ITokenManager
@@ -52,6 +56,12 @@ class UseCaseModule {
     @Provides
     fun providesFetchCurrentUserUseCase(schedulers: Schedulers, userCache: IUserCache, userModelMapper: UserModelMapper): FetchCurrentUserUseCase {
         return FetchCurrentUserUseCase(schedulers, userCache, userModelMapper)
+    }
+
+
+    @Provides
+    fun provideFetchPVCDataUseCase(schedulers: Schedulers, pvcDataModelMapper: PVCDataModelMapper, pvcDataRepository: IPVCDataRepository): FetchPVCDataUseCase {
+        return FetchPVCDataUseCase(schedulers, pvcDataModelMapper, pvcDataRepository)
     }
 
 }
