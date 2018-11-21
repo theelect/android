@@ -25,6 +25,7 @@ import android.content.pm.PackageManager
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.GravityCompat
 
 
 class MainActivity : BaseActivity(),
@@ -177,19 +178,17 @@ class MainActivity : BaseActivity(),
     }
 
 
-    val onNavigationItemSelectedListener : NavigationView.OnNavigationItemSelectedListener = object :NavigationView.OnNavigationItemSelectedListener{
-        override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
-            when (item.itemId) {
-                R.id.nav_item_verify ->{
-                    mainFragmentNavigation.goToPVCVerification()
-                }
-                R.id.nav_item_data -> {
-                    mainFragmentNavigation.goToPVCValidationList()
-                }
+    val onNavigationItemSelectedListener : NavigationView.OnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.nav_item_verify ->{
+                mainFragmentNavigation.goToPVCVerification()
             }
-            return true
+            R.id.nav_item_data -> {
+                mainFragmentNavigation.goToPVCValidationList()
+            }
         }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        true
     }
 
     fun updateToolbarTitle(title: String) {

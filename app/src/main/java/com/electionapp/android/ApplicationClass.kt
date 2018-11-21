@@ -3,7 +3,6 @@ package com.electionapp.android
 import android.app.Activity
 import android.databinding.DataBindingUtil
 import android.support.multidex.MultiDexApplication
-import com.facebook.FacebookSdk
 import com.facebook.stetho.Stetho
 import com.electionapp.android.di.AppComponent
 import com.electionapp.android.di.DaggerAppComponent
@@ -41,7 +40,6 @@ class ApplicationClass : MultiDexApplication(), HasActivityInjector {
         applicationClass = this
 
         //Fabric.with(this, Crashlytics())
-        FacebookSdk.sdkInitialize(this)
 
         Stetho.initializeWithDefaults(this)
 
