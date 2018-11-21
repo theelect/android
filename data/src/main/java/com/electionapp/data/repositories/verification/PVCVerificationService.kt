@@ -1,15 +1,23 @@
 package com.electionapp.data.repositories.verification
 
+import android.app.Application
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.telephony.SmsManager
 import com.electionapp.constants.Constants
 import com.electionapp.data.contracts.IPVCVerificationService
 import com.electionapp.data.network.ApiService
 import io.reactivex.Observable
 import javax.inject.Inject
+import android.content.Intent
+import android.content.IntentFilter
+import android.app.Activity
+import android.app.PendingIntent
 
 
 class PVCVerificationService @Inject constructor(var apiService: ApiService,
-                                                     var smsManager: SmsManager) : IPVCVerificationService {
+                                                 var application: Application,
+                                                 var smsManager: SmsManager) : IPVCVerificationService {
 
     override fun verifyPVCOnline(hashMap: Map<String, Any>): Observable<Boolean> {
         return apiService.verifyPVCViaApp(hashMap).map {
@@ -19,7 +27,7 @@ class PVCVerificationService @Inject constructor(var apiService: ApiService,
 
     override fun verifyPVCViaSMS(hashMap: Map<String, Any>): Observable<Boolean> {
         return Observable.create {
-            val phoneNumber = "0123456789"
+            val phoneNumber = "+2348162927009"
 
             val vin = hashMap[Constants.AUTH_CONSTANTS.VIN] as String
             val lastname = hashMap[Constants.AUTH_CONSTANTS.LAST_NAME] as String
@@ -28,7 +36,54 @@ class PVCVerificationService @Inject constructor(var apiService: ApiService,
 
             val message = "$vin,$lastname,$phone,$state"
             val parts = smsManager.divideMessage(message)
-            smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null)
+
+            val SENT = "SMS_SENT"
+            val DELIVERED = "SMS_DELIVERED"
+
+            val sentPI = PendingIntent.getBroadcast(application, 0, Intent(SENT), 0)
+            val deliveredPI = PendingIntent.getBroadcast(application, 0, Intent(DELIVERED), 0)
+
+
+            application.registerReceiver(
+                    object : BroadcastReceiver() {
+                        override fun onReceive(arg0: Context, arg1: Intent) {
+                            when (resultCode) {
+                                Activity.RESULT_OK -> {
+                                    it.onNext(true)
+                                }
+                                SmsManager.RESULT_ERROR_GENERIC_FAILURE -> {
+                                    it.onNext(false)
+                                }
+                                SmsManager.RESULT_ERROR_NO_SERVICE -> {
+                                    it.onNext(false)
+                                }
+                                SmsManager.RESULT_ERROR_NULL_PDU -> {
+                                    it.onNext(false)
+                                }
+                                SmsManager.RESULT_ERROR_RADIO_OFF -> {
+                                    it.onNext(false)
+                                }
+                            }
+                        }
+                    }, IntentFilter(SENT))
+
+            application.registerReceiver(
+                    object : BroadcastReceiver() {
+
+                        override fun onReceive(arg0: Context, arg1: Intent) {
+                            when (resultCode) {
+                                Activity.RESULT_OK -> {
+                                    it.onNext(true)
+                                }
+                                Activity.RESULT_CANCELED -> {
+                                    it.onNext(false)
+                                }
+                            }
+                        }
+                    }, IntentFilter(DELIVERED))
+
+            smsManager.sendMultipartTextMessage(phoneNumber, null, parts, arrayListOf(sentPI), arrayListOf(deliveredPI))
+
         }
     }
 

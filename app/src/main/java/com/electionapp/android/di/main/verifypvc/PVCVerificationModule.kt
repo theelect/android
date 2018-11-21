@@ -3,7 +3,7 @@ package com.electionapp.android.di.main.verifypvc
 
 import android.arch.lifecycle.ViewModelProviders
 import com.electionapp.android.di.scopes.FragmentScope
-import com.electionapp.android.ui.main.IMainNavigator
+import com.electionapp.android.ui.main.IMainFragmentNavigation
 import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationFragment
 import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationViewModel
 import com.electionapp.android.utils.ViewModelFactory
@@ -22,7 +22,7 @@ class PVCVerificationModule {
 
     @FragmentScope
     @Provides
-    fun providesLoginVMFactory(useCase: VerifyPVCUseCase, fetchCurrentUserUseCase: FetchCurrentUserUseCase, userMapper: UserMapper, navigator: IMainNavigator): ViewModelFactory<PVCVerificationViewModel> {
+    fun providesLoginVMFactory(useCase: VerifyPVCUseCase, fetchCurrentUserUseCase: FetchCurrentUserUseCase, userMapper: UserMapper, navigator: IMainFragmentNavigation): ViewModelFactory<PVCVerificationViewModel> {
         return ViewModelFactory(lazyOf(PVCVerificationViewModel(useCase, fetchCurrentUserUseCase,
                 userMapper, navigator)))
     }

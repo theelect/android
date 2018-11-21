@@ -20,7 +20,7 @@ class VerifyPVCUseCase @Inject constructor(schedulers: Schedulers,
     : UseCase<Params, Boolean>(schedulers) {
 
     override fun buildObservable(params: Params?): Observable<Boolean> {
-        var isOnline = params?.getBoolean(Constants.PVC_VERIFICATION_CONSTANTS.IS_VERIFICATION_ONLINE, false)
+        var isOnline = params?.getBoolean(Constants.PVC_VERIFICATION_CONSTANTS.IS_VERIFICATION_ONLINE, true)
         return if (isOnline!!) {
             pvcVerificationService.verifyPVCOnline(params!!.getParameters())
         }else{

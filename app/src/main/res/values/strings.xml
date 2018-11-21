@@ -49,5 +49,6 @@
     <string name="input_phone_error">Please input your phone number</string>
     <string name="navigation_drawer_open">OPEN</string>
     <string name="navigation_drawer_close">CLOSED</string>
+    <string name="input_vin">Please input VIN</string>
 
 </resources>

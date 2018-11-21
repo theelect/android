@@ -1,9 +1,10 @@
 package com.electionapp.android.di.main
 
+import android.os.Bundle
 import com.electionapp.android.di.scopes.ActivitiesScope
-import com.electionapp.android.ui.main.IMainNavigator
-import com.electionapp.android.ui.main.MainActivity
-import com.electionapp.android.ui.main.MainNavigator
+import com.electionapp.android.ui.main.*
+import com.electionapp.android.utils.FragmentHistory
+import com.electionapp.android.views.FragNavController
 import dagger.Module
 import dagger.Provides
 
@@ -17,8 +18,8 @@ class MainModule {
 
     @ActivitiesScope
     @Provides
-    fun providesMainNavigator(activity: MainActivity): IMainNavigator {
-        return MainNavigator(activity)
+    fun providesMainNavigator(activity: MainActivity): IMainFragmentNavigation {
+        return MainFragmentNavigation(activity, Bundle())
     }
 
 }

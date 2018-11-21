@@ -3,7 +3,7 @@ package com.electionapp.android.ui.main.fragments.verifypvcdata
 import com.electionapp.android.R
 import com.electionapp.android.model.user.User
 import com.electionapp.android.ui.base.BaseViewModel
-import com.electionapp.android.ui.main.IMainNavigator
+import com.electionapp.android.ui.main.IMainFragmentNavigation
 import com.electionapp.android.utils.extensions.mutableLiveDataOf
 import com.electionapp.android.utils.mapper.UserMapper
 import com.electionapp.constants.Constants
@@ -20,7 +20,7 @@ import com.electionapp.domain.usecase.usecase.FetchCurrentUserUseCase
 class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
                                private val fetchCurrentUserUseCase: FetchCurrentUserUseCase,
                                private val userMapper: UserMapper,
-                               mainNavigator: IMainNavigator) : BaseViewModel() {
+                               mainNavigator: IMainFragmentNavigation) : BaseViewModel() {
 
     val verifyParams = Params.create()
 
@@ -40,12 +40,15 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
 
     fun verifyPVCWithDetails(firstName: String,
                              lastName: String,
-                             phoneNumber: String, vin: String) {
+                             phoneNumber: String,
+                             vin: String,
+                             isOnline: Boolean) {
 
         verifyParams.putData(Constants.AUTH_CONSTANTS.FIRST_NAME, firstName)
         verifyParams.putData(Constants.AUTH_CONSTANTS.LAST_NAME, lastName)
         verifyParams.putData(Constants.AUTH_CONSTANTS.PHONE, phoneNumber)
         verifyParams.putData(Constants.AUTH_CONSTANTS.VIN, vin)
+        verifyParams.putData(Constants.PVC_VERIFICATION_CONSTANTS.IS_VERIFICATION_ONLINE, isOnline)
 
         if (validateData(verifyParams)) {
             addDisposable(verifyPVCUseCase.execute(verifyParams)
@@ -68,8 +71,8 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
         } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.LAST_NAME)) {
             displayError(R.string.input_last_name_error)
             false
-        } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.WARD)) {
-            displayError(R.string.pick_your_ward)
+        } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.VIN)) {
+            displayError(R.string.input_vin)
             false
         } else {
             super.validateData(params)
@@ -88,12 +91,24 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
 
     private fun onVerificationCompleted(t: Boolean) {
         hideLoading()
+        val isOnline = verifyParams.getBoolean(Constants.PVC_VERIFICATION_CONSTANTS.IS_VERIFICATION_ONLINE, false)
+        if(t){
+            if (!isOnline){
+                showDialogMessage("Verification done via SMS!!!")
+            }else{
+                showDialogMessage("VIN IS VALID!!")
+            }
+        }else{
+            showDialogMessage("VIN IS INVALID!!")
+        }
     }
 
 
     private fun onVerificationFailed(exception: Throwable) {
         hideLoading()
         handleError(exception)
+
+        showDialogMessage("VIN IS INVALID!!")
     }
 
     inner class VerificationObserver : DefaultObserver<Boolean>() {

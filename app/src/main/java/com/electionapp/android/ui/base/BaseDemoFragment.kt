@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.electionapp.android.ui.main.MainActivity
-import com.electionapp.android.utils.IMainFragmentNavigation
+import com.electionapp.android.ui.main.IMainFragmentNavigation
 
 
 /**

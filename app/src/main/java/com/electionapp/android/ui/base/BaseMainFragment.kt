@@ -1,6 +1,6 @@
 package com.electionapp.android.ui.base
 
-import com.electionapp.android.utils.IMainFragmentNavigation
+import com.electionapp.android.ui.main.IMainFragmentNavigation
 import javax.inject.Inject
 
 /**

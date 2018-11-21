@@ -137,7 +137,7 @@ abstract class BaseMVVMFragment<V : BaseViewModel> : Fragment() {
                 inflater, layoutResID, container, false)
         val view = binding.root
         binding.setLifecycleOwner(this)
-        //binding.setVariable(BR.viewmodel, getViewModel())
+        binding.setVariable(BR.viewmodel, getViewModel())
         return view
     }
 
