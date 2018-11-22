@@ -38,13 +38,13 @@ class PVCVerificationFragment : BaseMVVMFragment<PVCVerificationViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         verify_by_app_button.setOnClickListener {
-            getViewModel().verifyPVCWithDetails(first_name_edit_text.text.toString(), last_name_edit_text.text.toString(),
+            getViewModel().verifyPVCWithDetails(last_name_edit_text.text.toString(),
                     phone_edit_text.text.toString(), vin_edit_text.text.toString(), true)
 
         }
 
         verify_by_sms_button.setOnClickListener {
-            getViewModel().verifyPVCWithDetails(first_name_edit_text.text.toString(), last_name_edit_text.text.toString(),
+            getViewModel().verifyPVCWithDetails( last_name_edit_text.text.toString(),
                     phone_edit_text.text.toString(), vin_edit_text.text.toString(), false)
         }
 

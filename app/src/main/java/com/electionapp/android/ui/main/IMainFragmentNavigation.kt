@@ -111,17 +111,15 @@ class MainFragmentNavigation(private var activity: MainActivity,
     override fun onTabTransaction(fragment: Fragment, index: Int) {
         // If we have a backstack, show the back button
         if (activity.supportActionBar != null && navController != null) {
-
-
             updateToolbar()
 
         }
     }
 
     private fun updateToolbar() {
-        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(!navController!!.isRootFragment)
-        activity.supportActionBar!!.setDisplayShowHomeEnabled(!navController!!.isRootFragment)
-        activity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+//        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(!navController!!.isRootFragment)
+//        activity.supportActionBar!!.setDisplayShowHomeEnabled(!navController!!.isRootFragment)
+//        activity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         //TransitionManager.beginDelayedTransition(title_layout, ChangeBounds())
     }
 

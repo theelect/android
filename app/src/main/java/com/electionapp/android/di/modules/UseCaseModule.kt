@@ -64,4 +64,10 @@ class UseCaseModule {
         return FetchPVCDataUseCase(schedulers, pvcDataModelMapper, pvcDataRepository)
     }
 
+    @Provides
+    fun provideFetchCurrentUserWithTokenUserUseCase(schedulers: Schedulers, authService: IAuthService): FetchCurrentUserWithTokenUserUseCase {
+        return FetchCurrentUserWithTokenUserUseCase(schedulers, authService)
+    }
+
+
 }

@@ -26,7 +26,7 @@ class AuthInterceptor(private var tokenManager: ITokenManager) : Interceptor {
         requestBuilder.addHeader("apiKey", "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD")
 
         if (tokenManager.getToken() != null) {
-            requestBuilder.addHeader("Authorization", tokenManager.getToken()!!)
+            requestBuilder.addHeader("Authorization", "Bearer " + tokenManager.getToken())
         }
 
         var response: Response? = null

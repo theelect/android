@@ -35,7 +35,6 @@ interface Constants {
     }
 
 
-
     object DATA_SHARING_CONSTANTS {
         const val SERVICE_TYPE = "_metroscan._tcp."
 
@@ -146,12 +145,13 @@ interface Constants {
 
     object PVC_VERIFICATION_CONSTANTS {
         val IS_VERIFICATION_ONLINE = "IS_VERIFICATION_ONLINE"
+        val LAST_NAME = "last_name"
     }
 
     interface AUTH_CONSTANTS {
         companion object {
-            val FIRST_NAME = "firstname"
-            val LAST_NAME = "lastname"
+            val FIRST_NAME = "first_name"
+            val LAST_NAME = "last_name"
             val PHONE = "phone"
             val EMAIL = "email"
             val PASSWORD = "password"

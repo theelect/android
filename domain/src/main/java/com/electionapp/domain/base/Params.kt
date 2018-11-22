@@ -46,7 +46,7 @@ class Params private constructor() {
         parameters.put(key, value)
     }
 
-    fun getParameters(): Map<String, Any> {
+    fun getParameters(): HashMap<String, Any> {
         return parameters
     }
 

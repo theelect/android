@@ -26,6 +26,8 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
+import com.electionapp.domain.base.Params
+import com.electionapp.domain.usecase.auth.FetchCurrentUserWithTokenUserUseCase
 
 
 class MainActivity : BaseActivity(),
@@ -48,6 +50,10 @@ class MainActivity : BaseActivity(),
 
     lateinit var tabs: Array<String>
 
+    @Inject
+    lateinit var fetchCurrentUserWithTokenUserUseCase: FetchCurrentUserWithTokenUserUseCase
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +72,13 @@ class MainActivity : BaseActivity(),
         requestPermisson()
 
         switchFragment(0)
+
+        fetchCurrentUserWithTokenUserUseCase.execute(Params.EMPTY).subscribe({
+
+        },{
+
+        })
+
     }
 
 

@@ -12,12 +12,8 @@ class AuthService @Inject constructor(var userCache: IUserCache,
                                       var apiService: ApiService) : IAuthService {
 
     override fun fetchUserWithToken(hashMap: Map<String, Any>): Observable<Boolean> {
-        return apiService.fetchUserData(hashMap).map {
-            if(it.success==200){
-                userCache.saveCurrentUser(it.data)
-            }else{
-                return@map false
-            }
+        return apiService.fetchUserData().map {
+            userCache.saveCurrentUser(it)
             true
         }
     }

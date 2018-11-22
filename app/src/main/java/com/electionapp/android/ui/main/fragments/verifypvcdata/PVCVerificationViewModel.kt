@@ -38,14 +38,12 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
 
     }
 
-    fun verifyPVCWithDetails(firstName: String,
-                             lastName: String,
+    fun verifyPVCWithDetails(lastName: String,
                              phoneNumber: String,
                              vin: String,
                              isOnline: Boolean) {
 
-        verifyParams.putData(Constants.AUTH_CONSTANTS.FIRST_NAME, firstName)
-        verifyParams.putData(Constants.AUTH_CONSTANTS.LAST_NAME, lastName)
+        verifyParams.putData(Constants.PVC_VERIFICATION_CONSTANTS.LAST_NAME, lastName)
         verifyParams.putData(Constants.AUTH_CONSTANTS.PHONE, phoneNumber)
         verifyParams.putData(Constants.AUTH_CONSTANTS.VIN, vin)
         verifyParams.putData(Constants.PVC_VERIFICATION_CONSTANTS.IS_VERIFICATION_ONLINE, isOnline)
@@ -65,10 +63,7 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
         return if (!params.notEmptyString(Constants.AUTH_CONSTANTS.PHONE)) {
             displayError(R.string.input_phone_error)
             false
-        } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.FIRST_NAME)) {
-            displayError(R.string.input_first_name_error)
-            false
-        } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.LAST_NAME)) {
+        } else if (!params.notEmptyString(Constants.PVC_VERIFICATION_CONSTANTS.LAST_NAME)) {
             displayError(R.string.input_last_name_error)
             false
         } else if (!params.notEmptyString(Constants.AUTH_CONSTANTS.VIN)) {
@@ -93,11 +88,7 @@ class PVCVerificationViewModel(private val verifyPVCUseCase: VerifyPVCUseCase,
         hideLoading()
         val isOnline = verifyParams.getBoolean(Constants.PVC_VERIFICATION_CONSTANTS.IS_VERIFICATION_ONLINE, false)
         if(t){
-            if (!isOnline){
-                showDialogMessage("Verification done via SMS!!!")
-            }else{
-                showDialogMessage("VIN IS VALID!!")
-            }
+            showDialogMessage("VALIDATED!!!")
         }else{
             if (!isOnline){
                 showDialogMessage("Verification via SMS failed!!!")

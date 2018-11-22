@@ -21,7 +21,7 @@ class PVCVerificationService @Inject constructor(var apiService: ApiService,
 
     override fun verifyPVCOnline(hashMap: Map<String, Any>): Observable<Boolean> {
         return apiService.verifyPVCViaApp(hashMap).map {
-            it.data.is_verified
+            it.is_verified
         }
     }
 

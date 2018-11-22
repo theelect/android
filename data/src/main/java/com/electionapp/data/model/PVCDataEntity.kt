@@ -12,7 +12,7 @@ data class PVCDataEntity(
         val campaign: String?,
         val verification_error:String?,
         val createdAt: String?,
-        val is_verified: Boolean?,
+        val is_verified: Boolean,
         val last_name: String?,
         val phone: String?,
         val state_id: String?,

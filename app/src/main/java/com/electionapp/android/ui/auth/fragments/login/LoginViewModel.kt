@@ -6,6 +6,7 @@ import com.electionapp.android.ui.auth.IAuthNavigator
 import com.electionapp.constants.Constants
 import com.electionapp.domain.base.DefaultObserver
 import com.electionapp.domain.base.Params
+import com.electionapp.domain.usecase.auth.FetchCurrentUserWithTokenUserUseCase
 import com.electionapp.domain.usecase.auth.LogInUseCase
 
 

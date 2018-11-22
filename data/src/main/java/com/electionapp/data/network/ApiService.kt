@@ -16,15 +16,15 @@ interface ApiService {
     @POST("create-wc")
     fun signWCUp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<Void>>
 
-    @POST("user")
-    fun fetchUserData(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<UserEntity>>
+    @GET("user")
+    fun fetchUserData(): Observable<UserEntity>
 
 
     @POST("password-reset")
     fun requestPasswordReset(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<Void>>
 
     @POST("pvc/verifyViaApp")
-    fun verifyPVCViaApp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<PVCDataEntity>>
+    fun verifyPVCViaApp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<PVCDataEntity>
 
     @POST("pvc")
     fun getAllVerifiedPVCWithFilters(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<List<PVCDataEntity>>>
