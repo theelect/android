@@ -9,7 +9,7 @@ import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationVi
 import com.electionapp.android.utils.ViewModelFactory
 import com.electionapp.android.utils.mapper.UserMapper
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
-import com.electionapp.domain.usecase.usecase.FetchCurrentUserUseCase
+import com.electionapp.domain.usecase.user.FetchCurrentUserUseCase
 import dagger.Module
 import dagger.Provides
 

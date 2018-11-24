@@ -2,7 +2,10 @@ package com.electionapp.android.di.main.validationdata
 
 
 import android.arch.lifecycle.ViewModelProviders
+import com.electionapp.android.R
 import com.electionapp.android.di.scopes.FragmentScope
+import com.electionapp.android.model.pvc.PVCData
+import com.electionapp.android.ui.adapters.base.SingleLayoutAdapter
 import com.electionapp.android.ui.main.fragments.pvcdatalist.PVCVerificationListFragment
 import com.electionapp.android.ui.main.fragments.pvcdatalist.PVCVerificationListViewModel
 import com.electionapp.android.utils.ViewModelFactory
@@ -28,6 +31,12 @@ class PVCValidationListModule {
     @Provides
     fun providesVM(viewModelFactory: ViewModelFactory<PVCVerificationListViewModel>, fragment: PVCVerificationListFragment): PVCVerificationListViewModel {
         return ViewModelProviders.of(fragment, viewModelFactory).get(PVCVerificationListViewModel::class.java)
+    }
+
+    @FragmentScope
+    @Provides
+    fun providesAdapter(): SingleLayoutAdapter<PVCData> {
+        return SingleLayoutAdapter<PVCData>(R.layout.item_pvc_data)
     }
 
 }

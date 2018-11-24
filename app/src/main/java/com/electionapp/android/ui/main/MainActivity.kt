@@ -26,8 +26,11 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
+import com.electionapp.android.utils.IRestartHelper
 import com.electionapp.domain.base.Params
-import com.electionapp.domain.usecase.auth.FetchCurrentUserWithTokenUserUseCase
+import com.electionapp.domain.usecase.user.FetchIfCurrentUserIsAdminUseCase
+import com.electionapp.domain.usecase.user.LogUserOutUseCase
+import io.reactivex.disposables.CompositeDisposable
 
 
 class MainActivity : BaseActivity(),
@@ -51,9 +54,15 @@ class MainActivity : BaseActivity(),
     lateinit var tabs: Array<String>
 
     @Inject
-    lateinit var fetchCurrentUserWithTokenUserUseCase: FetchCurrentUserWithTokenUserUseCase
+    lateinit var fetchIfCurrentUserIsAdminUseCase: FetchIfCurrentUserIsAdminUseCase
 
+    @Inject
+    lateinit var logUserOutUseCase: LogUserOutUseCase
 
+    @Inject
+    lateinit var restartHelper: IRestartHelper
+
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,11 +82,19 @@ class MainActivity : BaseActivity(),
 
         switchFragment(0)
 
-        fetchCurrentUserWithTokenUserUseCase.execute(Params.EMPTY).subscribe({
+//        fetchCurrentUserWithTokenUserUseCase.execute(Params.EMPTY).subscribe({
+//
+//        },{
+//
+//        })
 
-        },{
-
-        })
+        if (fetchIfCurrentUserIsAdminUseCase.getIfUserIsAdmin()) {
+            nav_view.menu.clear()
+            nav_view.inflateMenu(R.menu.activity_main_drawer_admin)
+        } else {
+            nav_view.menu.clear()
+            nav_view.inflateMenu(R.menu.activity_main_drawer_wc)
+        }
 
     }
 
@@ -191,13 +208,20 @@ class MainActivity : BaseActivity(),
     }
 
 
-    val onNavigationItemSelectedListener : NavigationView.OnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
+    val onNavigationItemSelectedListener: NavigationView.OnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.nav_item_verify ->{
+            R.id.nav_item_verify -> {
                 mainFragmentNavigation.goToPVCVerification()
             }
             R.id.nav_item_data -> {
                 mainFragmentNavigation.goToPVCValidationList()
+            }
+            R.id.nav_item_logout -> {
+                compositeDisposable.addAll(logUserOutUseCase.execute(Params.EMPTY).subscribe({
+                    restartHelper.doRestart()
+                }, {
+                    it.printStackTrace()
+                }))
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)

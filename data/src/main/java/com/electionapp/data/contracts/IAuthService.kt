@@ -7,7 +7,7 @@ interface IAuthService {
 
     fun logUserIn(hashMap: Map<String, Any>): Observable<Boolean>
 
-    fun fetchUserWithToken(hashMap: Map<String, Any>): Observable<Boolean>
+    fun fetchUserWithToken(): Observable<Boolean>
 
     fun registerWC(hashMap: Map<String, Any>): Observable<Boolean>
 

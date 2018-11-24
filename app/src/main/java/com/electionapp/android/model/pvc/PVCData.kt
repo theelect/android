@@ -1,7 +1,5 @@
 package com.electionapp.android.model.pvc
 
-import android.arch.persistence.room.PrimaryKey
-
 data class PVCData(
         val _id: String,
         val campaign: String,

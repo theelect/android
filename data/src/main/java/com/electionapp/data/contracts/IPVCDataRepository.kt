@@ -10,4 +10,5 @@ interface IPVCDataRepository {
 
     fun fetchAllPVCDataWithFiltersFromServer(hashMap: Map<String, Any>): Observable<List<PVCDataEntity>>
 
+    fun savePVCData(pvcDataEntity: PVCDataEntity)
 }

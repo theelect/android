@@ -6,12 +6,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.RatingBar
+import android.widget.TextView
 import android.widget.ViewFlipper
+import com.electionapp.android.R
 import com.electionapp.android.ui.adapters.base.BindableAdapter
 import com.electionapp.android.ui.adapters.base.BindableItemClickListener
 import com.electionapp.android.ui.adapters.base.DataBindingAdapter
 import com.electionapp.android.utils.extensions.itemDecorations
 import com.electionapp.android.views.decorators.SpacingItemDecoration
+import org.jetbrains.anko.textColor
 
 
 @set:BindingAdapter("visible")
@@ -75,4 +78,15 @@ fun setRecyclerViewOrientation(recyclerView: RecyclerView, verticalList: Boolean
 @BindingAdapter("displayedChild")
 fun setDisplayedChild(viewFlipper: ViewFlipper, displayedChild: Int) {
     viewFlipper.displayedChild = displayedChild
+}
+
+@BindingAdapter("status")
+fun setTextAndColorForStatus(textView: TextView, is_verified:Boolean) {
+    if(is_verified){
+        textView.text = "VERIFIED"
+        textView.textColor = R.color.mds_green_400
+    }else{
+        textView.text = "INVALID"
+        textView.textColor = R.color.mds_red_400
+    }
 }

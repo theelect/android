@@ -10,7 +10,7 @@ import com.electionapp.constants.Constants
 import com.electionapp.domain.base.DefaultObserver
 import com.electionapp.domain.base.Params
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
-import com.electionapp.domain.usecase.usecase.FetchCurrentUserUseCase
+import com.electionapp.domain.usecase.user.FetchCurrentUserUseCase
 
 
 /**

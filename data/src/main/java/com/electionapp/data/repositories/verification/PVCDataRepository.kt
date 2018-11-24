@@ -11,6 +11,9 @@ import javax.inject.Inject
 class PVCDataRepository @Inject constructor(var apiService: ApiService,
                                             var pvcDao: PVCDao) : IPVCDataRepository {
 
+    override fun savePVCData(pvcDataEntity: PVCDataEntity) {
+        pvcDao.savePVCData(pvcDataEntity)
+    }
 
     override fun fetchAllPVCDataWithFiltersFromDB(hashMap: Map<String, Any>): Observable<List<PVCDataEntity>> {
         return pvcDao.getPVCDataList().toObservable()

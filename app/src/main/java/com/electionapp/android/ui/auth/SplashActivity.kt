@@ -50,7 +50,8 @@ interface ISplashNavigator {
 }
 
 
-class SplashNavigator(private var checkUserIsSignedInUseCase: CheckUserIsSignedInUseCase, private var splashActivity: SplashActivity) : ISplashNavigator {
+class SplashNavigator(private var checkUserIsSignedInUseCase: CheckUserIsSignedInUseCase,
+                      private var splashActivity: SplashActivity) : ISplashNavigator {
 
     override fun routeUser() {
         if (!checkUserIsSignedInUseCase.isUserSignedIn()) {

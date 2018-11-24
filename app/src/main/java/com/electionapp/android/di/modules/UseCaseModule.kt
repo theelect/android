@@ -1,19 +1,16 @@
 package com.electionapp.android.di.modules
 
 
-import com.electionapp.data.contracts.IAuthService
-import com.electionapp.data.contracts.IPVCDataRepository
-import com.electionapp.data.contracts.IPVCVerificationService
-import com.electionapp.data.contracts.IUserCache
-import com.electionapp.data.repositories.verification.PVCDataRepository
-import com.electionapp.data.repositories.verification.PVCVerificationService
+import com.electionapp.data.contracts.*
 import com.electionapp.domain.base.Schedulers
 import com.electionapp.domain.mapper.PVCDataModelMapper
 import com.electionapp.domain.mapper.UserModelMapper
 import com.electionapp.domain.usecase.auth.*
 import com.electionapp.domain.usecase.pvc.FetchPVCDataUseCase
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
-import com.electionapp.domain.usecase.usecase.FetchCurrentUserUseCase
+import com.electionapp.domain.usecase.user.FetchCurrentUserUseCase
+import com.electionapp.domain.usecase.user.FetchIfCurrentUserIsAdminUseCase
+import com.electionapp.domain.usecase.user.LogUserOutUseCase
 import com.softcom.abujametrodata.contracts.ITokenManager
 import dagger.Module
 import dagger.Provides
@@ -69,5 +66,14 @@ class UseCaseModule {
         return FetchCurrentUserWithTokenUserUseCase(schedulers, authService)
     }
 
+    @Provides
+    fun provideFetchIfCurrentUserIsAdminUseCase(schedulers: Schedulers, userAccountTypeManager: IUserAccountTypeManager): FetchIfCurrentUserIsAdminUseCase {
+        return FetchIfCurrentUserIsAdminUseCase(schedulers, userAccountTypeManager)
+    }
+
+    @Provides
+    fun provideLogUserOutUseCase(schedulers: Schedulers, userAccountTypeManager: IUserAccountTypeManager, userIDManager: IUserIDManager): LogUserOutUseCase {
+        return LogUserOutUseCase(schedulers, userIDManager, userAccountTypeManager)
+    }
 
 }

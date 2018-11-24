@@ -16,7 +16,7 @@ class FetchCurrentUserWithTokenUserUseCase @Inject constructor(schedulers: Sched
                                                                private var userRepository: IAuthService) : UseCase<Params, Boolean>(schedulers) {
 
     override fun buildObservable(params: Params?): Observable<Boolean> {
-        return userRepository.fetchUserWithToken(params!!.getParameters())
+        return userRepository.fetchUserWithToken()
     }
 
 }

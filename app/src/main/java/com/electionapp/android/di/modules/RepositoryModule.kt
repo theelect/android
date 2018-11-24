@@ -3,14 +3,14 @@ package com.electionapp.android.di.modules
 
 import androidx.work.WorkManager
 import com.electionapp.android.di.scopes.ApplicationScope
-import com.electionapp.data.contracts.IAuthService
-import com.electionapp.data.contracts.IPVCDataRepository
-import com.electionapp.data.contracts.IPVCVerificationService
-import com.electionapp.data.contracts.IUserCache
+import com.electionapp.data.contracts.*
 import com.electionapp.data.repositories.auth.AuthService
+import com.electionapp.data.repositories.manager.UserAccountTypeManager
 import com.electionapp.data.repositories.user.UserCache
 import com.electionapp.data.repositories.verification.PVCDataRepository
 import com.electionapp.data.repositories.verification.PVCVerificationService
+import com.electionapp.domain.base.Schedulers
+import com.electionapp.domain.usecase.user.FetchIfCurrentUserIsAdminUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -51,6 +51,11 @@ class RepositoryModule {
     @Provides
     fun provideUserRepository(userCache: UserCache): IUserCache {
         return userCache
+    }
+
+    @Provides
+    fun provideIUserAccountTypeManager(userAccountTypeManager: UserAccountTypeManager): IUserAccountTypeManager {
+        return userAccountTypeManager
     }
 
 }

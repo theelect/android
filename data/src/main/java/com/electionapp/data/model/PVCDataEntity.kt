@@ -18,10 +18,7 @@ data class PVCDataEntity(
         val state_id: String?,
         val submitted_by: String?,
         val updatedAt: String?,
-        val vin: String?
-){
-    @Ignore
-    val pollingUnit: PollingUnitEntity?=null
-    @Ignore
-    val state: StateEntity?=null
-}
+        val vin: String?,
+        val pollingUnit: PollingUnitEntity?,
+        val state: StateEntity?
+)

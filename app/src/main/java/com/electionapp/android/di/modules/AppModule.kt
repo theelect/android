@@ -11,6 +11,8 @@ import com.electionapp.android.utils.imageloader.PicassoImageLoader
 import com.electionapp.android.utils.notifications.NotificationHelper
 import com.electionapp.domain.base.Schedulers
 import com.electionapp.android.di.scopes.ApplicationScope
+import com.electionapp.android.utils.IRestartHelper
+import com.electionapp.android.utils.RestartHelper
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
@@ -69,6 +71,15 @@ class AppModule {
             Log.e("INJECTION", "Failed to load meta-data, NullPointer: " + e.message)
         }
         return apiKey
+    }
+
+
+
+
+    @ApplicationScope
+    @Provides
+    fun providesRestartHelper(restartHelper: RestartHelper): IRestartHelper {
+        return restartHelper
     }
 
 }

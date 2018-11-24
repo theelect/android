@@ -1,4 +1,4 @@
-package com.electionapp.domain.usecase.usecase
+package com.electionapp.domain.usecase.user
 
 
 import com.electionapp.data.contracts.IUserCache

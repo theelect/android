@@ -13,14 +13,17 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.app.Activity
 import android.app.PendingIntent
+import com.electionapp.data.contracts.IPVCDataRepository
 
 
 class PVCVerificationService @Inject constructor(var apiService: ApiService,
                                                  var application: Application,
+                                                 var pvcDataRepository: IPVCDataRepository,
                                                  var smsManager: SmsManager) : IPVCVerificationService {
 
     override fun verifyPVCOnline(hashMap: Map<String, Any>): Observable<Boolean> {
         return apiService.verifyPVCViaApp(hashMap).map {
+            pvcDataRepository.savePVCData(it)
             it.is_verified
         }
     }
