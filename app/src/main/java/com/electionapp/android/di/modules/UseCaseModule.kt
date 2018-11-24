@@ -5,7 +5,9 @@ import com.electionapp.data.contracts.*
 import com.electionapp.data.repositories.user.UserCache
 import com.electionapp.domain.base.Schedulers
 import com.electionapp.domain.mapper.PVCDataModelMapper
+import com.electionapp.domain.mapper.PVCStatsModelMapper
 import com.electionapp.domain.mapper.UserModelMapper
+import com.electionapp.domain.usecase.admin.FetchPVCStatsUseCase
 import com.electionapp.domain.usecase.auth.*
 import com.electionapp.domain.usecase.pvc.FetchPVCDataUseCase
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
@@ -74,7 +76,12 @@ class UseCaseModule {
 
     @Provides
     fun provideLogUserOutUseCase(schedulers: Schedulers, userCache: IUserCache, tokenManager: ITokenManager, userAccountTypeManager: IUserAccountTypeManager, userIDManager: IUserIDManager): LogUserOutUseCase {
-        return LogUserOutUseCase(schedulers, userIDManager, userCache, tokenManager,userAccountTypeManager)
+        return LogUserOutUseCase(schedulers, userIDManager, userCache, tokenManager, userAccountTypeManager)
+    }
+
+    @Provides
+    fun provideFetchPVCStatsUseCase(schedulers: Schedulers, mapper: PVCStatsModelMapper, repository: IPVCStatsRepository): FetchPVCStatsUseCase {
+        return FetchPVCStatsUseCase(schedulers, mapper, repository)
     }
 
 }

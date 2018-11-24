@@ -2,6 +2,7 @@ package com.electionapp.data.network
 
 
 import com.electionapp.data.model.PVCDataEntity
+import com.electionapp.data.model.StatItemEntity
 import com.electionapp.data.model.UserEntity
 import com.electionapp.data.network.reponses.GenericResponse
 import io.reactivex.Observable
@@ -26,7 +27,10 @@ interface ApiService {
     @POST("pvc/verifyViaApp")
     fun verifyPVCViaApp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<PVCDataEntity>
 
-    @POST("pvc")
+    @GET("pvc")
     fun getAllVerifiedPVCWithFilters(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<List<PVCDataEntity>>>
+
+    @GET("pvc/statistics")
+    fun getAllVerifiedPVCStatsWithFilters(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<List<StatItemEntity>>
 
 }

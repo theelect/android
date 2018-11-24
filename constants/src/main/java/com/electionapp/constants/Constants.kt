@@ -11,6 +11,17 @@ import java.text.SimpleDateFormat
 interface Constants {
 
 
+    object STATS_CONSTANTS {
+        const val TYPE = "type"
+
+
+        const val GENDER = "gender"
+        const val OCCUPATION = "occupation"
+        const val LGA = "lga"
+        const val WARD = "ward"
+
+    }
+
     object USERS_CONSTANTS {
 
         const val USERNAME = "username"

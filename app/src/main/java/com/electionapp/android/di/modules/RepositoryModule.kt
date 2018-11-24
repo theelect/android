@@ -6,11 +6,10 @@ import com.electionapp.android.di.scopes.ApplicationScope
 import com.electionapp.data.contracts.*
 import com.electionapp.data.repositories.auth.AuthService
 import com.electionapp.data.repositories.manager.UserAccountTypeManager
+import com.electionapp.data.repositories.stats.PVCStatsRepository
 import com.electionapp.data.repositories.user.UserCache
 import com.electionapp.data.repositories.verification.PVCDataRepository
 import com.electionapp.data.repositories.verification.PVCVerificationService
-import com.electionapp.domain.base.Schedulers
-import com.electionapp.domain.usecase.user.FetchIfCurrentUserIsAdminUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -40,6 +39,11 @@ class RepositoryModule {
         return pVCDataRepository
     }
 
+    @ApplicationScope
+    @Provides
+    fun providePVCStatsRepository(repository: PVCStatsRepository): IPVCStatsRepository {
+        return repository
+    }
 
     @ApplicationScope
     @Provides

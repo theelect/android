@@ -8,6 +8,8 @@ import com.electionapp.android.ui.adapters.admin.StatAdapter
 import com.electionapp.android.ui.main.fragments.pvcstats.PVCAdminStatsFragment
 import com.electionapp.android.ui.main.fragments.pvcstats.PVCAdminStatsViewModel
 import com.electionapp.android.utils.ViewModelFactory
+import com.electionapp.android.utils.mapper.PVCStatsMapper
+import com.electionapp.domain.usecase.admin.FetchPVCStatsUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -20,8 +22,9 @@ class PVCAdminStatsModule {
 
     @FragmentScope
     @Provides
-    fun providesVMFactory(): ViewModelFactory<PVCAdminStatsViewModel> {
-        return ViewModelFactory(lazyOf(PVCAdminStatsViewModel()))
+    fun providesVMFactory(fetchPVCStatsUseCase: FetchPVCStatsUseCase,
+                          userPVCStatsMapper: PVCStatsMapper): ViewModelFactory<PVCAdminStatsViewModel> {
+        return ViewModelFactory(lazyOf(PVCAdminStatsViewModel(fetchPVCStatsUseCase, userPVCStatsMapper)))
     }
 
     @FragmentScope
