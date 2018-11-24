@@ -62,6 +62,7 @@ dependencies {
             appDependencies.lifeCycleExtensions,
             appDependencies.picassoTransformations,
             appDependencies.stetho,
+            appDependencies.mpAndroidChart,
             appDependencies.circleImageview,
             appDependencies.searchableSpinner,
             project(':domain'),

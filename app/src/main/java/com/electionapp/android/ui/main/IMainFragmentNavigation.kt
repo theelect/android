@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import com.electionapp.android.R
 import com.electionapp.android.fragments.DummyFragment
 import com.electionapp.android.ui.main.fragments.pvcdatalist.PVCVerificationListFragment
+import com.electionapp.android.ui.main.fragments.pvcstats.PVCAdminStatsFragment
 import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationFragment
 import com.electionapp.android.utils.FragmentHistory
 import com.electionapp.android.views.FragNavController
@@ -138,7 +139,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
         when (index) {
             FragNavController.TAB1 -> return PVCVerificationFragment.newInstance()
             FragNavController.TAB2 -> return PVCVerificationListFragment.newInstance()
-            FragNavController.TAB3 -> return DummyFragment()
+            FragNavController.TAB3 -> return PVCAdminStatsFragment.newInstance()
             FragNavController.TAB4 -> return DummyFragment()
             FragNavController.TAB5 -> return DummyFragment()
         }

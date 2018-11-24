@@ -89,6 +89,7 @@ class MainActivity : BaseActivity(),
         if (fetchIfCurrentUserIsAdminUseCase.getIfUserIsAdmin()) {
             nav_view.menu.clear()
             nav_view.inflateMenu(R.menu.activity_main_drawer_admin)
+            switchFragment(2)
         } else {
             nav_view.menu.clear()
             nav_view.inflateMenu(R.menu.activity_main_drawer_wc)
