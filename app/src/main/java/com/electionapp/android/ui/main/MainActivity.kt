@@ -80,8 +80,6 @@ class MainActivity : BaseActivity(),
 
         requestPermisson()
 
-        switchFragment(0)
-
 //        fetchCurrentUserWithTokenUserUseCase.execute(Params.EMPTY).subscribe({
 //
 //        },{
@@ -94,6 +92,7 @@ class MainActivity : BaseActivity(),
         } else {
             nav_view.menu.clear()
             nav_view.inflateMenu(R.menu.activity_main_drawer_wc)
+            switchFragment(0)
         }
 
     }

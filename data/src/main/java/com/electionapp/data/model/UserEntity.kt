@@ -15,7 +15,7 @@ class UserEntity(
         val email: String?,
         val role: String?,
         val is_active: Boolean?,
-        val vin: String,
+        val vin: String?,
         val ward: String?,
         val firstname: String?,
         val lastname: String?,

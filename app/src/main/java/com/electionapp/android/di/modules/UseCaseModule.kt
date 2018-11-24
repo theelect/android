@@ -2,6 +2,7 @@ package com.electionapp.android.di.modules
 
 
 import com.electionapp.data.contracts.*
+import com.electionapp.data.repositories.user.UserCache
 import com.electionapp.domain.base.Schedulers
 import com.electionapp.domain.mapper.PVCDataModelMapper
 import com.electionapp.domain.mapper.UserModelMapper
@@ -72,8 +73,8 @@ class UseCaseModule {
     }
 
     @Provides
-    fun provideLogUserOutUseCase(schedulers: Schedulers, userAccountTypeManager: IUserAccountTypeManager, userIDManager: IUserIDManager): LogUserOutUseCase {
-        return LogUserOutUseCase(schedulers, userIDManager, userAccountTypeManager)
+    fun provideLogUserOutUseCase(schedulers: Schedulers, userCache: IUserCache, tokenManager: ITokenManager, userAccountTypeManager: IUserAccountTypeManager, userIDManager: IUserIDManager): LogUserOutUseCase {
+        return LogUserOutUseCase(schedulers, userIDManager, userCache, tokenManager,userAccountTypeManager)
     }
 
 }
