@@ -25,8 +25,8 @@ class RoomModule {
                 context,
                 ElectionAppDatabase::class.java,
                 "ELECTION_DB")
-                .addMigrations(MIGRATION_1_2)
-                //.fallbackToDestructiveMigration()
+                //.addMigrations(MIGRATION_1_2)
+                .fallbackToDestructiveMigration()
                 .build()
     }
 

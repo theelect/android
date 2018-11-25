@@ -14,7 +14,7 @@ import com.electionapp.data.room.typeconverter.Converters
  * Created by aliumujib on 20/01/2018.
  */
 
-@Database(entities = [(UserEntity::class), (PVCDataEntity::class)], version = 1, exportSchema = true)
+@Database(entities = [(UserEntity::class), (PVCDataEntity::class)], version = 2, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class ElectionAppDatabase : RoomDatabase() {
 
