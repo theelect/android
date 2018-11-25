@@ -8,7 +8,6 @@ import com.electionapp.android.utils.mapper.PVCStatsMapper
 import com.electionapp.constants.Constants
 import com.electionapp.domain.base.Params
 import com.electionapp.domain.usecase.admin.FetchPVCStatsUseCase
-import java.lang.Exception
 
 
 /**
