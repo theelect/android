@@ -8,12 +8,13 @@ This project aggregates data from field agents.
 - [ ] Clone this repository into a folder of your project's name `git clone https://github.com/theelect/android.git MY_PROJECT`. Or if you're copying the folder, don't forget hidden files!
 - [ ] Make sure you have an internet connection and are on at least version 3.2 of Android Studio
 - [ ] Import into Android Studio
+- [ ] Please uninstall any old versions of the app before running the new one (No SQLite Database migration script is provided)
 - [ ] Run a gradle build
 - [ ] Push a build to your phone/emulator
 
 ## License
 
-    Copyright (C) 2017 
+    Copyright (C) 2017
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
