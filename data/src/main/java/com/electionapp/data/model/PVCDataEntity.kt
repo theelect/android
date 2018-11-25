@@ -1,7 +1,6 @@
 package com.electionapp.data.model
 
 import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -20,8 +19,6 @@ data class PVCDataEntity(
         val submitted_by: String?,
         val updatedAt: String?,
         val vin: String?,
-        @SerializedName("Pu")
-        val pollingUnit: PollingUnitEntity?,
-        @SerializedName("State")
-        val state: StateEntity?
+        @SerializedName("voter_info")
+        val voterInfo: VoterInfo?
 )

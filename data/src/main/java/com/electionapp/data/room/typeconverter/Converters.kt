@@ -3,6 +3,8 @@ package com.electionapp.data.room.typeconverter
 import android.arch.persistence.room.TypeConverter
 import com.electionapp.data.model.PollingUnitEntity
 import com.electionapp.data.model.StateEntity
+import com.electionapp.data.model.Voter
+import com.electionapp.data.model.VoterInfo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -48,5 +50,19 @@ class Converters {
         val gson = Gson()
         return gson.toJson(list)
     }
+
+    @TypeConverter
+    fun fromVoterInfoString(value: String): VoterInfo? {
+        val listType = object : TypeToken<PollingUnitEntity?>() {
+        }.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromVoterInfo(voterInfo: VoterInfo?): String {
+        val gson = Gson()
+        return gson.toJson(voterInfo)
+    }
+
 
 }

@@ -17,12 +17,12 @@ class PVCDataModelMapper(var pollingUnitModel: PollingUnitModelMapper,
     override fun mapFrom(from: PVCDataEntity): PVCDataModel {
         var pu: PollingUnitModel? = null
         var state: StateModel? = null
-        if (from.pollingUnit != null) {
-            pu = pollingUnitModel.mapFrom(from.pollingUnit!!)
+        if (from.voterInfo?.pollingUnit != null) {
+            pu = pollingUnitModel.mapFrom(from.voterInfo?.pollingUnit!!)
         }
 
-        if (from.state != null) {
-            state = stateModelMapper.mapFrom(from.state!!)
+        if (from.voterInfo?.state != null) {
+            state = stateModelMapper.mapFrom(from.voterInfo?.state!!)
         }
 
         return PVCDataModel(validate(from._id), validate(from.campaign), validate(from.verification_error), validate(from.is_verified),
