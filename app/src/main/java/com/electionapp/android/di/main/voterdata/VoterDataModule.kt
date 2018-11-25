@@ -39,7 +39,7 @@ class VoterDataModule {
     @FragmentScope
     @Provides
     fun providesAdapter(): SingleLayoutAdapter<PVCData> {
-        return SingleLayoutAdapter<PVCData>(R.layout.item_pvc_data)
+        return SingleLayoutAdapter<PVCData>(R.layout.item_pvc_data_full)
     }
 
 }

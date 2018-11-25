@@ -12,5 +12,7 @@ data class PVCDataModel(
         val updatedAt: String,
         val pollingUnit: PollingUnitModel?,
         val state: StateModel?,
-        val vin: String
+        val vin: String,
+        val first_name: String,
+        val occupation: String
 )

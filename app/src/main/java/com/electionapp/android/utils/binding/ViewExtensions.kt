@@ -15,6 +15,7 @@ import com.electionapp.android.ui.adapters.base.DataBindingAdapter
 import com.electionapp.android.utils.extensions.itemDecorations
 import com.electionapp.android.views.decorators.SpacingItemDecoration
 import org.jetbrains.anko.textColor
+import org.jetbrains.anko.textColorResource
 
 
 @set:BindingAdapter("visible")
@@ -80,13 +81,22 @@ fun setDisplayedChild(viewFlipper: ViewFlipper, displayedChild: Int) {
     viewFlipper.displayedChild = displayedChild
 }
 
+@BindingAdapter("hide")
+fun setViewStatus(view: View, hide: Boolean) {
+    if (hide) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.INVISIBLE
+    }
+}
+
 @BindingAdapter("status")
-fun setTextAndColorForStatus(textView: TextView, is_verified:Boolean) {
-    if(is_verified){
+fun setTextAndColorForStatus(textView: TextView, is_verified: Boolean) {
+    if (is_verified) {
         textView.text = "VERIFIED"
-        textView.textColor = R.color.mds_green_400
-    }else{
+        textView.textColorResource = R.color.mds_green_400
+    } else {
         textView.text = "INVALID"
-        textView.textColor = R.color.mds_red_400
+        textView.textColorResource = R.color.mds_red_400
     }
 }

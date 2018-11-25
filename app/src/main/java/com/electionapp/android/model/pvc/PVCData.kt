@@ -11,5 +11,7 @@ data class PVCData(
         val updatedAt: String,
         val pollingUnit: PollingUnit?,
         val state: State?,
-        val vin: String
+        val vin: String,
+        val first_name: String,
+        val occupation: String
 )

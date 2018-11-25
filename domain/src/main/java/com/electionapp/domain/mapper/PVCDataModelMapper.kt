@@ -28,7 +28,7 @@ class PVCDataModelMapper(var pollingUnitModel: PollingUnitModelMapper,
         return PVCDataModel(validate(from._id), validate(from.campaign), validate(from.verification_error), validate(from.is_verified),
                 validate(from.last_name), validate(from.phone), validate(from.state_id), validate(from.submitted_by),
                 validate(from.updatedAt), pu, state,
-                validate(from.vin))
+                validate(from.vin), validate(from.voterInfo?.voter?.first_name), validate(from.voterInfo?.voter?.occupation))
     }
 
 }

@@ -28,7 +28,7 @@ class PVCDataMapper(var pollingUnitMapper: PollingUnitMapper,
         return PVCData(from._id, from.campaign, from.is_verified,
                 (from.last_name), (from.phone), (from.state_id), (from.submitted_by),
                 (from.updatedAt), pu, state,
-                (from.vin))
+                (from.vin), from.first_name, from.occupation)
     }
 
 }
