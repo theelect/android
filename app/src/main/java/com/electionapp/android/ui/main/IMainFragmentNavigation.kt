@@ -7,6 +7,7 @@ import com.electionapp.android.fragments.DummyFragment
 import com.electionapp.android.ui.main.fragments.pvcdatalist.PVCVerificationListFragment
 import com.electionapp.android.ui.main.fragments.pvcstats.PVCAdminStatsFragment
 import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationFragment
+import com.electionapp.android.ui.main.fragments.voterdata.VoterDataFragment
 import com.electionapp.android.utils.FragmentHistory
 import com.electionapp.android.views.FragNavController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,13 +25,22 @@ interface IMainFragmentNavigation {
     fun switchTab(position: Int)
     fun popFragment()
     fun handleBackPress()
+    fun goToPVCAdminStats()
     fun goToPVCValidationList()
+    fun goToVoterDataList()
 }
 
 class MainFragmentNavigation(private var activity: MainActivity,
                              private var bundle: Bundle) : IMainFragmentNavigation,
         FragNavController.TransactionListener,
         FragNavController.RootFragmentListener {
+    override fun goToPVCAdminStats() {
+        switchTab(2)
+    }
+
+    override fun goToVoterDataList() {
+        switchTab(3)
+    }
 
     override fun goToPVCValidationList() {
         switchTab(1)
@@ -100,7 +110,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
                 activity.supportFragmentManager,
                 R.id.content_frame)
                 .transactionListener(this)
-                .rootFragmentListener(this, 3)
+                .rootFragmentListener(this, 4)
                 .build()
     }
 
@@ -140,7 +150,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
             FragNavController.TAB1 -> return PVCVerificationFragment.newInstance()
             FragNavController.TAB2 -> return PVCVerificationListFragment.newInstance()
             FragNavController.TAB3 -> return PVCAdminStatsFragment.newInstance()
-            FragNavController.TAB4 -> return DummyFragment()
+            FragNavController.TAB4 -> return VoterDataFragment.newInstance()
             FragNavController.TAB5 -> return DummyFragment()
         }
         throw IllegalStateException("Need to send an index that we know")

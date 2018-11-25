@@ -9,7 +9,7 @@ data class PVCData(
         val state_id: String,
         val submitted_by: String,
         val updatedAt: String,
-        val pollingUnit: PollingUnit,
-        val state: State,
+        val pollingUnit: PollingUnit?,
+        val state: State?,
         val vin: String
 )

@@ -14,13 +14,13 @@ import javax.inject.Inject
  * Created by aliumujib on 14/05/2018.
  */
 
-class FetchPVCDataUseCase @Inject constructor(schedulers: Schedulers,
-                                              var pvcDataModelMapper: PVCDataModelMapper,
-                                              var repository: IPVCDataRepository)
+class FetchPVCDataFromServerUseCase @Inject constructor(schedulers: Schedulers,
+                                                        var pvcDataModelMapper: PVCDataModelMapper,
+                                                        var repository: IPVCDataRepository)
     : UseCase<Params, List<PVCDataModel>>(schedulers) {
 
     override fun buildObservable(params: Params?): Observable<List<PVCDataModel>> {
-        return repository.fetchAllPVCDataWithFiltersFromDB(params!!.getParameters()).map {
+        return repository.fetchAllPVCDataWithFiltersFromServer(params!!.getParameters()).map {
             pvcDataModelMapper.mapFromList(it)
         }
     }

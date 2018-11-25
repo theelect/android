@@ -80,12 +80,6 @@ class MainActivity : BaseActivity(),
 
         requestPermisson()
 
-//        fetchCurrentUserWithTokenUserUseCase.execute(Params.EMPTY).subscribe({
-//
-//        },{
-//
-//        })
-
         if (fetchIfCurrentUserIsAdminUseCase.getIfUserIsAdmin()) {
             nav_view.menu.clear()
             nav_view.inflateMenu(R.menu.activity_main_drawer_admin)
@@ -208,13 +202,19 @@ class MainActivity : BaseActivity(),
     }
 
 
-    val onNavigationItemSelectedListener: NavigationView.OnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
+    private val onNavigationItemSelectedListener: NavigationView.OnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_item_verify -> {
                 mainFragmentNavigation.goToPVCVerification()
             }
             R.id.nav_item_data -> {
                 mainFragmentNavigation.goToPVCValidationList()
+            }
+            R.id.nav_item_dashboard -> {
+                mainFragmentNavigation.goToPVCAdminStats()
+            }
+            R.id.nav_voter_data_dashboard -> {
+                mainFragmentNavigation.goToVoterDataList()
             }
             R.id.nav_item_logout -> {
                 compositeDisposable.addAll(logUserOutUseCase.execute(Params.EMPTY).subscribe({

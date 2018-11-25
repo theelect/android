@@ -6,7 +6,7 @@ import com.electionapp.android.utils.extensions.mutableLiveDataOf
 import com.electionapp.android.utils.mapper.PVCDataMapper
 import com.electionapp.domain.base.DefaultObserver
 import com.electionapp.domain.base.Params
-import com.electionapp.domain.usecase.pvc.FetchPVCDataUseCase
+import com.electionapp.domain.usecase.pvc.FetchPVCDataFromCacheUseCase
 
 
 /**
@@ -14,7 +14,7 @@ import com.electionapp.domain.usecase.pvc.FetchPVCDataUseCase
  */
 
 class PVCVerificationListViewModel(
-        var fetchPVCDataUseCase: FetchPVCDataUseCase,
+        var fetchPVCDataFromCacheUseCase: FetchPVCDataFromCacheUseCase,
         var pvcDataMapper: PVCDataMapper) : BaseViewModel() {
 
     var validatedCount = mutableLiveDataOf<String>()
@@ -30,7 +30,7 @@ class PVCVerificationListViewModel(
 
 
 
-        addDisposable(fetchPVCDataUseCase.execute(Params.EMPTY).map {
+        addDisposable(fetchPVCDataFromCacheUseCase.execute(Params.EMPTY).map {
             pvcDataMapper.mapFromList(it)
         }.subscribeWith(VerificationListDataObserver()))
 

@@ -2,14 +2,14 @@ package com.electionapp.android.di.modules
 
 
 import com.electionapp.data.contracts.*
-import com.electionapp.data.repositories.user.UserCache
 import com.electionapp.domain.base.Schedulers
 import com.electionapp.domain.mapper.PVCDataModelMapper
 import com.electionapp.domain.mapper.PVCStatsModelMapper
 import com.electionapp.domain.mapper.UserModelMapper
 import com.electionapp.domain.usecase.admin.FetchPVCStatsUseCase
 import com.electionapp.domain.usecase.auth.*
-import com.electionapp.domain.usecase.pvc.FetchPVCDataUseCase
+import com.electionapp.domain.usecase.pvc.FetchPVCDataFromCacheUseCase
+import com.electionapp.domain.usecase.pvc.FetchPVCDataFromServerUseCase
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
 import com.electionapp.domain.usecase.user.FetchCurrentUserUseCase
 import com.electionapp.domain.usecase.user.FetchIfCurrentUserIsAdminUseCase
@@ -60,8 +60,8 @@ class UseCaseModule {
 
 
     @Provides
-    fun provideFetchPVCDataUseCase(schedulers: Schedulers, pvcDataModelMapper: PVCDataModelMapper, pvcDataRepository: IPVCDataRepository): FetchPVCDataUseCase {
-        return FetchPVCDataUseCase(schedulers, pvcDataModelMapper, pvcDataRepository)
+    fun provideFetchPVCDataUseCase(schedulers: Schedulers, pvcDataModelMapper: PVCDataModelMapper, pvcDataRepository: IPVCDataRepository): FetchPVCDataFromCacheUseCase {
+        return FetchPVCDataFromCacheUseCase(schedulers, pvcDataModelMapper, pvcDataRepository)
     }
 
     @Provides
@@ -82,6 +82,11 @@ class UseCaseModule {
     @Provides
     fun provideFetchPVCStatsUseCase(schedulers: Schedulers, mapper: PVCStatsModelMapper, repository: IPVCStatsRepository): FetchPVCStatsUseCase {
         return FetchPVCStatsUseCase(schedulers, mapper, repository)
+    }
+
+    @Provides
+    fun provideFetchPVCDataFromServerUseCase(schedulers: Schedulers, mapper: PVCDataModelMapper, repository: IPVCDataRepository): FetchPVCDataFromServerUseCase {
+        return FetchPVCDataFromServerUseCase(schedulers, mapper, repository)
     }
 
 }

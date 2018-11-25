@@ -5,6 +5,7 @@ import com.electionapp.data.model.PVCDataEntity
 import com.electionapp.data.model.StatItemEntity
 import com.electionapp.data.model.UserEntity
 import com.electionapp.data.network.reponses.GenericResponse
+import com.electionapp.data.network.reponses.VoterDataPagingResponse
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -28,7 +29,7 @@ interface ApiService {
     fun verifyPVCViaApp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<PVCDataEntity>
 
     @GET("pvc")
-    fun getAllVerifiedPVCWithFilters(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<List<PVCDataEntity>>>
+    fun getAllVerifiedPVCWithFilters(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<VoterDataPagingResponse>
 
     @GET("pvc/statistics")
     fun getAllVerifiedPVCStatsWithFilters(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<List<StatItemEntity>>

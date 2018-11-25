@@ -1,6 +1,5 @@
 package com.electionapp.data.repositories.verification
 
-import android.annotation.SuppressLint
 import com.electionapp.data.contracts.IPVCDataRepository
 import com.electionapp.data.model.PVCDataEntity
 import com.electionapp.data.network.ApiService
@@ -19,13 +18,9 @@ class PVCDataRepository @Inject constructor(var apiService: ApiService,
         return pvcDao.getPVCDataList().toObservable()
     }
 
-    @SuppressLint("CheckResult")
     override fun fetchAllPVCDataWithFiltersFromServer(hashMap: Map<String, Any>): Observable<List<PVCDataEntity>> {
         return apiService.getAllVerifiedPVCWithFilters(hashMap).map {
-            if (it.success == 0) {
-                pvcDao.savePVCData(it.data)
-            }
-            it.data
+            it.docs
         }
     }
 

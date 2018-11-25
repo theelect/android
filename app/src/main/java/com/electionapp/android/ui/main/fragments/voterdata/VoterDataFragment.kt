@@ -1,4 +1,4 @@
-package com.electionapp.android.ui.main.fragments.pvcdatalist
+package com.electionapp.android.ui.main.fragments.voterdata
 
 
 import android.os.Bundle
@@ -8,22 +8,20 @@ import com.electionapp.android.model.pvc.PVCData
 import com.electionapp.android.ui.adapters.base.SingleLayoutAdapter
 import com.electionapp.android.ui.base.BaseMVVMFragment
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_pvc_verifcation.*
-import kotlinx.android.synthetic.main.fragment_pvc_verifcation_list.*
+import kotlinx.android.synthetic.main.fragment_voter_data.*
 import javax.inject.Inject
 
 
-class PVCVerificationListFragment : BaseMVVMFragment<PVCVerificationListViewModel>() {
+class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
 
     override val layoutResID: Int
-        get() = R.layout.fragment_pvc_verifcation_list
-
-
-    @Inject
-    lateinit var singleLayoutAdapter: SingleLayoutAdapter<PVCData>
+        get() = R.layout.fragment_voter_data
 
     @Inject
-    override fun injectViewModel(viewModel: PVCVerificationListViewModel) {
+    lateinit var adapter: SingleLayoutAdapter<PVCData>
+
+    @Inject
+    override fun injectViewModel(viewModel: VoterDataViewModel) {
         super.injectViewModel(viewModel)
     }
 
@@ -32,23 +30,11 @@ class PVCVerificationListFragment : BaseMVVMFragment<PVCVerificationListViewMode
         AndroidSupportInjection.inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-        arguments?.let {
-
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listings_rv.adapter = singleLayoutAdapter
-
-        swipe_to_refresh_stats.setOnRefreshListener {
-            getViewModel().setUp()
-        }
+        voters_rv.adapter = adapter
 
     }
 
@@ -68,7 +54,7 @@ class PVCVerificationListFragment : BaseMVVMFragment<PVCVerificationListViewMode
 
         @JvmStatic
         fun newInstance() =
-                PVCVerificationListFragment().apply {
+                VoterDataFragment().apply {
                     arguments = Bundle().apply {
 
                     }

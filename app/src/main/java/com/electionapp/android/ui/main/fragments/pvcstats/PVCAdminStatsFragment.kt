@@ -15,7 +15,6 @@ import com.electionapp.android.views.decorators.DividerItemDecoration
 import com.electionapp.android.views.decorators.SpacingItemDecoration
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_pvc_admin_dash.*
-import kotlinx.android.synthetic.main.fragment_pvc_verifcation_list.*
 import javax.inject.Inject
 
 
@@ -79,6 +78,21 @@ class PVCAdminStatsFragment : BaseMVVMFragment<PVCAdminStatsViewModel>() {
             statAdapter.notifyDataSetChanged()
         })
 
+        swipe_to_refresh_stats.setOnRefreshListener {
+            getViewModel().setUp()
+        }
+
+
+    }
+
+    override fun showLoading() {
+        super.showLoading()
+        swipe_to_refresh_stats.isRefreshing = true
+    }
+
+    override fun hideLoading() {
+        super.hideLoading()
+        swipe_to_refresh_stats.isRefreshing = false
     }
 
 

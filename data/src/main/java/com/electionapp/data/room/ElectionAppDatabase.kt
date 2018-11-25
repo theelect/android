@@ -22,5 +22,4 @@ abstract class ElectionAppDatabase : RoomDatabase() {
 
     abstract fun getPVCDao(): PVCDao
 
-
 }

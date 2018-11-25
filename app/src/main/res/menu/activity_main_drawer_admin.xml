@@ -6,6 +6,10 @@
             android:title="PVC Stats" />
 
         <item
+            android:id="@+id/nav_voter_data_dashboard"
+            android:title="Voter Data" />
+
+        <item
             android:id="@+id/nav_item_logout"
             android:title="Logout" />
     </group>
