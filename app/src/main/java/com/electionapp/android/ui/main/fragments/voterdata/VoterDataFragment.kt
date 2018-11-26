@@ -46,7 +46,6 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
                 return true
             }
         }
-
         return false
     }
 
@@ -58,15 +57,6 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
 
     }
 
-    override fun showLoading() {
-        super.showLoading()
-        swipe_to_refresh_stats.isRefreshing = true
-    }
-
-    override fun hideLoading() {
-        super.hideLoading()
-        swipe_to_refresh_stats.isRefreshing = false
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.pvc_data_menu, menu)

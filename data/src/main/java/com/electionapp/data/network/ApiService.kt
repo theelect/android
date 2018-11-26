@@ -1,6 +1,7 @@
 package com.electionapp.data.network
 
 
+import com.electionapp.data.model.LGAEntity
 import com.electionapp.data.model.PVCDataEntity
 import com.electionapp.data.model.StatItemEntity
 import com.electionapp.data.model.UserEntity
@@ -21,7 +22,6 @@ interface ApiService {
     @GET("user")
     fun fetchUserData(): Observable<UserEntity>
 
-
     @POST("password-reset")
     fun requestPasswordReset(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<Void>>
 
@@ -34,4 +34,12 @@ interface ApiService {
     @GET("pvc/statistics")
     fun getAllVerifiedPVCStatsWithFilters(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<List<StatItemEntity>>
 
+    @GET("lgas")
+    fun getAllLGAsWithWards(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<List<LGAEntity>>
+
+    @GET(" pvc/occupation")
+    fun getAllOccupations(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<List<String>>
+
 }
+
+

@@ -78,21 +78,8 @@ class PVCAdminStatsFragment : BaseMVVMFragment<PVCAdminStatsViewModel>() {
             statAdapter.notifyDataSetChanged()
         })
 
-        swipe_to_refresh_stats.setOnRefreshListener {
-            getViewModel().setUp()
-        }
 
 
-    }
-
-    override fun showLoading() {
-        super.showLoading()
-        swipe_to_refresh_stats.isRefreshing = true
-    }
-
-    override fun hideLoading() {
-        super.hideLoading()
-        swipe_to_refresh_stats.isRefreshing = false
     }
 
 

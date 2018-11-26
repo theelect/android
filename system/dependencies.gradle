@@ -135,6 +135,7 @@ ext {
             ratingBarLib                           : 'me.zhanghai.android.materialratingbar:library:1.3.1',
             circleImageview                        : 'de.hdodenhof:circleimageview:2.2.0',
             searchableSpinner                      : 'com.github.aliumujib:SearchableSpinner:v1.4',
+            expandableLayout                       : 'com.github.iammert:ExpandableLayout:1.4.1'
     ]
 
     testDependencies = [

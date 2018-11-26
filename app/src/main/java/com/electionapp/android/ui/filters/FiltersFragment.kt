@@ -3,21 +3,20 @@ package com.electionapp.android.ui.filters
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-
 import com.electionapp.android.R
-import com.electionapp.android.fragments.BaseFragment
-import com.electionapp.android.fragments.DummyFragment
-import com.electionapp.android.utils.ViewPagerAdapter
+import com.electionapp.android.ui.base.BaseMVVMFragment
 import com.electionapp.android.utils.appCompatActivity
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_filters.*
+import javax.inject.Inject
 
 
-class FiltersFragment : BaseFragment() {
+class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
+
+    override val layoutResID: Int
+        get() = R.layout.fragment_filters
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,40 +25,53 @@ class FiltersFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_filters, container, false)
+    @Inject
+    override fun injectViewModel(viewModel: FiltersViewModel) {
+        super.injectViewModel(viewModel)
     }
+
+
+    override fun injectDependencies() {
+        super.injectDependencies()
+        AndroidSupportInjection.inject(this)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         initToolbar(toolbar, "Filters")
-        setupViewPager(viewpager, tabs)
+
+        val titles = listOf("LGA", "Profession")
+        for (i in 0 until titles.size) {
+            tabs.addTab(tabs.newTab().setText(titles[i]))
+        }
+
+        tabs.addOnTabSelectedListener(object : TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                view_flipper.displayedChild = p0!!.position
+            }
+        })
+
+
     }
 
-    fun initToolbar(toolbar: Toolbar, title: String) {
-
+    private fun initToolbar(toolbar: Toolbar, title: String) {
         appCompatActivity().setSupportActionBar(toolbar)
         appCompatActivity().supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         appCompatActivity().supportActionBar!!.setDisplayShowHomeEnabled(true)
         appCompatActivity().supportActionBar!!.title = title
-
-
     }
 
-    private fun setupViewPager(viewPager: ViewPager, tabLayout: TabLayout) {
-        val adapter = ViewPagerAdapter(childFragmentManager)
-
-        adapter.addFrag(DummyFragment.newInstance(), "LGA")
-        adapter.addFrag(DummyFragment.newInstance(), "Profession")
-        adapter.addFrag(DummyFragment.newInstance(), "Order By")
-
-        viewPager.adapter = adapter
-        tabLayout.setupWithViewPager(viewPager)
-    }
 
     companion object {
         @JvmStatic

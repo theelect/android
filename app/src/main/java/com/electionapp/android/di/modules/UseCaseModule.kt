@@ -3,11 +3,14 @@ package com.electionapp.android.di.modules
 
 import com.electionapp.data.contracts.*
 import com.electionapp.domain.base.Schedulers
+import com.electionapp.domain.mapper.LGAModelMapper
 import com.electionapp.domain.mapper.PVCDataModelMapper
 import com.electionapp.domain.mapper.PVCStatsModelMapper
 import com.electionapp.domain.mapper.UserModelMapper
 import com.electionapp.domain.usecase.admin.FetchPVCStatsUseCase
 import com.electionapp.domain.usecase.auth.*
+import com.electionapp.domain.usecase.main.FetchAllOccupationsFromServerUseCase
+import com.electionapp.domain.usecase.main.FetchLGADataUseCase
 import com.electionapp.domain.usecase.pvc.FetchPVCDataFromCacheUseCase
 import com.electionapp.domain.usecase.pvc.FetchPVCDataFromServerUseCase
 import com.electionapp.domain.usecase.pvc.VerifyPVCUseCase
@@ -87,6 +90,16 @@ class UseCaseModule {
     @Provides
     fun provideFetchPVCDataFromServerUseCase(schedulers: Schedulers, mapper: PVCDataModelMapper, repository: IPVCDataRepository): FetchPVCDataFromServerUseCase {
         return FetchPVCDataFromServerUseCase(schedulers, mapper, repository)
+    }
+
+    @Provides
+    fun provideFetchAllOccupationsFromServerUseCase(schedulers: Schedulers, repository: IPVCDataRepository): FetchAllOccupationsFromServerUseCase {
+        return FetchAllOccupationsFromServerUseCase(schedulers, repository)
+    }
+
+    @Provides
+    fun provideFetchLGADataUseCase(schedulers: Schedulers, lgaModelMapper: LGAModelMapper, repository: IPVCDataRepository): FetchLGADataUseCase {
+        return FetchLGADataUseCase(schedulers, lgaModelMapper, repository)
     }
 
 }

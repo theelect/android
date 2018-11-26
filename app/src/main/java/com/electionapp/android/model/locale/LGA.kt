@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.weird_toolbar.*
 
 class LGA(
         val id: Int,
-        val name: String) : IdentifiableObject {
+        val name: String,
+        val wards: List<Ward>) : IdentifiableObject {
+
     override fun getIdentifier(): Int {
         return id
     }

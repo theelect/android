@@ -1,5 +1,6 @@
 package com.electionapp.android.di.modules
 
+import com.electionapp.android.model.locale.LGA
 import com.electionapp.android.utils.mapper.*
 import dagger.Module
 import dagger.Provides
@@ -32,6 +33,11 @@ class PresentationMapperModule {
     @Provides
     fun providePVCStatsMapper(): PVCStatsMapper {
         return PVCStatsMapper()
+    }
+
+    @Provides
+    fun provideLGAMapper(): LGAMapper {
+        return LGAMapper()
     }
 
 }

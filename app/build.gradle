@@ -69,6 +69,7 @@ dependencies {
             appDependencies.stetho,
             appDependencies.mpAndroidChart,
             appDependencies.circleImageview,
+            appDependencies.expandableLayout,
             appDependencies.searchableSpinner,
             project(':domain'),
             project(':data'),

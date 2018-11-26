@@ -33,4 +33,8 @@ class DomainMapperModule {
         return PVCStatsModelMapper()
     }
 
+    @Provides
+    fun provideLGAModelMapper(): LGAModelMapper {
+        return LGAModelMapper()
+    }
 }
