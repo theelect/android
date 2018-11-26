@@ -120,7 +120,7 @@ fun Fragment.finish() {
 }
 
 fun Activity.showLoading() {
-    findViewById<View>(R.id.loader_view).visibility = View.VISIBLE
+    findViewById<View>(R.id.loader_view)?.visibility = View.VISIBLE
 }
 
 fun Toolbar.setEmptyTitle() {
@@ -128,7 +128,7 @@ fun Toolbar.setEmptyTitle() {
 }
 
 fun Activity.hideLoading() {
-    findViewById<View>(R.id.loader_view).visibility = View.GONE
+    findViewById<View>(R.id.loader_view)?.visibility = View.GONE
 }
 
 fun Fragment.hideViewLoading() {

@@ -1,63 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.AppBarLayout
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.electionapp.android.ui.filters.FiltersViewModel" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabMode="fixed" />
-    </android.support.design.widget.AppBarLayout>
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <ViewFlipper
-        android:id="@+id/view_flipper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <iammert.com.expandablelib.ExpandableLayout
-                android:id="@+id/el"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:childLayout="@layout/layout_child"
-                app:parentLayout="@layout/layout_parent" />
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
 
-        </ScrollView>
+        </android.support.design.widget.AppBarLayout>
 
-        <RadioGroup
-            android:id="@+id/professions"
+        <ViewFlipper
+            android:id="@+id/view_flipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <iammert.com.expandablelib.ExpandableLayout
+                    android:id="@+id/expandable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:childLayout="@layout/layout_child"
+                    app:parentLayout="@layout/layout_parent" />
+
+            </ScrollView>
+
+            <RadioGroup
+                android:id="@+id/professions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+            </RadioGroup>
+
+        </ViewFlipper>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/filter_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:text="FILTER" />
 
 
-        </RadioGroup>
-
-    </ViewFlipper>
-
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

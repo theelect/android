@@ -187,6 +187,11 @@ interface Constants {
         }
     }
 
+    object FILTER_CONSTANTS {
+        const val LGA = "lga"
+        const val WARD = "ward"
+        const val OCCUPATION = "occupation"
+    }
 
 }
 
