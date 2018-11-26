@@ -8,6 +8,8 @@ import com.electionapp.android.ui.auth.fragments.signup.emailsignup.EmailSignUpV
 import com.electionapp.android.utils.ViewModelFactory
 import com.electionapp.domain.usecase.auth.SignUserUpViaEmailUseCase
 import com.electionapp.android.di.scopes.FragmentScope
+import com.electionapp.android.utils.mapper.LGAMapper
+import com.electionapp.domain.usecase.main.FetchLGADataUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -20,8 +22,11 @@ class EmailSignUpModule {
 
     @FragmentScope
     @Provides
-    fun providesLoginVMFactory(useCase: SignUserUpViaEmailUseCase, loginNavigator: IAuthNavigator): ViewModelFactory<EmailSignUpViewModel> {
-        return ViewModelFactory(lazyOf(EmailSignUpViewModel(useCase, loginNavigator)))
+    fun providesLoginVMFactory(useCase: SignUserUpViaEmailUseCase,
+                               fetchLGADataUseCase: FetchLGADataUseCase,
+                               lgaMapper: LGAMapper,
+                               loginNavigator: IAuthNavigator): ViewModelFactory<EmailSignUpViewModel> {
+        return ViewModelFactory(lazyOf(EmailSignUpViewModel(useCase, fetchLGADataUseCase, lgaMapper, loginNavigator)))
     }
 
     @FragmentScope

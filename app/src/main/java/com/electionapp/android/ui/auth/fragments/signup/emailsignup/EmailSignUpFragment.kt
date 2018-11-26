@@ -10,7 +10,6 @@ import com.electionapp.android.model.locale.Ward
 import com.electionapp.android.ui.auth.fragments.BaseAuthFragment
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.email_sign_up.*
-import java.util.ArrayList
 import javax.inject.Inject
 
 
@@ -61,18 +60,12 @@ class EmailSignUpFragment : BaseAuthFragment<EmailSignUpViewModel>() {
 
 
     fun showLGAs() {
-        val lgas = ArrayList<IdentifiableObject>()
 
-        //TODO remvoe when I get real wards from Johnson
-        for (i in 1..20) {
-            lgas.add(Ward(i, "LGA $i"))
-        }
-
-
-        val spinnerDialog = SpinnerDialog(this.activity, lgas, "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.ic_source_commit_start_next_local_grey600_36dp, R.drawable.ic_source_commit_start_next_local_grey600_24dp)
+        val spinnerDialog = SpinnerDialog(this.activity, getViewModel().getLGAList(), "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.ic_source_commit_start_next_local_grey600_36dp, R.drawable.ic_source_commit_start_next_local_grey600_24dp)
 
         spinnerDialog.bindOnSpinerListener { item, position ->
             lga_edit_text.setText(item.title)
+            getViewModel().setSelectedLGA(item)
         }
 
         spinnerDialog.showSpinerDialog()
@@ -80,21 +73,16 @@ class EmailSignUpFragment : BaseAuthFragment<EmailSignUpViewModel>() {
 
 
     fun showWards() {
-        val wards = ArrayList<IdentifiableObject>()
+        if (getViewModel().getSelectedLGA() != null) {
 
-        //TODO remvoe when I get real wards from Johnson
-        for (i in 1..20) {
-            wards.add(Ward(i, "Ward $i"))
+            val spinnerDialog = SpinnerDialog(this.activity, getViewModel().getSelectedLGA()!!.wards, "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.ic_city_grey600_24dp, R.drawable.ic_city_grey600_24dp)
+
+            spinnerDialog.bindOnSpinerListener { item, position ->
+                ward_edit_text.setText(item.title)
+            }
+
+            spinnerDialog.showSpinerDialog()
         }
-
-
-        val spinnerDialog = SpinnerDialog(this.activity, wards, "Select or Search Ward", R.style.DialogAnimations_SmileWindow, R.drawable.ic_city_grey600_24dp, R.drawable.ic_city_grey600_24dp)
-
-        spinnerDialog.bindOnSpinerListener { item, position ->
-            ward_edit_text.setText(item.title + " Position: " + item.subtitle)
-        }
-
-        spinnerDialog.showSpinerDialog()
     }
 
     companion object {

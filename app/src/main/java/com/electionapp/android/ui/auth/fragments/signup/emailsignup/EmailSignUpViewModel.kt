@@ -1,12 +1,17 @@
 package com.electionapp.android.ui.auth.fragments.signup.emailsignup
 
+import `in`.galaxyofandroid.spinerdialog.IdentifiableObject
 import com.electionapp.android.R
+import com.electionapp.android.model.locale.LGA
 import com.electionapp.android.ui.auth.BaseAuthViewModel
 import com.electionapp.android.ui.auth.IAuthNavigator
+import com.electionapp.android.utils.mapper.LGAMapper
 import com.electionapp.constants.Constants
 import com.electionapp.domain.base.DefaultObserver
 import com.electionapp.domain.base.Params
 import com.electionapp.domain.usecase.auth.SignUserUpViaEmailUseCase
+import com.electionapp.domain.usecase.main.FetchLGADataUseCase
+import java.util.ArrayList
 
 
 /**
@@ -14,9 +19,13 @@ import com.electionapp.domain.usecase.auth.SignUserUpViaEmailUseCase
  */
 
 class EmailSignUpViewModel(val signUserUpUseCase: SignUserUpViaEmailUseCase,
+                           val fetchLGADataUseCase: FetchLGADataUseCase,
+                           val lgaMapper: LGAMapper,
                            authNavigator: IAuthNavigator) : BaseAuthViewModel(authNavigator) {
 
     val loginParams = Params.create()
+    private val lgaList: ArrayList<IdentifiableObject> = arrayListOf()
+    private var selectedLGA: LGA? = null
 
     fun signUserUp(email: String, firstName: String,
                    lastName: String, password: String,
@@ -40,6 +49,37 @@ class EmailSignUpViewModel(val signUserUpUseCase: SignUserUpViaEmailUseCase,
         }
     }
 
+    fun getLGAList(): ArrayList<IdentifiableObject> {
+        return lgaList
+    }
+
+    fun getSelectedLGA(): LGA? {
+        if (selectedLGA == null) {
+            showSnackbarMessage("Please select a Local Government Area")
+        }
+        return selectedLGA
+    }
+
+    override fun setUp() {
+        super.setUp()
+        addDisposable(fetchLGADataUseCase.execute(Params.EMPTY).map {
+            lgaMapper.mapFromList(it)
+        }
+                .doOnSubscribe {
+                    showLoading()
+                }.doOnNext {
+                    hideLoading()
+                }.doOnError {
+                    hideLoading()
+                }
+                .subscribe({
+                    lgaList.clear()
+                    lgaList.addAll(it)
+                }, {
+                    handleError(it)
+                    it.printStackTrace()
+                }))
+    }
 
     override fun validateData(params: Params): Boolean {
         return if (!params.notEmptyString(Constants.AUTH_CONSTANTS.EMAIL)) {
@@ -79,6 +119,10 @@ class EmailSignUpViewModel(val signUserUpUseCase: SignUserUpViaEmailUseCase,
 
     fun setSelectedDate(dateSelected: String) {
         loginParams.putData(Constants.USERS_CONSTANTS.DOB, dateSelected)
+    }
+
+    fun setSelectedLGA(item: IdentifiableObject?) {
+        selectedLGA = item as LGA?
     }
 
     inner class SignUpObserver : DefaultObserver<Boolean>() {

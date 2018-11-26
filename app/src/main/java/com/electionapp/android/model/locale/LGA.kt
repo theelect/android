@@ -3,6 +3,7 @@ package com.electionapp.android.model.locale
 import `in`.galaxyofandroid.spinerdialog.IdentifiableObject
 import com.electionapp.android.R
 import kotlinx.android.synthetic.main.weird_toolbar.*
+import java.util.ArrayList
 
 /**
  *
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.weird_toolbar.*
 class LGA(
         val id: Int,
         val name: String,
-        val wards: List<Ward>) : IdentifiableObject {
+        val wards: ArrayList<IdentifiableObject>) : IdentifiableObject {
 
     override fun getIdentifier(): Int {
         return id
