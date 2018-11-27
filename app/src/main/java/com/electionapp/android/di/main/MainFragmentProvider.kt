@@ -1,12 +1,14 @@
 package com.electionapp.android.di.main
 
 import com.electionapp.android.di.main.pvcstats.PVCAdminStatsModule
+import com.electionapp.android.di.main.pvcstats.PVCStatsFullModule
 import com.electionapp.android.di.main.validationdata.PVCValidationListModule
 import com.electionapp.android.di.main.verifypvc.PVCVerificationModule
 import com.electionapp.android.di.main.voterdata.VoterDataModule
 import com.electionapp.android.di.scopes.FragmentScope
 import com.electionapp.android.ui.main.fragments.pvcdatalist.PVCVerificationListFragment
 import com.electionapp.android.ui.main.fragments.pvcstats.PVCAdminStatsFragment
+import com.electionapp.android.ui.main.fragments.statfulldetails.StatFullDetailsFragment
 import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationFragment
 import com.electionapp.android.ui.main.fragments.voterdata.VoterDataFragment
 import dagger.Module
@@ -32,5 +34,9 @@ abstract class MainFragmentProvider {
     @FragmentScope
     @ContributesAndroidInjector(modules = [VoterDataModule::class])
     internal abstract fun bindsVoterDataFragment(): VoterDataFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [PVCStatsFullModule::class])
+    internal abstract fun bindsStatFullDetailsFragment(): StatFullDetailsFragment
 
 }

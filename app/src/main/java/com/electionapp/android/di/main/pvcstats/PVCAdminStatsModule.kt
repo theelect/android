@@ -36,8 +36,8 @@ class PVCAdminStatsModule {
 
     @FragmentScope
     @Provides
-    fun providesStatAdapter(context: Context): StatAdapter {
-        return StatAdapter(context)
+    fun providesStatAdapter(context: Context, fragment: PVCAdminStatsFragment): StatAdapter {
+        return StatAdapter(context, fragment)
     }
 
 }

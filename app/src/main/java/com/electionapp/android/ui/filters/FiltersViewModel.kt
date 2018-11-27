@@ -76,4 +76,11 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
     fun getParams(): Params {
         return filterParams
     }
+
+    fun clearFilters() {
+        filterParams.putString(Constants.FILTER_CONSTANTS.WARD, "")
+        filterParams.putString(Constants.FILTER_CONSTANTS.LGA, "")
+        filterParams.putString(Constants.FILTER_CONSTANTS.OCCUPATION, "")
+    }
+
 }

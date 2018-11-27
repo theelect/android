@@ -1,6 +1,8 @@
 package com.electionapp.android.ui.main.fragments.voterdata
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -57,6 +59,16 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
 
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == FiltersActivity.FILTER_TASK_REQ_CODE) {
+                val hashMap: HashMap<String, Any> = data!!.getSerializableExtra(FiltersActivity.FILTER_TASK_DATA) as HashMap<String, Any>
+                getViewModel().queryWithFilters(hashMap)
+            }
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.pvc_data_menu, menu)

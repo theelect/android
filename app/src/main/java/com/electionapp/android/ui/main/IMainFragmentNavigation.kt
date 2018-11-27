@@ -6,6 +6,7 @@ import com.electionapp.android.R
 import com.electionapp.android.fragments.DummyFragment
 import com.electionapp.android.ui.main.fragments.pvcdatalist.PVCVerificationListFragment
 import com.electionapp.android.ui.main.fragments.pvcstats.PVCAdminStatsFragment
+import com.electionapp.android.ui.main.fragments.statfulldetails.StatFullDetailsFragment
 import com.electionapp.android.ui.main.fragments.verifypvcdata.PVCVerificationFragment
 import com.electionapp.android.ui.main.fragments.voterdata.VoterDataFragment
 import com.electionapp.android.utils.FragmentHistory
@@ -28,12 +29,18 @@ interface IMainFragmentNavigation {
     fun goToPVCAdminStats()
     fun goToPVCValidationList()
     fun goToVoterDataList()
+    fun goToPVCAdminStatsDetails(mode: Int)
 }
 
 class MainFragmentNavigation(private var activity: MainActivity,
                              private var bundle: Bundle) : IMainFragmentNavigation,
         FragNavController.TransactionListener,
         FragNavController.RootFragmentListener {
+
+    override fun goToPVCAdminStatsDetails(mode: Int) {
+        pushFragment(StatFullDetailsFragment.newInstance(mode))
+    }
+
     override fun goToPVCAdminStats() {
         switchTab(2)
     }

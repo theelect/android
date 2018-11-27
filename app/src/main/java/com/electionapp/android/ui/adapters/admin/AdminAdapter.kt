@@ -25,13 +25,17 @@ import kotlinx.android.synthetic.main.item_stat_group_count.view.*
 import kotlinx.android.synthetic.main.item_stat_pie_chart.view.*
 import java.util.*
 
-class StatAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var totalStat: StatItem? = null
     var lgaStatGroup: StatGroup? = null
     var wardStatGroup: StatGroup? = null
     var genderStatGroup: StatGroup? = null
     var professionStatGroup: StatGroup? = null
+
+    interface MoreBtnClickListener {
+        fun onMoreButtonClicked(mode: StatGroup)
+    }
 
     override fun getItemCount(): Int {
         return 5
@@ -56,7 +60,7 @@ class StatAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_TYPE.SINGLE_STAT_ITEM.value -> SingleStatViewHolder.create(parent)
-            ITEM_TYPE.MULTI_STAT_ITEM.value -> MultiStatViewHolder.create(parent)
+            ITEM_TYPE.MULTI_STAT_ITEM.value -> MultiStatViewHolder.create(parent, moreBtnClickListener)
             ITEM_TYPE.PIE_CHART_ITEM.value -> PieChartStatViewHolder.create(parent)
             else -> HolePieChartStatViewHolder.create(parent)
         }
@@ -165,7 +169,7 @@ open class PieChartStatViewHolder(var view: View, var binding: ViewDataBinding) 
     }
 }
 
-class MultiStatViewHolder(var view: View, var binding: ViewDataBinding) : RecyclerView.ViewHolder(view) {
+class MultiStatViewHolder(var view: View, var binding: ViewDataBinding, var moreBtnClickListener: StatAdapter.MoreBtnClickListener) : RecyclerView.ViewHolder(view) {
 
     fun bind(statGroup: StatGroup?) {
         val adapter = SingleLayoutAdapter<StatItem>(R.layout.item_stat_)
@@ -173,15 +177,20 @@ class MultiStatViewHolder(var view: View, var binding: ViewDataBinding) : Recycl
         view.stat_group_rv.addItemDecoration(DividerItemDecoration(view.context))
         view.stat_group_rv.layoutManager = layoutManager
         view.stat_group_rv.adapter = adapter
+        if(statGroup!=null){
+            view.more_btn.setOnClickListener {
+                moreBtnClickListener.onMoreButtonClicked(statGroup)
+            }
+        }
         binding.setVariable(BR.item, statGroup)
         binding.executePendingBindings()
     }
 
     companion object {
-        fun create(parent: ViewGroup): MultiStatViewHolder {
+        fun create(parent: ViewGroup, moreBtnClickListener: StatAdapter.MoreBtnClickListener): MultiStatViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_stat_group_count, parent, false)
-            return MultiStatViewHolder(binding.root, binding)
+            return MultiStatViewHolder(binding.root, binding, moreBtnClickListener)
         }
     }
 }

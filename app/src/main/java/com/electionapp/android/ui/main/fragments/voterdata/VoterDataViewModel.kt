@@ -16,15 +16,22 @@ import java.text.DecimalFormat
 class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServerUseCase,
                          var pvcDataMapper: PVCDataMapper) : BaseViewModel() {
 
-     val totalRegisteredVoterStat = mutableLiveDataOf<String>()
-     val totalVerifiedVoterStat = mutableLiveDataOf<String>()
-     val voterData = mutableLiveDataOf<List<PVCData>>()
+    val totalRegisteredVoterStat = mutableLiveDataOf<String>()
+    val totalVerifiedVoterStat = mutableLiveDataOf<String>()
+    val voterData = mutableLiveDataOf<List<PVCData>>()
+    val params = Params.create()
 
+    fun queryWithFilters(hashMap: HashMap<String, Any>) {
+        for (mutableEntry in hashMap) {
+            params.putData(mutableEntry.key, mutableEntry.value)
+        }
+        setUp()
+    }
 
     override fun setUp() {
         super.setUp()
 
-        addDisposable(fetchPVCDataFromCacheUseCase.execute(Params.EMPTY).map {
+        addDisposable(fetchPVCDataFromCacheUseCase.execute(params).map {
             pvcDataMapper.mapFromList(it)
         }.subscribe({
             onVoterDataFetchSuccess(it)

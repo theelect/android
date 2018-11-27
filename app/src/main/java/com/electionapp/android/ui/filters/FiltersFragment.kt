@@ -16,14 +16,11 @@ import com.electionapp.android.ui.base.BaseMVVMFragment
 import com.electionapp.android.ui.filters.FiltersActivity.Companion.FILTER_TASK_DATA
 import com.electionapp.android.utils.appCompatActivity
 import com.electionapp.android.utils.common.NotNullObserver
-import com.electionapp.constants.Constants
 import dagger.android.support.AndroidSupportInjection
 import iammert.com.expandablelib.ExpandableLayout
 import iammert.com.expandablelib.Section
 import kotlinx.android.synthetic.main.fragment_filters.*
 import javax.inject.Inject
-import android.widget.Toast
-import android.widget.RadioGroup
 
 
 class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
@@ -86,13 +83,21 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
             initRadioButtons(it)
         })
 
+        clear_filter_button.setOnClickListener {
+            getViewModel().clearFilters()
+            setResult()
+        }
 
         filter_button.setOnClickListener {
-            val data = Intent()
-            data.putExtra(FILTER_TASK_DATA, getViewModel().getParams().getParameters())
-            activity?.setResult(RESULT_OK, data)
-            activity?.finish()
+            setResult()
         }
+    }
+
+    private fun setResult() {
+        val data = Intent()
+        data.putExtra(FILTER_TASK_DATA, getViewModel().getParams().getParameters())
+        activity?.setResult(RESULT_OK, data)
+        activity?.finish()
     }
 
     private fun initRadioButtons(list: List<String>) {
@@ -108,8 +113,8 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
             val checkedRadioButtonId = professions.checkedRadioButtonId
             val radioBtn = professions.findViewById(checkedRadioButtonId) as RadioButton
             getViewModel().setSelectedOccupation(radioBtn.text.toString())
-//            Toast.makeText(this@FiltersFragment.context, radioBtn.text, Toast.LENGTH_SHORT).show()
         }
+
     }
 
 

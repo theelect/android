@@ -1,12 +1,15 @@
 package com.electionapp.android.ui.main.fragments.pvcdatalist
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.electionapp.android.R
 import com.electionapp.android.model.pvc.PVCData
 import com.electionapp.android.ui.adapters.base.SingleLayoutAdapter
 import com.electionapp.android.ui.base.BaseMVVMFragment
+import com.electionapp.android.ui.filters.FiltersActivity
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_pvc_verifcation.*
 import kotlinx.android.synthetic.main.fragment_pvc_verifcation_list.*

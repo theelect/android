@@ -21,7 +21,7 @@ class PVCVerificationListViewModel(
     var inValidCount = mutableLiveDataOf<String>()
     var allData = mutableLiveDataOf<List<PVCData>>()
 
-
+    val params = Params.create()
     override fun setUp() {
         super.setUp()
 
@@ -30,7 +30,7 @@ class PVCVerificationListViewModel(
 
 
 
-        addDisposable(fetchPVCDataFromCacheUseCase.execute(Params.EMPTY).map {
+        addDisposable(fetchPVCDataFromCacheUseCase.execute(params).map {
             pvcDataMapper.mapFromList(it)
         }.subscribeWith(VerificationListDataObserver()))
 
@@ -57,6 +57,7 @@ class PVCVerificationListViewModel(
     private fun onVerificationDataFailedToFetch(exception: Throwable) {
         handleError(exception)
     }
+
 
 
     inner class VerificationListDataObserver : DefaultObserver<List<PVCData>>() {
