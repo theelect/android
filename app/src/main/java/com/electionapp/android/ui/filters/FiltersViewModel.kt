@@ -16,11 +16,11 @@ import com.electionapp.domain.usecase.main.FetchLGADataUseCase
 
 class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
                        private val lgaMapper: LGAMapper,
+                       private val filterParams: Params,
                        private val fetchAllOccupationsFromServerUseCase: FetchAllOccupationsFromServerUseCase) : BaseViewModel() {
 
     val lgas = mutableLiveDataOf<List<LGA>>()
     val occupations = mutableLiveDataOf<List<String>>()
-    private val filterParams = Params.create()
 
     override fun setUp() {
         super.setUp()
