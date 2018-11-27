@@ -95,7 +95,7 @@ class PVCAdminStatsViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
         this.totalStat.value = totalStatItem
 
 
-        val statGroup = StatGroup(getSortedList(list), "Top Local Government Areas", 2)
+        val statGroup = StatGroup(getSortedList(list), "Top 4 Local Government Areas", 2)
         this.lgaStatGroup.value = statGroup
         hideLoading()
     }
@@ -107,7 +107,7 @@ class PVCAdminStatsViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
     }
 
     private fun onWardStatsFetchSuccess(list: MutableList<StatItem>) {
-        val statGroup = StatGroup(getSortedList(list), "Top Wards", 3)
+        val statGroup = StatGroup(getSortedList(list), "Top 4 Wards", 3)
         this.wardStatGroup.value = statGroup
         hideLoading()
     }

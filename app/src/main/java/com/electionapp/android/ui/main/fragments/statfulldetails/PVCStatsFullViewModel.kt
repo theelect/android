@@ -19,6 +19,8 @@ class PVCStatsFullViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
 
     val totalStat = mutableLiveDataOf<StatItem>()
     val statGroup = mutableLiveDataOf<StatGroup>()
+    var title = ""
+
 
     override fun setUp() {
         super.setUp()
@@ -27,11 +29,8 @@ class PVCStatsFullViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
     }
 
     private fun onLGAStatsFetchSuccess(list: MutableList<StatItem>) {
-        var total = 0
-        list.forEach {
-            total += it.count
-        }
-        val totalStatItem = StatItem(total, "Total Verified Voters", 0.0)
+
+        val totalStatItem = StatItem(list.size, title, 0.0)
         this.totalStat.value = totalStatItem
 
 
@@ -48,9 +47,12 @@ class PVCStatsFullViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
 
     fun setMode(mode: Int) {
         val params = Params.create()
-        if(mode == 2){
+
+        if (mode == 2) {
+            title = "Total Local Government Areas"
             params.putData(Constants.STATS_CONSTANTS.TYPE, Constants.STATS_CONSTANTS.LGA)
-        }else{
+        } else {
+            title = "Total Wards"
             params.putData(Constants.STATS_CONSTANTS.TYPE, Constants.STATS_CONSTANTS.WARD)
         }
 
