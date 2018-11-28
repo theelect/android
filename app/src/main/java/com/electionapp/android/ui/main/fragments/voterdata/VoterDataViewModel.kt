@@ -4,6 +4,7 @@ import com.electionapp.android.model.pvc.PVCData
 import com.electionapp.android.ui.base.BaseViewModel
 import com.electionapp.android.utils.extensions.mutableLiveDataOf
 import com.electionapp.android.utils.mapper.PVCDataMapper
+import com.electionapp.constants.Constants
 import com.electionapp.domain.base.Params
 import com.electionapp.domain.usecase.pvc.FetchPVCDataFromServerUseCase
 import java.text.DecimalFormat
@@ -22,15 +23,16 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     val params = Params.create()
 
     fun queryWithFilters(hashMap: HashMap<String, Any>) {
+        params.clear()
         for (mutableEntry in hashMap) {
             params.putData(mutableEntry.key, mutableEntry.value)
         }
-        setUp()
+        runQuery()
     }
 
-    override fun setUp() {
-        super.setUp()
 
+
+    fun runQuery() {
         addDisposable(fetchPVCDataFromCacheUseCase.execute(params).map {
             pvcDataMapper.mapFromList(it)
         }.subscribe({
@@ -38,7 +40,6 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
         }, {
             onVoterDataFetchFailed(it)
         }))
-
     }
 
 
@@ -64,6 +65,15 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     private fun formatNumber(number: Int): String {
         val formatter = DecimalFormat("#,###,###")
         return formatter.format(number)
+    }
+
+    fun setNameAndMode(name: String, mode: Int) {
+        if(mode == 2){
+            params.putString(Constants.FILTER_CONSTANTS.LGA, name)
+        }else{
+            params.putString(Constants.FILTER_CONSTANTS.WARD, name)
+        }
+        runQuery()
     }
 
 }

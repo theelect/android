@@ -74,7 +74,22 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
 
 
     fun getParams(): Params {
+        cleanParams()
         return filterParams
+    }
+
+    private fun cleanParams() {
+        val iter = filterParams.getParameters().entries.iterator()
+        while (iter.hasNext()) {
+            val entry = iter.next()
+//            if ("Sample".equals(entry.value, ignoreCase = true)) {
+//                iter.remove()
+//            }
+            if (((entry.value is String) && ((entry.value as String).isEmpty()))) {
+                iter.remove()
+            }
+        }
+
     }
 
     fun clearFilters() {

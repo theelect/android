@@ -30,6 +30,8 @@ interface IMainFragmentNavigation {
     fun goToPVCValidationList()
     fun goToVoterDataList()
     fun goToPVCAdminStatsDetails(mode: Int)
+    fun goToVoterDataList(name: String, mode: Int)
+
 }
 
 class MainFragmentNavigation(private var activity: MainActivity,
@@ -37,22 +39,34 @@ class MainFragmentNavigation(private var activity: MainActivity,
         FragNavController.TransactionListener,
         FragNavController.RootFragmentListener {
 
+    override fun goToVoterDataList(name: String, mode: Int) {
+        updateToolbarTitle("Voters")
+        pushFragment(VoterDataFragment.newInstance(mode, name))
+    }
+
     override fun goToPVCAdminStatsDetails(mode: Int) {
+        if (mode == 2) {
+            updateToolbarTitle("LGA")
+        } else {
+            updateToolbarTitle("Wards")
+        }
         pushFragment(StatFullDetailsFragment.newInstance(mode))
     }
 
     override fun goToPVCAdminStats() {
         switchTab(2)
+        updateToolbarTitle("Voters")
     }
 
     override fun goToVoterDataList() {
         switchTab(3)
+        updateToolbarTitle("Voter Data")
     }
 
     override fun goToPVCValidationList() {
         switchTab(1)
+        updateToolbarTitle("Voter Data")
     }
-
 
     override fun handleBackPress() {
 
@@ -142,6 +156,10 @@ class MainFragmentNavigation(private var activity: MainActivity,
     }
 
 
+    private fun updateToolbarTitle(title: String) {
+        activity.supportActionBar!!.title = title
+    }
+
     override fun onFragmentTransaction(fragment: Fragment, transactionType: FragNavController.TransactionType) {
         //do fragmentty stuff. Maybe change title, I'm not going to tell you how to live your life
         // If we have a backstack, show the back button
@@ -166,6 +184,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
 
     override fun goToPVCVerification() {
         switchTab(0)
+        updateToolbarTitle("PVC Data Collect")
     }
 
 

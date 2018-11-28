@@ -18,6 +18,7 @@ import javax.inject.Inject
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.electionapp.android.ui.filters.FiltersActivity
+import com.electionapp.android.ui.main.fragments.statfulldetails.StatFullDetailsFragment
 
 
 class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
@@ -38,11 +39,10 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
         AndroidSupportInjection.inject(this)
     }
 
-   override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
-            R.id.filter ->
-            {
+            R.id.filter -> {
                 FiltersActivity.startForResult(this)
                 // do stuff
                 return true
@@ -54,8 +54,17 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        voters_rv.addItemDecoration(SpacingItemDecoration(context!!.dpToPx(16), context!!.dpToPx(16),false))
+        voters_rv.addItemDecoration(SpacingItemDecoration(context!!.dpToPx(16), context!!.dpToPx(16), false))
         voters_rv.adapter = adapter
+
+        var name: String? = arguments?.getString(NAME)
+        var mode: Int? = arguments?.getInt(MODE)
+
+        if (name != null && mode != null) {
+            getViewModel().setNameAndMode(name, mode)
+        }else{
+            getViewModel().runQuery()
+        }
 
     }
 
@@ -77,6 +86,19 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
 
     companion object {
         val TAG = this::class.java.canonicalName
+
+        val MODE = "MODE"
+        val NAME = "NAME"
+
+        @JvmStatic
+        fun newInstance(mode: Int, name: String): VoterDataFragment {
+            val arguments = Bundle()
+            arguments.putInt(MODE, mode)
+            arguments.putString(NAME, name)
+            val fragment = VoterDataFragment()
+            fragment.arguments = arguments
+            return fragment
+        }
 
         @JvmStatic
         fun newInstance() =

@@ -12,7 +12,7 @@ import com.electionapp.android.utils.extensions.inflater
 
 import kotlin.properties.Delegates.observable
 
- class SingleLayoutAdapter<T>(@LayoutRes private val resId: Int) :
+class SingleLayoutAdapter<T>(@LayoutRes private val resId: Int, var onItemClickListener: BindableItemClickListener<T>? = null) :
         RecyclerView.Adapter<SingleLayoutAdapter.ViewHolder<T>>(), BindableAdapter<T> {
 
     override fun setData(data: T) {
@@ -31,13 +31,16 @@ import kotlin.properties.Delegates.observable
 
     override fun onBindViewHolder(holder: ViewHolder<T>, position: Int) = holder.bind(items[position])
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder<T>(parent.inflate())
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder<T>(parent.inflate(), onItemClickListener)
 
     private fun ViewGroup.inflate() = DataBindingUtil.inflate<ViewDataBinding>(inflater, resId, this, false)
 
-    class ViewHolder<in T>(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder<T>(private val binding: ViewDataBinding, var onItemClickListener: BindableItemClickListener<T>?) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: T) = with(binding) {
+            itemView.setOnClickListener {
+                onItemClickListener?.onItemClicked(item)
+            }
             setVariable(BR.item, item)
             executePendingBindings()
         }

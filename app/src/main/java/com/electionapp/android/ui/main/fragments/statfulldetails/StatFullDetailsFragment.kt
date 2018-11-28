@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import com.electionapp.android.R
 import com.electionapp.android.model.admin.StatItem
+import com.electionapp.android.ui.adapters.base.BindableItemClickListener
 import com.electionapp.android.ui.adapters.base.SingleLayoutAdapter
 import com.electionapp.android.ui.base.BaseMVVMFragment
+import com.electionapp.android.ui.main.IMainFragmentNavigation
 import com.electionapp.android.utils.dpToPx
 import com.electionapp.android.views.decorators.SpacingItemDecoration
 import dagger.android.support.AndroidSupportInjection
@@ -14,10 +16,19 @@ import kotlinx.android.synthetic.main.fragment_stats_details_full.*
 import javax.inject.Inject
 
 
-class StatFullDetailsFragment : BaseMVVMFragment<PVCStatsFullViewModel>() {
+class StatFullDetailsFragment : BaseMVVMFragment<PVCStatsFullViewModel>(), BindableItemClickListener<StatItem> {
+
+    override fun onItemClicked(data: StatItem) {
+        navigation.goToVoterDataList(data.name, mode)
+    }
 
     override val layoutResID: Int
         get() = R.layout.fragment_stats_details_full
+
+    var mode = 0
+
+    @Inject
+    lateinit var navigation: IMainFragmentNavigation
 
     @Inject
     lateinit var adapter: SingleLayoutAdapter<StatItem>
@@ -42,7 +53,7 @@ class StatFullDetailsFragment : BaseMVVMFragment<PVCStatsFullViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mode = arguments!!.getInt(MODE)
+        mode = arguments!!.getInt(MODE)
 
         getViewModel().setMode(mode)
         stat_rv.adapter = adapter
@@ -57,6 +68,7 @@ class StatFullDetailsFragment : BaseMVVMFragment<PVCStatsFullViewModel>() {
         val WARD_ = 3
 
         val MODE = "MODE"
+        val NAME = "NAME"
 
         @JvmStatic
         fun newInstance(mode: Int): StatFullDetailsFragment {

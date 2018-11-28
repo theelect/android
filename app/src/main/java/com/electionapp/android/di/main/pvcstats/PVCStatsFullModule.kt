@@ -41,8 +41,8 @@ class PVCStatsFullModule {
 
     @FragmentScope
     @Provides
-    fun providesStatAdapter(): SingleLayoutAdapter<StatItem> {
-        return SingleLayoutAdapter(R.layout.item_stat_card)
+    fun providesStatAdapter(fragment: StatFullDetailsFragment): SingleLayoutAdapter<StatItem> {
+        return SingleLayoutAdapter(R.layout.item_stat_card, fragment)
     }
 
 }

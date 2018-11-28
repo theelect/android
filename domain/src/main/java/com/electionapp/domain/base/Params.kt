@@ -2,6 +2,7 @@ package com.electionapp.domain.base
 
 import android.arch.lifecycle.MutableLiveData
 import java.util.HashMap
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Created by aliumujib on 12/05/2018.
@@ -182,6 +183,10 @@ class Params private constructor() {
 
     fun clear() {
         parameters.clear()
+    }
+
+    fun remove(key: String) {
+        parameters.remove(key)
     }
 
     companion object {
