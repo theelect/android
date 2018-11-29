@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.electionapp.android">
+    package="com.tonyecoleelection.android">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,18 +13,18 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".ApplicationClass"
+        android:name="com.tonyecoleelection.android.ApplicationClass"
         tools:ignore="GoogleAppIndexingWarning">
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="com.electionapp.android.ui.main.MainActivity"
+        <activity android:name="com.tonyecoleelection.android.ui.main.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.electionapp.android.ui.auth.SplashActivity"
+        <activity android:name="com.tonyecoleelection.android.ui.auth.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +33,10 @@
 
         </activity>
 
-        <activity android:name="com.electionapp.android.ui.auth.AuthActivity"
+        <activity android:name="com.tonyecoleelection.android.ui.auth.AuthActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.filters.FiltersActivity"
+        <activity android:name="com.tonyecoleelection.android.ui.filters.FiltersActivity"
             android:screenOrientation="portrait"/>
 
     </application>

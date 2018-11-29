@@ -1,0 +1,33 @@
+package com.tonyecoleelection.android.model.locale
+
+import `in`.galaxyofandroid.spinerdialog.IdentifiableObject
+import com.tonyecoleelection.android.R
+import java.util.ArrayList
+
+/**
+ *
+ *
+ **/
+
+class LGA(
+        val id: Int,
+        val name: String,
+        val wards: ArrayList<IdentifiableObject>) : IdentifiableObject {
+
+    override fun getIdentifier(): Int {
+        return id
+    }
+
+    override fun getSubtitle(): String {
+        return "Local Gov't Area"
+    }
+
+    override fun getRecourseId(): Int {
+        return R.drawable.email_grey
+    }
+
+    override fun getTitle(): String {
+        return name
+    }
+
+}

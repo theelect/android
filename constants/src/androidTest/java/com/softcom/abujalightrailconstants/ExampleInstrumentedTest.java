@@ -1,4 +1,4 @@
-package com.electionapp.constants;
+package com.tonyecoleelection.constants;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

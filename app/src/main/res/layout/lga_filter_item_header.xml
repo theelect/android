@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.electionapp.android.model.locale.LGA" />
+            type="com.tonyecoleelection.android.model.locale.LGA" />
 
         <variable
             name="checked"

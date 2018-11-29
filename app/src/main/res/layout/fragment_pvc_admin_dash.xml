@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.electionapp.android.ui.main.fragments.pvcstats.PVCAdminStatsViewModel" />
+            type="com.tonyecoleelection.android.ui.main.fragments.pvcstats.PVCAdminStatsViewModel" />
 
     </data>
 

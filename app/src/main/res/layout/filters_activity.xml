@@ -7,7 +7,7 @@
     <fragment
         android:layout_width="match_parent"
         android:id="@+id/fragment"
-        android:name="com.electionapp.android.ui.filters.FiltersFragment"
+        android:name="com.tonyecoleelection.android.ui.filters.FiltersFragment"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

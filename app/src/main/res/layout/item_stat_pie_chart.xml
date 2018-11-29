@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.electionapp.android.model.admin.StatGroup" />
+            type="com.tonyecoleelection.android.model.admin.StatGroup" />
 
     </data>
 

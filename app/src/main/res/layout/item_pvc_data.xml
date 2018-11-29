@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.electionapp.android.model.pvc.PVCData" />
+            type="com.tonyecoleelection.android.model.pvc.PVCData" />
 
     </data>
 
