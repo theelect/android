@@ -103,7 +103,7 @@ fun setTextAndColorForStatus(textView: TextView, is_verified: Boolean) {
 
 @BindingAdapter("animatedValue")
 fun animateNumbers(textView: TextView, number: Int) {
-    var animator = ValueAnimator.ofInt(0, 3000)
+    var animator = ValueAnimator.ofInt(0, number)
     animator.duration = 1000
     animator.addUpdateListener {
         textView.text = it.animatedValue.toString()
