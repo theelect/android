@@ -95,6 +95,7 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
         getViewModel().lgas.observe(this, NotNullObserver {
             filtersAdapter.addData(it)
+            filtersAdapter.collapseAllSections()
         })
 
         getViewModel().occupations.observe(this, NotNullObserver {
@@ -143,6 +144,9 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
         appCompatActivity().supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         appCompatActivity().supportActionBar!!.setDisplayShowHomeEnabled(true)
         appCompatActivity().supportActionBar!!.title = title
+        toolbar.setNavigationOnClickListener {
+            activity?.finish()
+        }
     }
 
 

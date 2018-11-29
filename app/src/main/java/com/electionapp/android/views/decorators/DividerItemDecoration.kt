@@ -21,7 +21,7 @@ class DividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
             val params = child.layoutParams as RecyclerView.LayoutParams
 
             //HORIZONTAL
-            if (i % 4 == 1) {
+            if (i % 4 == 1 || i % 4 == 0) {
                 val top = child.bottom + params.bottomMargin
                 val bottom = top + horizontalDivider.intrinsicHeight
                 val left = child.right
@@ -29,8 +29,9 @@ class DividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
                 horizontalDivider.setBounds(left, top, right, bottom)
                 horizontalDivider.draw(c)
-            }else if(i % 4 == 2){
-                val top = child.bottom + params.bottomMargin
+            } else if (i % 4 == 2 || i % 4 == 3) {
+
+                val top = child.top + params.topMargin
                 val bottom = top + horizontalDivider.intrinsicHeight
                 val left = child.left
                 val right = child.right + child.width
@@ -38,18 +39,16 @@ class DividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
                 horizontalDivider.setBounds(left, top, right, bottom)
                 horizontalDivider.draw(c)
             }
-            else if(i % 4 == 3 || i % 4 == 0){
-                val top = child.bottom + params.bottomMargin
-                val bottom = top + horizontalDivider.intrinsicHeight
-                val left = child.left
-                val right = child.left + child.width
-
-                horizontalDivider.setBounds(left, top, right, bottom)
-                horizontalDivider.draw(c)
-            }
 
 
+            //VERTICAL
+            val top = child.top + params.topMargin
+            val bottom = top + child.height
+            val left = child.right
+            val right = child.right + verticalDivider.intrinsicWidth
 
+            horizontalDivider.setBounds(left, top, right, bottom)
+            horizontalDivider.draw(c)
         }
     }
 }
