@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.electionapp.android.R
 import com.electionapp.android.model.admin.StatGroup
+import com.electionapp.android.model.admin.StatItem
 import com.electionapp.android.ui.adapters.admin.StatAdapter
 import com.electionapp.android.ui.base.BaseMVVMFragment
 import com.electionapp.android.ui.main.IMainFragmentNavigation
@@ -46,6 +47,10 @@ class PVCAdminStatsFragment : BaseMVVMFragment<PVCAdminStatsViewModel>(), StatAd
 
         }
 
+    }
+
+    override fun onMoreStatItemButtonClicked(mode: StatItem) {
+        mainFragmentNavigation.goToVoterDataList()
     }
 
     override fun onMoreButtonClicked(mode: StatGroup) {

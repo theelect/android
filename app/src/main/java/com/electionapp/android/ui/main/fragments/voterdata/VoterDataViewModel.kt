@@ -21,6 +21,7 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     val totalVerifiedVoterStat = mutableLiveDataOf<String>()
     val voterData = mutableLiveDataOf<List<PVCData>>()
     val params = Params.create()
+    var isFetching: Boolean = false
 
     fun queryWithFilters(hashMap: HashMap<String, Any>) {
         params.clear()
@@ -31,9 +32,16 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     }
 
 
-
     fun runQuery() {
-        addDisposable(fetchPVCDataFromCacheUseCase.execute(params).map {
+        addDisposable(fetchPVCDataFromCacheUseCase.execute(params)
+                .doOnSubscribe {
+                    isFetching = true
+                }.doOnNext {
+                    isFetching = false
+                }.doOnError {
+                    isFetching = false
+                }
+                .map {
             pvcDataMapper.mapFromList(it)
         }.subscribe({
             onVoterDataFetchSuccess(it)
@@ -68,12 +76,25 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     }
 
     fun setNameAndMode(name: String, mode: Int) {
-        if(mode == 2){
+        if (mode == 2) {
             params.putString(Constants.FILTER_CONSTANTS.LGA, name)
-        }else{
+        } else {
             params.putString(Constants.FILTER_CONSTANTS.WARD, name)
         }
         runQuery()
     }
 
+    fun fetchingMore(): Boolean {
+        return isFetching
+    }
+
+    fun getMore() {
+        incrementPageCount()
+        runQuery()
+    }
+
+    private fun incrementPageCount() {
+        var pageCount = params.getInt(Constants.FILTER_CONSTANTS.CURRENT_PAGE, 1)
+        params.putInt(Constants.FILTER_CONSTANTS.CURRENT_PAGE, pageCount + 1)
+    }
 }

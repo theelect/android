@@ -54,7 +54,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 />
 
-
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </layout>

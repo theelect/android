@@ -17,7 +17,9 @@ class UserEntity(
         val is_active: Boolean?,
         val vin: String?,
         val ward: String?,
+        @SerializedName("first_name")
         val firstname: String?,
+        @SerializedName("last_name")
         val lastname: String?,
         val occupation: String?,
         val phone_number: String?,

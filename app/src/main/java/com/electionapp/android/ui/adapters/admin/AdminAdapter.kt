@@ -35,6 +35,8 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
 
     interface MoreBtnClickListener {
         fun onMoreButtonClicked(mode: StatGroup)
+
+        fun onMoreStatItemButtonClicked(mode: StatItem)
     }
 
     override fun getItemCount(): Int {
@@ -59,7 +61,7 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_TYPE.SINGLE_STAT_ITEM.value -> SingleStatViewHolder.create(parent)
+            ITEM_TYPE.SINGLE_STAT_ITEM.value -> SingleStatViewHolder.create(parent, moreBtnClickListener)
             ITEM_TYPE.MULTI_STAT_ITEM.value -> MultiStatViewHolder.create(parent, moreBtnClickListener)
             ITEM_TYPE.PIE_CHART_ITEM.value -> PieChartStatViewHolder.create(parent)
             else -> HolePieChartStatViewHolder.create(parent)
@@ -78,18 +80,23 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
 
 }
 
-class SingleStatViewHolder(view: View, var binding: ViewDataBinding) : RecyclerView.ViewHolder(view) {
+class SingleStatViewHolder(var view: View, var binding: ViewDataBinding, var moreBtnClickListener: StatAdapter.MoreBtnClickListener) : RecyclerView.ViewHolder(view) {
 
     fun bind(statItem: StatItem?) {
+        if (statItem != null) {
+            view.more_btn.setOnClickListener {
+                moreBtnClickListener.onMoreStatItemButtonClicked(statItem)
+            }
+        }
         binding.setVariable(BR.item, statItem)
         binding.executePendingBindings()
     }
 
     companion object {
-        fun create(parent: ViewGroup): SingleStatViewHolder {
+        fun create(parent: ViewGroup, moreBtnClickListener: StatAdapter.MoreBtnClickListener): SingleStatViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_pvc_total_count, parent, false)
-            return SingleStatViewHolder(binding.root, binding)
+            return SingleStatViewHolder(binding.root, binding, moreBtnClickListener)
         }
     }
 }
@@ -177,7 +184,7 @@ class MultiStatViewHolder(var view: View, var binding: ViewDataBinding, var more
         view.stat_group_rv.addItemDecoration(DividerItemDecoration(view.context))
         view.stat_group_rv.layoutManager = layoutManager
         view.stat_group_rv.adapter = adapter
-        if(statGroup!=null){
+        if (statGroup != null) {
             view.more_btn.setOnClickListener {
                 moreBtnClickListener.onMoreButtonClicked(statGroup)
             }

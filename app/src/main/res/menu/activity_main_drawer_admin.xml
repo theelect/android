@@ -3,7 +3,7 @@
     <group>
         <item
             android:id="@+id/nav_item_dashboard"
-            android:title="PVC Stats" />
+            android:title="Dashboard" />
 
         <item
             android:id="@+id/nav_voter_data_dashboard"

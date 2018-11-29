@@ -190,6 +190,9 @@ interface Constants {
     object FILTER_CONSTANTS {
         const val LGA = "lga"
         const val WARD = "ward"
+        const val PAGE_COUNT = 10
+        const val CURRENT_PAGE = "page"
+
         const val OCCUPATION = "occupation"
     }
 

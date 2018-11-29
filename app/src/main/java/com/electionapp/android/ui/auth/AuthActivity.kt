@@ -39,9 +39,7 @@ open class AuthActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         AndroidInjection.inject(this)
-
         setContentView(R.layout.auth_activity)
 
         try {
@@ -54,12 +52,12 @@ open class AuthActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
             }
         } catch (e: PackageManager.NameNotFoundException) {
-
+            e.printStackTrace()
         } catch (e: NoSuchAlgorithmException) {
-
+            e.printStackTrace()
         }
 
-        authNavigator.goToOnBoarding()
+        authNavigator.goToEntry()
 
     }
 

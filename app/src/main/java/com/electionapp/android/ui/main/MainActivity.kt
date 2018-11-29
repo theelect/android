@@ -27,10 +27,14 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import com.electionapp.android.utils.IRestartHelper
+import com.electionapp.android.utils.delay
+import com.electionapp.android.utils.mapper.UserMapper
 import com.electionapp.domain.base.Params
+import com.electionapp.domain.usecase.user.FetchCurrentUserUseCase
 import com.electionapp.domain.usecase.user.FetchIfCurrentUserIsAdminUseCase
 import com.electionapp.domain.usecase.user.LogUserOutUseCase
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 
 class MainActivity : BaseActivity(),
@@ -57,6 +61,12 @@ class MainActivity : BaseActivity(),
     lateinit var fetchIfCurrentUserIsAdminUseCase: FetchIfCurrentUserIsAdminUseCase
 
     @Inject
+    lateinit var fetchCurrentUserUseCase: FetchCurrentUserUseCase
+
+    @Inject
+    lateinit var userMapper: UserMapper
+
+    @Inject
     lateinit var logUserOutUseCase: LogUserOutUseCase
 
     @Inject
@@ -78,22 +88,38 @@ class MainActivity : BaseActivity(),
 
         initTab()
 
-        requestPermisson()
+        delay({
+            initNavHeader()
+        }, 2000)
+
+        requestPermission()
 
         if (fetchIfCurrentUserIsAdminUseCase.getIfUserIsAdmin()) {
             nav_view.menu.clear()
             nav_view.inflateMenu(R.menu.activity_main_drawer_admin)
-            switchFragment(2)
+            mainFragmentNavigation.goToPVCAdminStats()
         } else {
             nav_view.menu.clear()
             nav_view.inflateMenu(R.menu.activity_main_drawer_wc)
-            switchFragment(0)
+            mainFragmentNavigation.goToPVCVerification()
         }
 
     }
 
+    private fun initNavHeader() {
+        compositeDisposable.addAll(fetchCurrentUserUseCase.execute(Params.EMPTY)
+                .map {
+                    userMapper.mapFrom(it)
+                }
+                .subscribe({
+                    nav_header_name.text = "${it.firstname} ${it.lastname}"
+                    nav_header_email.text = "${it.email}"
+                }, {
+                    it.printStackTrace()
+                }))
+    }
 
-    fun requestPermisson() {
+    private fun requestPermission() {
         if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,

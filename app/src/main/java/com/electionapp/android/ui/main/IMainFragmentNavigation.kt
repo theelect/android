@@ -40,7 +40,7 @@ class MainFragmentNavigation(private var activity: MainActivity,
         FragNavController.RootFragmentListener {
 
     override fun goToVoterDataList(name: String, mode: Int) {
-        updateToolbarTitle("Voters")
+        updateToolbarTitle("Voter Feed")
         pushFragment(VoterDataFragment.newInstance(mode, name))
     }
 
@@ -55,12 +55,12 @@ class MainFragmentNavigation(private var activity: MainActivity,
 
     override fun goToPVCAdminStats() {
         switchTab(2)
-        updateToolbarTitle("Voters")
+        updateToolbarTitle("Dashboard")
     }
 
     override fun goToVoterDataList() {
         switchTab(3)
-        updateToolbarTitle("Voter Data")
+        updateToolbarTitle("Voter Feed")
     }
 
     override fun goToPVCValidationList() {

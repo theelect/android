@@ -44,7 +44,6 @@ class LoginFragment : BaseAuthFragment<LoginViewModel>() {
             getViewModel().logUserIn(email_edit_text.text.toString(), password_edit_text.text.toString())
         }
 
-
     }
 
 

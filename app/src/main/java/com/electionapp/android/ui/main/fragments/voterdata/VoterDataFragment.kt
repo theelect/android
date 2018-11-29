@@ -4,21 +4,22 @@ package com.electionapp.android.ui.main.fragments.voterdata
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import com.electionapp.android.R
 import com.electionapp.android.model.pvc.PVCData
 import com.electionapp.android.ui.adapters.base.SingleLayoutAdapter
 import com.electionapp.android.ui.base.BaseMVVMFragment
+import com.electionapp.android.ui.filters.FiltersActivity
 import com.electionapp.android.utils.dpToPx
 import com.electionapp.android.views.decorators.SpacingItemDecoration
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_voter_data.*
 import javax.inject.Inject
-import android.view.MenuInflater
-import android.view.MenuItem
-import com.electionapp.android.ui.filters.FiltersActivity
-import com.electionapp.android.ui.main.fragments.statfulldetails.StatFullDetailsFragment
 
 
 class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
@@ -54,17 +55,35 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        val layoutManager = LinearLayoutManager(context)
         voters_rv.addItemDecoration(SpacingItemDecoration(context!!.dpToPx(16), context!!.dpToPx(16), false))
+        voters_rv.layoutManager = layoutManager
         voters_rv.adapter = adapter
+
 
         var name: String? = arguments?.getString(NAME)
         var mode: Int? = arguments?.getInt(MODE)
 
         if (name != null && mode != null) {
             getViewModel().setNameAndMode(name, mode)
-        }else{
+        } else {
             getViewModel().runQuery()
         }
+
+        voters_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+
+                if (visibleItemCount + pastVisibleItems >= totalItemCount && !getViewModel().fetchingMore()) {
+                    getViewModel().getMore()
+                }
+
+            }
+        })
+
 
     }
 
