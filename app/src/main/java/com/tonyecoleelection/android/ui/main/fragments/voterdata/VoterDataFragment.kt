@@ -78,7 +78,7 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
                 val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
 
                 if (visibleItemCount + pastVisibleItems >= totalItemCount && !getViewModel().fetchingMore()) {
-                    getViewModel().getMore()
+                   // getViewModel().getMore()
                 }
 
             }

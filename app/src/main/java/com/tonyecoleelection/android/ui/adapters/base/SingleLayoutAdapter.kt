@@ -17,18 +17,16 @@ class SingleLayoutAdapter<T>(@LayoutRes private val resId: Int, var onItemClickL
 
     override fun setData(data: T) {
         if (data is List<*>) {
-            diffItems = data as List<T>
-            items.addAll(diffItems)
+            items = data as List<T>
         }
     }
 
-    var diffItems by observable<List<T>>(listOf()) { _, oldValue, newValue ->
+    var items by observable<List<T>>(listOf()) { _, oldValue, newValue ->
         DiffUtil
                 .calculateDiff(DiffUtilCallback(oldValue, newValue))
                 .dispatchUpdatesTo(this)
     }
 
-    var items = mutableListOf<T>()
 
     override fun getItemCount() = items.size
 
