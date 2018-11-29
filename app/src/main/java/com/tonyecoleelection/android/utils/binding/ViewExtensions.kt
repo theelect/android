@@ -1,5 +1,6 @@
 package com.tonyecoleelection.android.utils.binding
 
+import android.animation.ValueAnimator
 import android.databinding.BindingAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.ViewFlipper
 import com.tonyecoleelection.android.R
+import com.tonyecoleelection.android.R.id.textView
 import com.tonyecoleelection.android.ui.adapters.base.BindableAdapter
 import com.tonyecoleelection.android.ui.adapters.base.BindableItemClickListener
 import com.tonyecoleelection.android.ui.adapters.base.DataBindingAdapter
@@ -97,4 +99,14 @@ fun setTextAndColorForStatus(textView: TextView, is_verified: Boolean) {
         textView.text = "INVALID"
         textView.textColorResource = R.color.mds_red_400
     }
+}
+
+@BindingAdapter("animatedValue")
+fun animateNumbers(textView: TextView, number: Int) {
+    var animator = ValueAnimator.ofInt(0, 3000)
+    animator.duration = 1000
+    animator.addUpdateListener {
+        textView.text = it.animatedValue.toString()
+    }
+    animator.start()
 }
