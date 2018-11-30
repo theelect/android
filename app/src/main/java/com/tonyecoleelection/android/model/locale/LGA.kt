@@ -14,6 +14,9 @@ class LGA(
         val name: String,
         val wards: ArrayList<IdentifiableObject>) : IdentifiableObject {
 
+    val nameCapitalized: String
+        get() = name.capitalize()
+
     override fun getIdentifier(): Int {
         return id
     }

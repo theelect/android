@@ -138,7 +138,7 @@ open class PieChartStatViewHolder(var view: View, var binding: ViewDataBinding) 
 
             for (i in 0 until statGroup.items.size) {
 
-                entries.add(PieEntry(((statGroup.items[i].count.toFloat() / range) * 100), statGroup.items[i].name))
+                entries.add(PieEntry(((statGroup.items[i].count.toFloat() / range) * 100), statGroup.items[i].nameCapitalized))
             }
 
             val colors = mutableListOf<Int>()

@@ -11,6 +11,7 @@ import com.tonyecoleelection.android.R
 class Ward(
         val id: Int,
         val name: String) : IdentifiableObject {
+
     override fun getIdentifier(): Int {
         return id
     }
@@ -27,4 +28,6 @@ class Ward(
         return name
     }
 
+    val nameCapitalized: String
+        get() = name.capitalize()
 }

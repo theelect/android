@@ -14,4 +14,18 @@ data class PVCData(
         val vin: String,
         val first_name: String,
         val occupation: String
-)
+) {
+    val namesCapitalized:String
+    get() = "$first_name $last_name".capitalize()
+
+    val stateCapitalized:String
+        get() = "${state?.name}".capitalize()
+
+
+    val wardCapitalized:String
+        get() = "${pollingUnit?.ward}".capitalize()
+
+    val occupationCapitalized:String
+        get() = "$occupation".capitalize()
+
+}
