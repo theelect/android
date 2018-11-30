@@ -47,7 +47,6 @@ class MainActivity : BaseActivity(),
         return fragmentDispatchingAndroidInjector
     }
 
-    var toggle: ActionBarDrawerToggle? = null
 
     private val MY_PERMISSIONS_REQUEST_SEND_SMS = 1
 
@@ -133,26 +132,19 @@ class MainActivity : BaseActivity(),
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        toggle?.syncState()
+        mainFragmentNavigation.syncDrawerState()
     }
 
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-        toggle?.onConfigurationChanged(newConfig)
+        mainFragmentNavigation.onConfigurationChanged(newConfig)
     }
 
 
     private fun initToolbar() {
-
-        setSupportActionBar(toolbar_main)
-        toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar_main, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle!!)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
-
+        mainFragmentNavigation.initDrawerToggle()
         nav_view.setNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
     }
 
     private fun initTab() {
@@ -214,7 +206,7 @@ class MainActivity : BaseActivity(),
             }
         }
 
-        if (toggle?.onOptionsItemSelected(item) == true) {
+        if (mainFragmentNavigation?.onOptionsItemSelected(item) == true) {
             return true
         }
 
@@ -230,15 +222,19 @@ class MainActivity : BaseActivity(),
     private val onNavigationItemSelectedListener: NavigationView.OnNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_item_verify -> {
+                mainFragmentNavigation.clearStack()
                 mainFragmentNavigation.goToPVCVerification()
             }
             R.id.nav_item_data -> {
+                mainFragmentNavigation.clearStack()
                 mainFragmentNavigation.goToPVCValidationList()
             }
             R.id.nav_item_dashboard -> {
+                mainFragmentNavigation.clearStack()
                 mainFragmentNavigation.goToPVCAdminStats()
             }
             R.id.nav_voter_data_dashboard -> {
+                mainFragmentNavigation.clearStack()
                 mainFragmentNavigation.goToVoterDataList()
             }
             R.id.nav_item_logout -> {

@@ -49,7 +49,7 @@ class PVCAdminStatsFragment : BaseMVVMFragment<PVCAdminStatsViewModel>(), StatAd
     }
 
     override fun onMoreStatItemButtonClicked(mode: StatItem) {
-        mainFragmentNavigation.goToVoterDataList()
+        mainFragmentNavigation.goToVoterDataList(null, 0)
     }
 
     override fun onMoreButtonClicked(mode: StatGroup) {

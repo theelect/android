@@ -1,7 +1,14 @@
 package com.tonyecoleelection.android.ui.main
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.Toolbar
+import android.view.MenuItem
 import com.tonyecoleelection.android.R
 import com.tonyecoleelection.android.fragments.DummyFragment
 import com.tonyecoleelection.android.ui.main.fragments.pvcdatalist.PVCVerificationListFragment
@@ -11,6 +18,7 @@ import com.tonyecoleelection.android.ui.main.fragments.verifypvcdata.PVCVerifica
 import com.tonyecoleelection.android.ui.main.fragments.voterdata.VoterDataFragment
 import com.tonyecoleelection.android.utils.FragmentHistory
 import com.tonyecoleelection.android.views.FragNavController
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 interface IMainFragmentNavigation {
@@ -29,8 +37,12 @@ interface IMainFragmentNavigation {
     fun goToPVCValidationList()
     fun goToVoterDataList()
     fun goToPVCAdminStatsDetails(mode: Int)
-    fun goToVoterDataList(name: String, mode: Int)
+    fun goToVoterDataList(name: String?, mode: Int)
 
+    fun initDrawerToggle()
+    fun onOptionsItemSelected(item: MenuItem): Boolean?
+    fun onConfigurationChanged(newConfig: Configuration?)
+    fun syncDrawerState()
 }
 
 class MainFragmentNavigation(private var activity: MainActivity,
@@ -38,10 +50,37 @@ class MainFragmentNavigation(private var activity: MainActivity,
         FragNavController.TransactionListener,
         FragNavController.RootFragmentListener {
 
-    override fun goToVoterDataList(name: String, mode: Int) {
+
+    override fun syncDrawerState() {
+        toggle?.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        toggle?.onConfigurationChanged(newConfig)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean? {
+        return toggle?.onOptionsItemSelected(item)
+    }
+
+    val toolbar = activity.findViewById<Toolbar>(R.id.toolbar_main)
+    val drawerLayout = activity.findViewById<DrawerLayout>(R.id.drawer_layout)
+    var toggle: ActionBarDrawerToggle? = null
+
+    override fun initDrawerToggle() {
+        activity.setSupportActionBar(toolbar)
+        toggle = ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        activity.supportActionBar?.setHomeButtonEnabled(true)
+        drawerLayout.addDrawerListener(toggle!!)
+        toggle?.syncState()
+    }
+
+    override fun goToVoterDataList(name: String?, mode: Int) {
         updateToolbarTitle("Voter Feed")
         pushFragment(VoterDataFragment.newInstance(mode, name))
     }
+
 
     override fun goToPVCAdminStatsDetails(mode: Int) {
         if (mode == 2) {
@@ -148,10 +187,19 @@ class MainFragmentNavigation(private var activity: MainActivity,
     }
 
     private fun updateToolbar() {
-//        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(!navController!!.isRootFragment)
-//        activity.supportActionBar!!.setDisplayShowHomeEnabled(!navController!!.isRootFragment)
-//        activity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
-        //TransitionManager.beginDelayedTransition(title_layout, ChangeBounds())
+        if (!navController.isRootFragment) {
+            activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            activity.supportActionBar!!.setDisplayShowHomeEnabled(true)
+            activity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+            //toolbar.navigationIcon = ContextCompat.getDrawable(activity, R.drawable.ic_arrow_back)
+            toolbar.setNavigationOnClickListener {
+                popFragment()
+            }
+        } else {
+            activity.supportActionBar!!.setHomeAsUpIndicator(null)
+            initDrawerToggle()
+        }
+        // TransitionManager.beginDelayedTransition(title_layout, ChangeBounds())
     }
 
 

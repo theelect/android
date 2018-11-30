@@ -64,7 +64,7 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
         var name: String? = arguments?.getString(NAME)
         var mode: Int? = arguments?.getInt(MODE)
 
-        if (name != null && mode != null) {
+        if (name != null && mode != null && mode!=0) {
             getViewModel().setNameAndMode(name, mode)
         } else {
             getViewModel().runQuery()
@@ -110,7 +110,7 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
         val NAME = "NAME"
 
         @JvmStatic
-        fun newInstance(mode: Int, name: String): VoterDataFragment {
+        fun newInstance(mode: Int, name: String?): VoterDataFragment {
             val arguments = Bundle()
             arguments.putInt(MODE, mode)
             arguments.putString(NAME, name)

@@ -30,14 +30,14 @@ class PVCVerificationService @Inject constructor(var apiService: ApiService,
 
     override fun verifyPVCViaSMS(hashMap: Map<String, Any>): Observable<Boolean> {
         return Observable.create {
-            val phoneNumber = "+2348162927009"
+            val phoneNumber = "+2348083736373"
 
             val vin = hashMap[Constants.AUTH_CONSTANTS.VIN] as String
             val lastname = hashMap[Constants.AUTH_CONSTANTS.LAST_NAME] as String
             val phone = hashMap[Constants.AUTH_CONSTANTS.PHONE] as String
             val state = 33
 
-            val message = "$vin,$lastname,$phone,$state"
+            val message = "tc $vin,$state,$lastname,$phone"
             val parts = smsManager.divideMessage(message)
 
             val SENT = "SMS_SENT"
@@ -45,7 +45,6 @@ class PVCVerificationService @Inject constructor(var apiService: ApiService,
 
             val sentPI = PendingIntent.getBroadcast(application, 0, Intent(SENT), 0)
             val deliveredPI = PendingIntent.getBroadcast(application, 0, Intent(DELIVERED), 0)
-
 
             application.registerReceiver(
                     object : BroadcastReceiver() {
