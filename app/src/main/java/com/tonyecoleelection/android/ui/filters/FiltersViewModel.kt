@@ -51,7 +51,10 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
                     hideLoading()
                 }
                 .subscribe({
-                    occupations.value = it
+                    val formattedOccupations = it.map {
+                        it.capitalize()
+                    }
+                    occupations.value = formattedOccupations
                 }, {
                     handleError(it)
                     it.printStackTrace()
@@ -61,15 +64,15 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
 
 
     fun setSelectedLGA(lga: String) {
-        filterParams.putString(Constants.FILTER_CONSTANTS.LGA, lga)
+        filterParams.putString(Constants.FILTER_CONSTANTS.LGA, lga.toLowerCase())
     }
 
     fun setSelectedWard(ward: String) {
-        filterParams.putString(Constants.FILTER_CONSTANTS.WARD, ward)
+        filterParams.putString(Constants.FILTER_CONSTANTS.WARD, ward.toLowerCase())
     }
 
     fun setSelectedOccupation(occupation: String) {
-        filterParams.putString(Constants.FILTER_CONSTANTS.OCCUPATION, occupation)
+        filterParams.putString(Constants.FILTER_CONSTANTS.OCCUPATION, occupation.toLowerCase())
     }
 
 

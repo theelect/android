@@ -78,7 +78,7 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
                 val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
 
                 if (visibleItemCount + pastVisibleItems >= totalItemCount && !getViewModel().fetchingMore()) {
-                   // getViewModel().getMore()
+                   getViewModel().getMore()
                 }
 
             }
@@ -92,6 +92,7 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == FiltersActivity.FILTER_TASK_REQ_CODE) {
+                adapter.clearData()
                 val hashMap: HashMap<String, Any> = data!!.getSerializableExtra(FiltersActivity.FILTER_TASK_DATA) as HashMap<String, Any>
                 getViewModel().queryWithFilters(hashMap)
             }
