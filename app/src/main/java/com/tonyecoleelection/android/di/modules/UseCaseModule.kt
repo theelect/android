@@ -15,6 +15,7 @@ import com.tonyecoleelection.domain.usecase.user.FetchIfCurrentUserIsAdminUseCas
 import com.tonyecoleelection.domain.usecase.user.LogUserOutUseCase
 import com.softcom.abujametrodata.contracts.ITokenManager
 import com.tonyecoleelection.domain.mapper.*
+import com.tonyecoleelection.domain.usecase.pvc.FetchPVCCountServerUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -82,6 +83,11 @@ class UseCaseModule {
     @Provides
     fun provideFetchPVCStatsUseCase(schedulers: Schedulers, mapper: PVCStatsModelMapper, repository: IPVCStatsRepository): FetchPVCStatsUseCase {
         return FetchPVCStatsUseCase(schedulers, mapper, repository)
+    }
+
+    @Provides
+    fun provideFetchPVCCountServerUseCase(schedulers: Schedulers, repository: IPVCStatsRepository): FetchPVCCountServerUseCase {
+        return FetchPVCCountServerUseCase(schedulers, repository)
     }
 
     @Provides

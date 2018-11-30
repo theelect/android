@@ -8,6 +8,7 @@ import com.tonyecoleelection.android.utils.mapper.PVCStatsMapper
 import com.tonyecoleelection.constants.Constants
 import com.tonyecoleelection.domain.base.Params
 import com.tonyecoleelection.domain.usecase.admin.FetchPVCStatsUseCase
+import com.tonyecoleelection.domain.usecase.pvc.FetchPVCCountServerUseCase
 import java.util.*
 
 
@@ -16,6 +17,7 @@ import java.util.*
  */
 
 class PVCAdminStatsViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
+                             var fetchPVCCountServerUseCase: FetchPVCCountServerUseCase,
                              var userPVCStatsMapper: PVCStatsMapper) : BaseViewModel() {
 
     val totalStat = mutableLiveDataOf<StatItem>()
@@ -84,17 +86,20 @@ class PVCAdminStatsViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
                     onProfessionStatsFetchFailed(it)
                 }))
 
+        addDisposable(fetchPVCCountServerUseCase.execute(Params.EMPTY)
+                .doOnSubscribe {
+                    showLoading()
+                }
+                .subscribe({
+                    val totalStatItem = StatItem(it, "Total Verified Voters", 0.0)
+                    this.totalStat.value = totalStatItem
+                }, {
+                    onProfessionStatsFetchFailed(it)
+                }))
+
     }
 
     private fun onLGAStatsFetchSuccess(list: MutableList<StatItem>) {
-        var total = 0
-        list.forEach {
-            total += it.count
-        }
-        val totalStatItem = StatItem(total, "Total Verified Voters", 0.0)
-        this.totalStat.value = totalStatItem
-
-
         val statGroup = StatGroup(getSortedList(list), "Top 4 Local Government Areas", 2)
         this.lgaStatGroup.value = statGroup
         hideLoading()
