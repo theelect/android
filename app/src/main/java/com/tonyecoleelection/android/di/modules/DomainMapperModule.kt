@@ -37,4 +37,9 @@ class DomainMapperModule {
     fun provideLGAModelMapper(): LGAModelMapper {
         return LGAModelMapper()
     }
+
+    @Provides
+    fun provideVoterDataModelMapper(pvcDataModelMapper: PVCDataModelMapper): VoterDataModelMapper {
+        return VoterDataModelMapper(pvcDataModelMapper)
+    }
 }

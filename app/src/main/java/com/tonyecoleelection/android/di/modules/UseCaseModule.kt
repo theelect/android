@@ -3,10 +3,6 @@ package com.tonyecoleelection.android.di.modules
 
 import com.tonyecoleelection.data.contracts.*
 import com.tonyecoleelection.domain.base.Schedulers
-import com.tonyecoleelection.domain.mapper.LGAModelMapper
-import com.tonyecoleelection.domain.mapper.PVCDataModelMapper
-import com.tonyecoleelection.domain.mapper.PVCStatsModelMapper
-import com.tonyecoleelection.domain.mapper.UserModelMapper
 import com.tonyecoleelection.domain.usecase.admin.FetchPVCStatsUseCase
 import com.tonyecoleelection.domain.usecase.auth.*
 import com.tonyecoleelection.domain.usecase.main.FetchAllOccupationsFromServerUseCase
@@ -18,6 +14,7 @@ import com.tonyecoleelection.domain.usecase.user.FetchCurrentUserUseCase
 import com.tonyecoleelection.domain.usecase.user.FetchIfCurrentUserIsAdminUseCase
 import com.tonyecoleelection.domain.usecase.user.LogUserOutUseCase
 import com.softcom.abujametrodata.contracts.ITokenManager
+import com.tonyecoleelection.domain.mapper.*
 import dagger.Module
 import dagger.Provides
 
@@ -88,7 +85,7 @@ class UseCaseModule {
     }
 
     @Provides
-    fun provideFetchPVCDataFromServerUseCase(schedulers: Schedulers, mapper: PVCDataModelMapper, repository: IPVCDataRepository): FetchPVCDataFromServerUseCase {
+    fun provideFetchPVCDataFromServerUseCase(schedulers: Schedulers, mapper: VoterDataModelMapper, repository: IPVCDataRepository): FetchPVCDataFromServerUseCase {
         return FetchPVCDataFromServerUseCase(schedulers, mapper, repository)
     }
 

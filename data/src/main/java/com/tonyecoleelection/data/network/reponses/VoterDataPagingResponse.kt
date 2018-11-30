@@ -4,7 +4,9 @@ import com.tonyecoleelection.data.model.PVCDataEntity
 
 
 class VoterDataPagingResponse(val docs: List<PVCDataEntity>,
-                              total: Int,
-                              limit: Int,
-                              page: Int,
-                              pages: Int)
+                              val total: Int,
+                              val limit: Int,
+                              val page: Int,
+                              val total_verified: Int,
+                              val total_unverified: Int,
+                              val pages: Int)

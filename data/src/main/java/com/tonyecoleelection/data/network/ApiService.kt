@@ -28,7 +28,10 @@ interface ApiService {
     @POST("pvc/verifyViaApp")
     fun verifyPVCViaApp(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<PVCDataEntity>
 
-    @GET("pvc")
+    @POST("pvc")
+    fun pvcCount(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<PVCDataEntity>
+
+    @GET("pvc-count")
     fun getAllVerifiedPVCWithFilters(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<VoterDataPagingResponse>
 
     @GET("pvc/statistics")

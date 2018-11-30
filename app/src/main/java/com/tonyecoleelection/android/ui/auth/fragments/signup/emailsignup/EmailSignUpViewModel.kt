@@ -117,9 +117,6 @@ class EmailSignUpViewModel(val signUserUpUseCase: SignUserUpViaEmailUseCase,
         handleError(exception)
     }
 
-    fun setSelectedDate(dateSelected: String) {
-        loginParams.putData(Constants.USERS_CONSTANTS.DOB, dateSelected)
-    }
 
     fun setSelectedLGA(item: IdentifiableObject?) {
         selectedLGA = item as LGA?

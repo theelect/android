@@ -10,6 +10,7 @@ import com.tonyecoleelection.android.ui.main.fragments.voterdata.VoterDataFragme
 import com.tonyecoleelection.android.ui.main.fragments.voterdata.VoterDataViewModel
 import com.tonyecoleelection.android.utils.ViewModelFactory
 import com.tonyecoleelection.android.utils.mapper.PVCDataMapper
+import com.tonyecoleelection.android.utils.mapper.VoterDataMapper
 import com.tonyecoleelection.domain.usecase.pvc.FetchPVCDataFromServerUseCase
 import dagger.Module
 import dagger.Provides
@@ -23,7 +24,8 @@ class VoterDataModule {
 
     @FragmentScope
     @Provides
-    fun providesVMFactory(pvcDataMapper: PVCDataMapper, fetchPVCDataFromServerUseCase: FetchPVCDataFromServerUseCase): ViewModelFactory<VoterDataViewModel> {
+    fun providesVMFactory(pvcDataMapper: VoterDataMapper,
+                          fetchPVCDataFromServerUseCase: FetchPVCDataFromServerUseCase): ViewModelFactory<VoterDataViewModel> {
         return ViewModelFactory(lazyOf(VoterDataViewModel(fetchPVCDataFromServerUseCase, pvcDataMapper)))
     }
 

@@ -92,7 +92,7 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
             }
 
             radioButton.setOnCheckedChangeListener { compoundButton, b ->
-                params.putString(Constants.FILTER_CONSTANTS.LGA, title.text.toString().toLowerCase().toString())
+                params.putString(Constants.FILTER_CONSTANTS.LGA, title.text.toString().toLowerCase())
             }
         }
 

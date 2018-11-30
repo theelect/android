@@ -1,9 +1,11 @@
 package com.tonyecoleelection.android.ui.main.fragments.voterdata
 
 import com.tonyecoleelection.android.model.pvc.PVCData
+import com.tonyecoleelection.android.model.pvc.VoterData
 import com.tonyecoleelection.android.ui.base.BaseViewModel
 import com.tonyecoleelection.android.utils.extensions.mutableLiveDataOf
 import com.tonyecoleelection.android.utils.mapper.PVCDataMapper
+import com.tonyecoleelection.android.utils.mapper.VoterDataMapper
 import com.tonyecoleelection.constants.Constants
 import com.tonyecoleelection.domain.base.Params
 import com.tonyecoleelection.domain.usecase.pvc.FetchPVCDataFromServerUseCase
@@ -15,7 +17,7 @@ import java.text.DecimalFormat
  */
 
 class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServerUseCase,
-                         var pvcDataMapper: PVCDataMapper) : BaseViewModel() {
+                         var voterDataMapper: VoterDataMapper) : BaseViewModel() {
 
     val totalRegisteredVoterStat = mutableLiveDataOf<String>()
     val totalVerifiedVoterStat = mutableLiveDataOf<String>()
@@ -42,7 +44,7 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
                     isFetching = false
                 }
                 .map {
-            pvcDataMapper.mapFromList(it)
+                    voterDataMapper.mapFrom(it)
         }.subscribe({
             onVoterDataFetchSuccess(it)
         }, {
@@ -51,18 +53,15 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     }
 
 
-    private fun onVoterDataFetchSuccess(list: MutableList<PVCData>) {
+    private fun onVoterDataFetchSuccess(list: VoterData) {
         hideLoading()
-        totalRegisteredVoterStat.value = formatNumber(list.size)
-        var verifiedCount = 0
-        list.forEach {
-            if (it.is_verified) {
-                verifiedCount += 1
-            }
-        }
-        totalVerifiedVoterStat.value = formatNumber(verifiedCount)
+        totalRegisteredVoterStat.value = formatNumber(list.total)
 
-        voterData.value = list
+        totalVerifiedVoterStat.value = formatNumber(list.total_verified)
+
+        if(list.docs.isNotEmpty()){
+            voterData.value = list.docs
+        }
     }
 
     private fun onVoterDataFetchFailed(e: Throwable) {

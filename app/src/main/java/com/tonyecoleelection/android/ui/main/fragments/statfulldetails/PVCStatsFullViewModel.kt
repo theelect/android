@@ -34,7 +34,7 @@ class PVCStatsFullViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
         this.totalStat.value = totalStatItem
 
 
-        val statGroup = StatGroup(list, "Top Local Government Areas")
+        val statGroup = StatGroup(getSortedList(list), "Top Local Government Areas")
         this.statGroup.value = statGroup
         hideLoading()
     }
@@ -67,5 +67,14 @@ class PVCStatsFullViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
                 }))
     }
 
+    fun getSortedList(list: MutableList<StatItem>): MutableList<StatItem> {
+        return if (list.size >= 4) {
+            list.asSequence().sortedWith(compareByDescending {
+                it.count
+            }).toMutableList()
+        } else {
+            list
+        }
+    }
 
 }

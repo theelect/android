@@ -1,6 +1,8 @@
 package com.tonyecoleelection.android.di.modules
 
 import com.tonyecoleelection.android.utils.mapper.*
+import com.tonyecoleelection.domain.mapper.PVCDataModelMapper
+import com.tonyecoleelection.domain.mapper.VoterDataModelMapper
 import dagger.Module
 import dagger.Provides
 
@@ -39,4 +41,8 @@ class PresentationMapperModule {
         return LGAMapper()
     }
 
+    @Provides
+    fun provideVoterDataMapper(pvcDataMapper: PVCDataMapper): VoterDataMapper {
+        return VoterDataMapper(pvcDataMapper)
+    }
 }
