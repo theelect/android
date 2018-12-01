@@ -1,5 +1,7 @@
 package com.tonyecoleelection.android.model.pvc
 
+import com.tonyecoleelection.android.utils.toCamelCase
+
 data class PVCData(
         val _id: String,
         val campaign: String,
@@ -16,16 +18,16 @@ data class PVCData(
         val occupation: String
 ) {
     val namesCapitalized:String
-    get() = "$first_name $last_name".capitalize()
+    get() = "$first_name $last_name".toCamelCase()
 
     val stateCapitalized:String
-        get() = "${state?.name}".capitalize()
+        get() = "${state?.name}".toCamelCase()
 
 
     val wardCapitalized:String
-        get() = "${pollingUnit?.ward}".capitalize()
+        get() = "${pollingUnit?.ward}".toCamelCase()
 
     val occupationCapitalized:String
-        get() = "$occupation".capitalize()
+        get() = "$occupation".toCamelCase()
 
 }

@@ -1,5 +1,6 @@
 package com.tonyecoleelection.android.model.admin
 
+import com.tonyecoleelection.android.utils.toCamelCase
 import java.text.DecimalFormat
 
 data class StatItem(var count: Int,
@@ -7,7 +8,7 @@ data class StatItem(var count: Int,
                     var percentage: Double) {
 
     val nameCapitalized: String
-        get() = name.capitalize()
+        get() = name.toCamelCase()
 
     val countString: String
         get() {

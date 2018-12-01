@@ -12,4 +12,4 @@ class AgeGroupXAxisFormatter : IAxisValueFormatter {
         val percent = value / axis.mAxisRange
         return ageGroup[(ageGroup.size * percent).toInt()]
     }
-}// maybe do something here or provide parameters in constructor
+}

@@ -2,6 +2,7 @@ package com.tonyecoleelection.android.model.locale
 
 import `in`.galaxyofandroid.spinerdialog.IdentifiableObject
 import com.tonyecoleelection.android.R
+import com.tonyecoleelection.android.utils.toCamelCase
 
 /**
  *
@@ -29,5 +30,5 @@ class Ward(
     }
 
     val nameCapitalized: String
-        get() = name.capitalize()
+        get() = name.toCamelCase()
 }

@@ -15,8 +15,8 @@ class PVCDataModelMapper(var pollingUnitModel: PollingUnitModelMapper,
                          var stateModelMapper: StateModelMapper) : Mapper<PVCDataEntity, PVCDataModel>() {
 
     override fun mapFrom(from: PVCDataEntity): PVCDataModel {
-        var pu: PollingUnitModel = PollingUnitModel("", from.lga, "", from.state, from.ward)
-        var state: StateModel? = StateModel("", "", from.state)
+        var pu: PollingUnitModel = PollingUnitModel("", validate(from.lga), "", validate(from.state), validate(from.ward))
+        var state: StateModel? = StateModel("", "", validate(from.state))
 //        if (from.voterInfo?.pollingUnit != null) {
 //            pu = pollingUnitModel.mapFrom(from.voterInfo?.pollingUnit!!)
 //        }
