@@ -37,10 +37,13 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     fun runQuery() {
         addDisposable(fetchPVCDataFromCacheUseCase.execute(params)
                 .doOnSubscribe {
+                    showLoading()
                     isFetching = true
                 }.doOnNext {
+                    hideLoading()
                     isFetching = false
                 }.doOnError {
+                    hideLoading()
                     isFetching = false
                 }
                 .map {

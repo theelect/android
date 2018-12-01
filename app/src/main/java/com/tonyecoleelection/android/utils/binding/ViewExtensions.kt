@@ -46,6 +46,13 @@ fun <T> setRecyclerViewProperties(recyclerView: RecyclerView, data: T?) {
     }
 }
 
+@BindingAdapter("reloaddata")
+fun <T> reloadRecyclerViewProperties(recyclerView: RecyclerView, data: T?) {
+    if (recyclerView.adapter is BindableAdapter<*> && data != null) {
+        (recyclerView.adapter as BindableAdapter<T>).reloadDataSet(data)
+    }
+}
+
 @BindingAdapter("data")
 fun <T> setViewPagerProperties(viewPager: ViewPager, data: T?) {
     if (viewPager.adapter is BindableAdapter<*> && data != null) {

@@ -16,10 +16,12 @@ import com.tonyecoleelection.android.model.admin.StatItem
 import com.tonyecoleelection.android.ui.adapters.base.SingleLayoutAdapter
 import com.tonyecoleelection.android.views.decorators.DividerItemDecoration
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.tonyecoleelection.android.views.AgeGroupXAxisFormatter
+import kotlinx.android.synthetic.main.item_stat_group_bar_chart.view.*
 import kotlinx.android.synthetic.main.item_stat_group_count.view.*
 import kotlinx.android.synthetic.main.item_stat_pie_chart.view.*
 import java.util.*
@@ -31,6 +33,7 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
     var wardStatGroup: StatGroup? = null
     var genderStatGroup: StatGroup? = null
     var professionStatGroup: StatGroup? = null
+    var ageStatGroup: StatGroup? = null
 
     interface MoreBtnClickListener {
         fun onMoreButtonClicked(mode: StatGroup)
@@ -39,11 +42,11 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 6
     }
 
     enum class ITEM_TYPE(val value: Int) {
-        SINGLE_STAT_ITEM(1), MULTI_STAT_ITEM(2), PIE_CHART_ITEM(3), SECTION_CHART_ITEM(4)
+        SINGLE_STAT_ITEM(1), MULTI_STAT_ITEM(2), PIE_CHART_ITEM(3), SECTION_CHART_ITEM(4), BAR_CHART_ITEM(5)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -53,8 +56,10 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
             ITEM_TYPE.MULTI_STAT_ITEM.value
         } else if (position == 3) {
             ITEM_TYPE.PIE_CHART_ITEM.value
-        } else {
+        } else if (position == 4) {
             ITEM_TYPE.SECTION_CHART_ITEM.value
+        } else {
+            ITEM_TYPE.BAR_CHART_ITEM.value
         }
     }
 
@@ -63,6 +68,7 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
             ITEM_TYPE.SINGLE_STAT_ITEM.value -> SingleStatViewHolder.create(parent, moreBtnClickListener)
             ITEM_TYPE.MULTI_STAT_ITEM.value -> MultiStatViewHolder.create(parent, moreBtnClickListener)
             ITEM_TYPE.PIE_CHART_ITEM.value -> PieChartStatViewHolder.create(parent)
+            ITEM_TYPE.BAR_CHART_ITEM.value -> BarChartViewHolder.create(parent)
             else -> HolePieChartStatViewHolder.create(parent)
         }
     }
@@ -74,10 +80,78 @@ class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickLi
             2 -> (holder as MultiStatViewHolder).bind(wardStatGroup)
             3 -> (holder as PieChartStatViewHolder).bind(genderStatGroup)
             4 -> (holder as HolePieChartStatViewHolder).bind(professionStatGroup)
+            5 -> (holder as BarChartViewHolder).bind(ageStatGroup)
         }
     }
 
 }
+
+
+class BarChartViewHolder(var view: View, var binding: ViewDataBinding) : RecyclerView.ViewHolder(view) {
+
+    fun bind(statGroup: StatGroup?) {
+        val values = mutableListOf<BarEntry>()
+
+        if (statGroup != null) {
+
+            statGroup.items.forEachIndexed { index, statItem ->
+                values.add(BarEntry(index.toFloat(), statItem.count.toFloat()))
+            }
+
+            var set1 = BarDataSet(values, "Data Set")
+
+            val colors = mutableListOf<Int>()
+            for (i in 0 until statGroup.items.size) {
+                val rnd = Random()
+                val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+                colors.add(color)
+            }
+
+
+            set1.colors = colors
+            set1.setDrawValues(false)
+
+            val dataSets = ArrayList<IBarDataSet>()
+            dataSets.add(set1)
+
+            val data = BarData(dataSets)
+
+            // if more than 60 entries are displayed in the chart, no values will be
+            // drawn
+            view.stat_bar_chart.setMaxVisibleValueCount(60)
+
+            // scaling can now only be done on x- and y-axis separately
+            view.stat_bar_chart.setPinchZoom(false)
+
+            view.stat_bar_chart.setDrawBarShadow(false)
+            view.stat_bar_chart.setDrawGridBackground(false)
+
+            val verticalAxis = view.stat_bar_chart.xAxis
+            verticalAxis.position = XAxis.XAxisPosition.BOTTOM
+            verticalAxis.setDrawGridLines(false)
+            verticalAxis.setDrawGridLines(false)
+            verticalAxis.granularity = 1f // only intervals of 1 day
+            verticalAxis.labelCount = 7
+            verticalAxis.valueFormatter = AgeGroupXAxisFormatter()
+
+            view.stat_bar_chart.axisLeft.setDrawGridLines(false)
+            view.stat_bar_chart.data = data
+            view.stat_bar_chart.setFitBars(true)
+        }
+
+        binding.setVariable(BR.item, statGroup)
+        binding.executePendingBindings()
+    }
+
+    companion object {
+        fun create(parent: ViewGroup): BarChartViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_stat_group_bar_chart, parent, false)
+            return BarChartViewHolder(binding.root, binding)
+        }
+    }
+}
+
 
 class SingleStatViewHolder(var view: View, var binding: ViewDataBinding, var moreBtnClickListener: StatAdapter.MoreBtnClickListener) : RecyclerView.ViewHolder(view) {
 

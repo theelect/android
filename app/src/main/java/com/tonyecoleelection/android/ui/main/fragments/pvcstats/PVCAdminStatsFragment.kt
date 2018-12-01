@@ -64,27 +64,32 @@ class PVCAdminStatsFragment : BaseMVVMFragment<PVCAdminStatsViewModel>(), StatAd
 
         getViewModel().totalStat.observe(this, NotNullObserver {
             statAdapter.totalStat = it
-            statAdapter.notifyDataSetChanged()
+            statAdapter.notifyItemChanged(0)
         })
 
         getViewModel().lgaStatGroup.observe(this, NotNullObserver {
             statAdapter.lgaStatGroup = it
-            statAdapter.notifyDataSetChanged()
+            statAdapter.notifyItemChanged(1)
         })
 
         getViewModel().wardStatGroup.observe(this, NotNullObserver {
             statAdapter.wardStatGroup = it
-            statAdapter.notifyDataSetChanged()
+            statAdapter.notifyItemChanged(2)
         })
 
         getViewModel().genderStatGroup.observe(this, NotNullObserver {
             statAdapter.genderStatGroup = it
-            statAdapter.notifyDataSetChanged()
+            statAdapter.notifyItemChanged(3)
         })
 
         getViewModel().professionStatGroup.observe(this, NotNullObserver {
             statAdapter.professionStatGroup = it
-            statAdapter.notifyDataSetChanged()
+            statAdapter.notifyItemChanged(4)
+        })
+
+        getViewModel().ageStatGroup.observe(this, NotNullObserver {
+            statAdapter.ageStatGroup = it
+            statAdapter.notifyItemChanged(5)
         })
 
 

@@ -9,6 +9,7 @@ import com.tonyecoleelection.android.ui.main.fragments.pvcstats.PVCAdminStatsFra
 import com.tonyecoleelection.android.ui.main.fragments.pvcstats.PVCAdminStatsViewModel
 import com.tonyecoleelection.android.utils.ViewModelFactory
 import com.tonyecoleelection.android.utils.mapper.PVCStatsMapper
+import com.tonyecoleelection.domain.usecase.admin.FetchPVCAgeStatsUseCase
 import com.tonyecoleelection.domain.usecase.admin.FetchPVCStatsUseCase
 import com.tonyecoleelection.domain.usecase.pvc.FetchPVCCountServerUseCase
 import dagger.Module
@@ -25,8 +26,9 @@ class PVCAdminStatsModule {
     @Provides
     fun providesVMFactory(fetchPVCStatsUseCase: FetchPVCStatsUseCase,
                           fetchPVCCountServerUseCase: FetchPVCCountServerUseCase,
+                          fetchPVCAgeStatsUseCase: FetchPVCAgeStatsUseCase,
                           userPVCStatsMapper: PVCStatsMapper): ViewModelFactory<PVCAdminStatsViewModel> {
-        return ViewModelFactory(lazyOf(PVCAdminStatsViewModel(fetchPVCStatsUseCase, fetchPVCCountServerUseCase, userPVCStatsMapper)))
+        return ViewModelFactory(lazyOf(PVCAdminStatsViewModel(fetchPVCStatsUseCase, fetchPVCCountServerUseCase, fetchPVCAgeStatsUseCase, userPVCStatsMapper)))
     }
 
     @FragmentScope

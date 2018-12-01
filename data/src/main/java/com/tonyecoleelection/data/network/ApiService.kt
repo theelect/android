@@ -5,6 +5,7 @@ import com.tonyecoleelection.data.model.LGAEntity
 import com.tonyecoleelection.data.model.PVCDataEntity
 import com.tonyecoleelection.data.model.StatItemEntity
 import com.tonyecoleelection.data.model.UserEntity
+import com.tonyecoleelection.data.network.reponses.AgeStats
 import com.tonyecoleelection.data.network.reponses.DataCountResponse
 import com.tonyecoleelection.data.network.reponses.GenericResponse
 import com.tonyecoleelection.data.network.reponses.VoterDataPagingResponse
@@ -31,6 +32,9 @@ interface ApiService {
 
     @GET("pvc-count")
     fun pvcCount(): Observable<DataCountResponse>
+
+    @GET("pvc/age_statistics")
+    fun pvcAgeStats(): Observable<AgeStats>
 
     @GET("pvc")
     fun getAllVerifiedPVCWithFilters(@QueryMap body: Map<String, @JvmSuppressWildcards Any>): Observable<VoterDataPagingResponse>

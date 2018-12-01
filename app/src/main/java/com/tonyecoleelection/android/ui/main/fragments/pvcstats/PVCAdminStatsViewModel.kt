@@ -7,6 +7,7 @@ import com.tonyecoleelection.android.utils.extensions.mutableLiveDataOf
 import com.tonyecoleelection.android.utils.mapper.PVCStatsMapper
 import com.tonyecoleelection.constants.Constants
 import com.tonyecoleelection.domain.base.Params
+import com.tonyecoleelection.domain.usecase.admin.FetchPVCAgeStatsUseCase
 import com.tonyecoleelection.domain.usecase.admin.FetchPVCStatsUseCase
 import com.tonyecoleelection.domain.usecase.pvc.FetchPVCCountServerUseCase
 import java.util.*
@@ -18,6 +19,7 @@ import java.util.*
 
 class PVCAdminStatsViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
                              var fetchPVCCountServerUseCase: FetchPVCCountServerUseCase,
+                             var fetchPVCAgeStatsUseCase: FetchPVCAgeStatsUseCase,
                              var userPVCStatsMapper: PVCStatsMapper) : BaseViewModel() {
 
     val totalStat = mutableLiveDataOf<StatItem>()
@@ -25,6 +27,7 @@ class PVCAdminStatsViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
     val wardStatGroup = mutableLiveDataOf<StatGroup>()
     val genderStatGroup = mutableLiveDataOf<StatGroup>()
     val professionStatGroup = mutableLiveDataOf<StatGroup>()
+    val ageStatGroup = mutableLiveDataOf<StatGroup>()
     val date = mutableLiveDataOf<String>()
 
     override fun setUp() {
@@ -97,6 +100,32 @@ class PVCAdminStatsViewModel(var fetchPVCStatsUseCase: FetchPVCStatsUseCase,
                     onProfessionStatsFetchFailed(it)
                 }))
 
+        addDisposable(fetchPVCAgeStatsUseCase.execute(Params.EMPTY)
+                .map {
+                    userPVCStatsMapper.mapFromList(it)
+                }
+                .doOnSubscribe {
+                    showLoading()
+                }
+                .subscribe({
+                    onAgeStatsFetchSuccess(it)
+                }, {
+                    onAgeStatsFetchFailed(it)
+                }))
+
+    }
+
+
+    private fun onAgeStatsFetchSuccess(list: MutableList<StatItem>) {
+        val statGroup = StatGroup(list, "Age", 5)
+        this.ageStatGroup.value = statGroup
+        hideLoading()
+    }
+
+    private fun onAgeStatsFetchFailed(exception: Throwable) {
+        exception.printStackTrace()
+        handleError(exception)
+        hideLoading()
     }
 
     private fun onLGAStatsFetchSuccess(list: MutableList<StatItem>) {

@@ -15,15 +15,26 @@ class SingleLayoutAdapter<T>(@LayoutRes private val resId: Int, var onItemClickL
 
     override fun setData(data: T) {
         if (data is List<*>) {
-          //  items = data as List<T>
+            //  items = data as List<T>
             val diffCallback = DiffUtilCallback(this.items, data)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
             data.forEach {
-                if(!items.contains(it)){
+                if (!items.contains(it)) {
                     items.add(it as T)
                 }
             }
             diffResult.dispatchUpdatesTo(this)
+        }
+    }
+
+    override fun reloadDataSet(data: T) {
+        if (data is List<*>) {
+            data.forEach {
+                if (!items.contains(it)) {
+                    items.add(it as T)
+                }
+            }
+            notifyDataSetChanged()
         }
     }
 
