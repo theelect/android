@@ -130,6 +130,15 @@ class BarChartViewHolder(var view: View, var binding: ViewDataBinding) : Recycle
             verticalAxis.position = XAxis.XAxisPosition.BOTTOM
             verticalAxis.setDrawGridLines(false)
             verticalAxis.setDrawGridLines(false)
+            view.stat_bar_chart.setDrawGridBackground(false)
+            view.stat_bar_chart.axisRight.isEnabled = false
+            view.stat_bar_chart.axisLeft.isEnabled = true
+            view.stat_bar_chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+            view.stat_bar_chart.xAxis.setDrawGridLines(false)
+            view.stat_bar_chart.axisLeft.setDrawGridLines(false)
+            view.stat_bar_chart.description.isEnabled = false
+            view.stat_bar_chart.legend.isEnabled = false
+            view.stat_bar_chart.animateX(1500)
             verticalAxis.granularity = 1f // only intervals of 1 day
             verticalAxis.labelCount = 7
             verticalAxis.valueFormatter = AgeGroupXAxisFormatter()
