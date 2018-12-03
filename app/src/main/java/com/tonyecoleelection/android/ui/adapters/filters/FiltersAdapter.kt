@@ -13,15 +13,11 @@ import com.tonyecoleelection.android.BR
 import com.tonyecoleelection.android.R
 import com.tonyecoleelection.android.model.locale.LGA
 import com.tonyecoleelection.android.model.locale.Ward
+import com.tonyecoleelection.android.utils.delayForASecond
 import com.tonyecoleelection.android.views.sectionedadapter.SectionedRecyclerViewAdapter
 import com.tonyecoleelection.android.views.sectionedadapter.SectionedViewHolder
 import com.tonyecoleelection.constants.Constants
 import com.tonyecoleelection.domain.base.Params
-
-
-/**
- *  @author Aidan Follestad (afollestad)
- */
 
 class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<SectionedViewHolder>() {
 
@@ -92,7 +88,13 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
             }
 
             radioButton.setOnCheckedChangeListener { compoundButton, b ->
+                val lastChecked = params.getInt(Constants.FILTER_CONSTANTS.LAST_CHECKED_POSITION, 0)
                 params.putString(Constants.FILTER_CONSTANTS.LGA, title.text.toString().toLowerCase())
+                params.putInt(Constants.FILTER_CONSTANTS.LAST_CHECKED_POSITION, relativePosition.relativePos())
+
+                delayForASecond {
+                    adapter.notifyDataSetChanged()
+                }
             }
         }
 

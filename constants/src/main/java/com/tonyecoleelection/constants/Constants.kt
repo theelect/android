@@ -69,6 +69,7 @@ interface Constants {
         const val WARD = "ward"
         const val PAGE_COUNT = 10
         const val CURRENT_PAGE = "page"
+        const val LAST_CHECKED_POSITION = "position"
 
         const val OCCUPATION = "profession"
     }

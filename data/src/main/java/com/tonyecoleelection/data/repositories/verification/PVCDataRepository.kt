@@ -17,7 +17,11 @@ class PVCDataRepository @Inject constructor(var apiService: ApiService,
     }
 
     override fun fetchAllOccupationsFromServer(hashMap: Map<String, Any>): Observable<List<String>> {
-        return apiService.getAllOccupations(hashMap)
+        return apiService.getAllOccupations(hashMap).map {
+            it.filter {
+                !it.isNullOrBlank()
+            }
+        }
     }
 
     override fun savePVCData(pvcDataEntity: PVCDataEntity) {
@@ -31,8 +35,6 @@ class PVCDataRepository @Inject constructor(var apiService: ApiService,
     override fun fetchAllPVCDataWithFiltersFromServer(hashMap: Map<String, Any>): Observable<VoterDataPagingResponse> {
         return apiService.getAllVerifiedPVCWithFilters(hashMap)
     }
-
-
 
 
 }
