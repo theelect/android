@@ -8,6 +8,9 @@ import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.RadioButton
 import com.tonyecoleelection.android.R
@@ -55,7 +58,7 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+setHasOptionsMenu(true)
 
         initToolbar(toolbar, "Filters")
 
@@ -95,14 +98,30 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
             initRadioButtons(it)
         })
 
-        clear_filter_button.setOnClickListener {
-            getViewModel().clearFilters()
-            setResult()
-        }
 
-        filter_button.setOnClickListener {
-            setResult()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            R.id.apply_filter -> {
+                setResult()
+                // do stuff
+                return true
+            }
+            R.id.clear_filters -> {
+                getViewModel().clearFilters()
+                setResult()
+                // do stuff
+                return true
+            }
         }
+        return false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.pvc_filters, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun setResult() {

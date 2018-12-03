@@ -22,6 +22,7 @@ import com.tonyecoleelection.domain.base.Params
 class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<SectionedViewHolder>() {
 
     val list: MutableList<LGA> = mutableListOf()
+    var lastCheckedVH: LGAHeaderVH? = null
 
     fun addData(list: List<LGA>) {
         this.list.addAll(list)
@@ -88,12 +89,11 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
             }
 
             radioButton.setOnCheckedChangeListener { compoundButton, b ->
-                val lastChecked = params.getInt(Constants.FILTER_CONSTANTS.LAST_CHECKED_POSITION, 0)
-                params.putString(Constants.FILTER_CONSTANTS.LGA, title.text.toString().toLowerCase())
-                params.putInt(Constants.FILTER_CONSTANTS.LAST_CHECKED_POSITION, relativePosition.relativePos())
-
-                delayForASecond {
-                    adapter.notifyDataSetChanged()
+                if (b) {
+                    adapter?.lastCheckedVH?.radioButton?.isChecked = false
+                    params.putString(Constants.FILTER_CONSTANTS.LGA, title.text.toString().toLowerCase())
+                    params.putInt(Constants.FILTER_CONSTANTS.LAST_CHECKED_POSITION, relativePosition.relativePos())
+                    adapter?.lastCheckedVH = this
                 }
             }
         }

@@ -66,30 +66,6 @@
 
         </ViewFlipper>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/clear_filter_button"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_gravity="start|bottom"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/white"
-            android:text="CLEAR FILTERS" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/filter_button"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
-            android:layout_gravity="end|bottom"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/white"
-            android:text="FILTER" />
-
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>
