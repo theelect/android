@@ -2,13 +2,19 @@ package com.tonyecoleelection.android.ui.base
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
+import com.onurciner.toastox.ToastOX
 import com.tonyecoleelection.android.ui.main.MainActivity
+import com.tonyecoleelection.android.utils.common.NotNullObserver
 import com.tonyecoleelection.android.utils.hideLoading
 import com.tonyecoleelection.android.utils.hideViewLoading
 import com.tonyecoleelection.android.utils.showLoading
@@ -58,16 +64,28 @@ abstract class BaseVMFragment<V : BaseViewModel> : Fragment() {
             }
         })
 
-        viewModel.snackbarMessage.observe(this, Observer {
-            it.let {
-                Toast.makeText(context, it!!, Toast.LENGTH_LONG).show()
-            }
+        viewModel.snackbarErrorStringMessage.observe(this, NotNullObserver {
+
+            ToastOX.error(context, it)
+
         })
 
-        viewModel.snackbarStringMessage.observe(this, Observer {
-            it.let {
-                Toast.makeText(context, it!!.replace("java.lang.Throwable:", ""), Toast.LENGTH_LONG).show()
-            }
+        viewModel.snackbarErrorIntMessage.observe(this, NotNullObserver {
+
+            ToastOX.error(context, resources.getString(it))
+
+        })
+
+        viewModel.snackbarMessage.observe(this, NotNullObserver {
+
+            ToastOX.ok(context, resources.getString(it))
+
+        })
+
+        viewModel.snackbarStringMessage.observe(this, NotNullObserver {
+
+            ToastOX.ok(context, it.replace("java.lang.Throwable:", ""))
+
         })
 
         viewModel.dialogMessage.observe(this, Observer {

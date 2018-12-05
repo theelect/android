@@ -30,6 +30,9 @@ open class BaseViewModel : ViewModel(), Observable {
 
     val snackbarMessage = SingleLiveEvent<Int>()
     val snackbarStringMessage = SingleLiveEvent<String>()
+    val snackbarErrorStringMessage = SingleLiveEvent<String>()
+    val snackbarErrorIntMessage = SingleLiveEvent<Int>()
+
     val dialogMessage = SingleLiveEvent<String>()
     val isLoading = SingleLiveEvent<NetworkState>()
 
@@ -76,22 +79,17 @@ open class BaseViewModel : ViewModel(), Observable {
     }
 
     fun displayError(string: String?) {
-        snackbarStringMessage.value = string
+        snackbarErrorStringMessage.value = string
     }
 
     fun displayError(@StringRes res: Int?) {
-        snackbarMessage.value = res
+        snackbarErrorIntMessage.value = res
     }
 
     open fun setUp() {
 
     }
 
-
-    /***
-     * this is dirty as FUCK!!!
-     * buttttttt then sha ... time dey go and I need to handle these olodo errors
-     * **/
     open fun handleError(exception: Throwable) {
         if (exception is HttpException) {
             val responseBody = exception.response().errorBody()

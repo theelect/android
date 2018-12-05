@@ -56,7 +56,7 @@ class SingleLayoutAdapter<T>(@LayoutRes private val resId: Int, var onItemClickL
 
     override fun onBindViewHolder(holder: ViewHolder<T>, position: Int) = holder.bind(items[position])
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder<T>(parent.inflate(), onItemClickListener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflate(), onItemClickListener)
 
     private fun ViewGroup.inflate() = DataBindingUtil.inflate<ViewDataBinding>(inflater, resId, this, false)
 

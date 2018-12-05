@@ -95,6 +95,7 @@ dependencies {
         transitive = true
     }
 
+    compile 'com.github.10uroi:ToastOX:1.0.1'
     kapt appDependencies.daggerCompiler
     kapt appDependencies.daggerAndroidCompiler
    // annotationProcessor appDependencies.daggerAndroidCompiler

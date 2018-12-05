@@ -21,9 +21,9 @@ import android.support.design.widget.Snackbar
 import com.tonyecoleelection.android.utils.common.NotNullObserver
 import android.view.Gravity
 import android.R.attr.gravity
+import android.support.design.widget.CoordinatorLayout
 import android.widget.FrameLayout
-
-
+import com.onurciner.toastox.ToastOX
 
 
 /**
@@ -81,18 +81,27 @@ abstract class BaseMVVMFragment<V : BaseViewModel> : Fragment() {
         })
 
         viewModel.snackbarMessage.observe(this, NotNullObserver {
-            val snackbar = Snackbar.make(view, it, Snackbar.LENGTH_LONG)
-            val view = snackbar.view
-            val params = view.layoutParams as FrameLayout.LayoutParams
-            params.gravity = Gravity.TOP
-            view.setLayoutParams(params)
-            snackbar.show()
+
+            ToastOX.ok(context, resources.getString(it))
+
         })
 
-        viewModel.snackbarStringMessage.observe(this, Observer {
-            it.let {
-                Toast.makeText(context, it!!.replace("java.lang.Throwable:", ""), Toast.LENGTH_LONG).show()
-            }
+        viewModel.snackbarErrorStringMessage.observe(this, NotNullObserver {
+
+            ToastOX.error(context, it)
+
+        })
+
+        viewModel.snackbarErrorIntMessage.observe(this, NotNullObserver {
+
+            ToastOX.error(context, resources.getString(it))
+
+        })
+
+        viewModel.snackbarStringMessage.observe(this, NotNullObserver {
+
+            ToastOX.ok(context, it.replace("java.lang.Throwable:", ""))
+
         })
 
         viewModel.dialogMessage.observe(this, Observer {
