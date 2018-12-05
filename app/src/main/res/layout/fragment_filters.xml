@@ -32,6 +32,7 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/white"
                 app:tabGravity="fill"
                 app:tabMode="fixed" />
 
@@ -62,6 +63,49 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical">
 
+            </RadioGroup>
+
+
+            <RadioGroup
+                android:id="@+id/age_groups"
+                android:layout_width="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/radio_18_30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18-30"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radio_31_40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="31-40"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radio_41_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="41-50"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radio_51_60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="51-60"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radio_61_100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="61-100"
+                    android:checked="true" />
             </RadioGroup>
 
         </ViewFlipper>

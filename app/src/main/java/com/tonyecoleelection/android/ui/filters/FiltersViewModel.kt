@@ -101,4 +101,10 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
         filterParams.putString(Constants.FILTER_CONSTANTS.OCCUPATION, "")
     }
 
+    fun filterByAgeGroup(text: String) {
+        val ageGroupArray = text.split("-".toRegex())
+        filterParams.putString(Constants.FILTER_CONSTANTS.AGE_MIN, ageGroupArray[0])
+        filterParams.putString(Constants.FILTER_CONSTANTS.AGE_MAX, ageGroupArray[1])
+    }
+
 }

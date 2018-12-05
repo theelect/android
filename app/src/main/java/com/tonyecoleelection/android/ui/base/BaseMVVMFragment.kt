@@ -17,6 +17,13 @@ import android.support.v7.widget.Toolbar
 import com.tonyecoleelection.android.BR
 import com.tonyecoleelection.android.R
 import com.tonyecoleelection.android.utils.*
+import android.support.design.widget.Snackbar
+import com.tonyecoleelection.android.utils.common.NotNullObserver
+import android.view.Gravity
+import android.R.attr.gravity
+import android.widget.FrameLayout
+
+
 
 
 /**
@@ -72,10 +79,13 @@ abstract class BaseMVVMFragment<V : BaseViewModel> : Fragment() {
             }
         })
 
-        viewModel.snackbarMessage.observe(this, Observer {
-            it.let {
-                Toast.makeText(context, it!!, Toast.LENGTH_LONG).show()
-            }
+        viewModel.snackbarMessage.observe(this, NotNullObserver {
+            val snackbar = Snackbar.make(view, it, Snackbar.LENGTH_LONG)
+            val view = snackbar.view
+            val params = view.layoutParams as FrameLayout.LayoutParams
+            params.gravity = Gravity.TOP
+            view.setLayoutParams(params)
+            snackbar.show()
         })
 
         viewModel.snackbarStringMessage.observe(this, Observer {

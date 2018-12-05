@@ -59,14 +59,15 @@ interface Constants {
             val WARD = "ward"
             val LGA = "lga"
             val VIN = "vin"
-
-
         }
     }
 
     object FILTER_CONSTANTS {
         const val LGA = "lga"
         const val WARD = "ward"
+        const val AGE_MIN = "age_min"
+        const val AGE_MAX = "age_max"
+
         const val PAGE_COUNT = 10
         const val CURRENT_PAGE = "page"
         const val LAST_CHECKED_POSITION = "position"

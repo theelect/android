@@ -4,6 +4,7 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -101,11 +102,15 @@ class BarChartViewHolder(var view: View, var binding: ViewDataBinding) : Recycle
             var set1 = BarDataSet(values, "Data Set")
 
             val colors = mutableListOf<Int>()
-            for (i in 0 until statGroup.items.size) {
-                val rnd = Random()
-                val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-                colors.add(color)
-            }
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_amber_400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_blue_400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_green_400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_pink_400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_purple_400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_bluegrey_400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_cyan_400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_indigo_A400))
+            colors.add(ContextCompat.getColor(view.context, R.color.mds_lightgreen_400))
 
 
             set1.colors = colors
@@ -220,7 +225,6 @@ open class PieChartStatViewHolder(var view: View, var binding: ViewDataBinding) 
             }
 
             for (i in 0 until statGroup.items.size) {
-
                 entries.add(PieEntry(((statGroup.items[i].count.toFloat() / range) * 100), statGroup.items[i].nameCapitalized))
             }
 

@@ -58,7 +58,7 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
         initToolbar(toolbar, "Filters")
 
@@ -68,7 +68,8 @@ setHasOptionsMenu(true)
         filtersAdapter.shouldShowFooters(false)
         expandable_layout.adapter = filtersAdapter
 
-        val titles = listOf("LGA", "Profession")
+        val titles = listOf("LGA", "Profession", "Age")
+
         for (i in 0 until titles.size) {
             tabs.addTab(tabs.newTab().setText(titles[i]))
         }
@@ -97,6 +98,13 @@ setHasOptionsMenu(true)
         getViewModel().occupations.observe(this, NotNullObserver {
             initRadioButtons(it)
         })
+
+        age_groups.setOnCheckedChangeListener { radioGroup, i ->
+            val checkedRadioButtonId = age_groups.checkedRadioButtonId
+            val radioBtn = age_groups.findViewById(checkedRadioButtonId) as RadioButton
+
+            getViewModel().filterByAgeGroup(radioBtn.text.toString())
+        }
 
 
     }
