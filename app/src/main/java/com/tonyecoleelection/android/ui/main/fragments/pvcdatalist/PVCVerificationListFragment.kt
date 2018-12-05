@@ -11,6 +11,9 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_pvc_verifcation_list.*
 import javax.inject.Inject
 
+/**
+ * Verifies PVC data by collecting data in a form and sends it to a server online or to SMS number
+ */
 
 class PVCVerificationListFragment : BaseMVVMFragment<PVCVerificationListViewModel>() {
 

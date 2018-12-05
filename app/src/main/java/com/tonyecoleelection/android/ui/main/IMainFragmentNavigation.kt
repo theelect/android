@@ -45,6 +45,11 @@ interface IMainFragmentNavigation {
     fun syncDrawerState()
 }
 
+/**
+ * Controls navigation within the main fragments of the app
+ * All methods do exactly what they say and any extra methods should first be added to IMainFragmentNavigation
+ * **/
+
 class MainFragmentNavigation(private var activity: MainActivity,
                              private var bundle: Bundle) : IMainFragmentNavigation,
         FragNavController.TransactionListener,

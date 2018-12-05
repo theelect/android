@@ -16,6 +16,10 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_pvc_admin_dash.*
 import javax.inject.Inject
 
+/**
+ * Fetches PVC statistics from a database online and renders it in a list using databinding library
+ */
+
 
 class PVCAdminStatsFragment : BaseMVVMFragment<PVCAdminStatsViewModel>(), StatAdapter.MoreBtnClickListener {
 

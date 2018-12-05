@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 
 /**
- * Created by aliumujib on.
+ * Renders all the framents that handle authentication
  */
 
 open class AuthActivity : AppCompatActivity(), HasSupportFragmentInjector {

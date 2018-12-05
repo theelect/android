@@ -27,6 +27,15 @@ import kotlinx.android.synthetic.main.item_stat_group_count.view.*
 import kotlinx.android.synthetic.main.item_stat_pie_chart.view.*
 import java.util.*
 
+
+
+/**
+ * Renders data in charts, lists and graphs
+ * Depends heavily on mikephils MPANdroidChart
+ */
+
+
+
 class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var totalStat: StatItem? = null
