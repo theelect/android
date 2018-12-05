@@ -9,6 +9,15 @@ This project aggregates data from field agents.
 
  - Data Layer: The data layer utilizes ROOM and retrofit with Rxjava to make asyncronous network calls and persist data in the phone storage. Data fetched here feeds directly into the Usecases and the UI.
 
+ ## Libraries Used
+ - RxJava2
+ - Dagger 2 with Android Support Injectors
+ - MPAndroid Chart
+ - Retrofit
+ - ROOM
+ - Retrofit
+ - GSON
+
 ## How to build
 
 - [ ] Clone this repository into a folder of your project's name `git clone https://github.com/theelect/android.git MY_PROJECT`. Or if you're copying the folder, don't forget hidden files!
