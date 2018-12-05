@@ -13,7 +13,7 @@
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:id="@+id/swipe_to_refresh_stats"
+        android:id="@+id/swipe_to_refresh"
         android:layout_height="wrap_content">
 
         <android.support.constraint.ConstraintLayout

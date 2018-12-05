@@ -45,7 +45,7 @@ class PVCVerificationListFragment : BaseMVVMFragment<PVCVerificationListViewMode
 
         listings_rv.adapter = singleLayoutAdapter
 
-        swipe_to_refresh_stats.setOnRefreshListener {
+        swipe_to_refresh.setOnRefreshListener {
             getViewModel().setUp()
         }
 
@@ -53,12 +53,12 @@ class PVCVerificationListFragment : BaseMVVMFragment<PVCVerificationListViewMode
 
     override fun showLoading() {
         super.showLoading()
-        swipe_to_refresh_stats.isRefreshing = true
+        swipe_to_refresh.isRefreshing = true
     }
 
     override fun hideLoading() {
         super.hideLoading()
-        swipe_to_refresh_stats.isRefreshing = false
+        swipe_to_refresh.isRefreshing = false
     }
 
 

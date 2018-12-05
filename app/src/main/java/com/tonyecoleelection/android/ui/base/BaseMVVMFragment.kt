@@ -76,6 +76,7 @@ abstract class BaseMVVMFragment<V : BaseViewModel> : Fragment() {
                 activity?.showLoading()
             } else {
                 activity?.hideLoading()
+                hideLoading()
             }
         })
 

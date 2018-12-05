@@ -84,8 +84,20 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
             }
         })
 
+        swipe_to_refresh.setOnRefreshListener {
+            getViewModel().resetPage()
+            adapter.clearData()
+            getViewModel().runQuery()
+        }
 
     }
+
+
+    override fun hideLoading() {
+        super.hideLoading()
+        swipe_to_refresh.isRefreshing = false
+    }
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

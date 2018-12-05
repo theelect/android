@@ -34,6 +34,10 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     }
 
 
+    fun resetPage(){
+        params.putInt(Constants.FILTER_CONSTANTS.CURRENT_PAGE, 1)
+    }
+
     fun runQuery() {
         addDisposable(fetchPVCDataFromCacheUseCase.execute(params)
                 .doOnSubscribe {

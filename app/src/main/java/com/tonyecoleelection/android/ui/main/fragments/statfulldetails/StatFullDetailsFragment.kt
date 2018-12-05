@@ -59,6 +59,17 @@ class StatFullDetailsFragment : BaseMVVMFragment<PVCStatsFullViewModel>(), Binda
         stat_rv.adapter = adapter
         stat_rv.addItemDecoration(SpacingItemDecoration(context!!.dpToPx(16), context!!.dpToPx(16), false))
 
+
+        swipe_to_refresh.setOnRefreshListener {
+            getViewModel().setMode(mode)
+        }
+
+    }
+
+
+    override fun hideLoading() {
+        super.hideLoading()
+        swipe_to_refresh.isRefreshing = false
     }
 
 
