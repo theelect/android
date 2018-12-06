@@ -1,5 +1,6 @@
 package com.tonyecoleelection.android.ui.filters
 
+import android.text.TextUtils
 import com.tonyecoleelection.android.model.locale.LGA
 import com.tonyecoleelection.android.ui.base.BaseViewModel
 import com.tonyecoleelection.android.utils.extensions.mutableLiveDataOf
@@ -63,12 +64,12 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
     }
 
 
-    fun setSelectedLGA(lga: String) {
-        filterParams.putString(Constants.FILTER_CONSTANTS.LGA, lga.toLowerCase())
+    fun setSelectedLGAs(lga: List<String>) {
+        filterParams.putString(Constants.FILTER_CONSTANTS.LGA, TextUtils.join(",", lga))
     }
 
-    fun setSelectedWard(ward: String) {
-        filterParams.putString(Constants.FILTER_CONSTANTS.WARD, ward.toLowerCase())
+    fun setSelectedWards(ward: List<String>) {
+        filterParams.putString(Constants.FILTER_CONSTANTS.WARD, TextUtils.join(",", ward))
     }
 
     fun setSelectedOccupation(occupation: String) {

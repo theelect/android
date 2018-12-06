@@ -13,16 +13,53 @@ import com.tonyecoleelection.android.BR
 import com.tonyecoleelection.android.R
 import com.tonyecoleelection.android.model.locale.LGA
 import com.tonyecoleelection.android.model.locale.Ward
-import com.tonyecoleelection.android.utils.delayForASecond
 import com.tonyecoleelection.android.views.sectionedadapter.SectionedRecyclerViewAdapter
 import com.tonyecoleelection.android.views.sectionedadapter.SectionedViewHolder
-import com.tonyecoleelection.constants.Constants
 import com.tonyecoleelection.domain.base.Params
 
 class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<SectionedViewHolder>() {
 
     val list: MutableList<LGA> = mutableListOf()
-    var lastCheckedVH: LGAHeaderVH? = null
+    private val checkedLGANameList = mutableListOf<String>()
+    private val checkedWardNameList = mutableListOf<String>()
+
+    fun getCheckedLGAs(): MutableList<String> {
+        return checkedLGANameList
+    }
+
+    fun getCheckedWards(): MutableList<String> {
+        return checkedWardNameList
+    }
+
+    fun addVHToCheckedLGAList(checkedLGAName: String) {
+        if (!checkedLGANameList.contains(checkedLGAName)) {
+            checkedLGANameList.add(checkedLGAName)
+        }
+    }
+
+    fun removeVHFromCheckedLGAList(checkedLGAName: String) {
+        checkedLGANameList.remove(checkedLGAName)
+    }
+
+    fun addVHToCheckedWardList(checkedWardName: String) {
+        if (!checkedWardNameList.contains(checkedWardName)) {
+            checkedWardNameList.add(checkedWardName)
+        }
+    }
+
+    fun removeVHFromCheckedWardList(checkedWardName: String) {
+        checkedWardNameList.remove(checkedWardName)
+    }
+
+    private fun getIsLGASelected(lgaName: String): Boolean {
+        return checkedLGANameList.contains(lgaName)
+    }
+
+    private fun getIsWardSelected(wardName: String): Boolean {
+        return checkedWardNameList.contains(wardName)
+    }
+
+    //var lastCheckedVH: LGAHeaderVH? = null
 
     fun addData(list: List<LGA>) {
         this.list.addAll(list)
@@ -39,7 +76,7 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
 
     override fun onBindHeaderViewHolder(holder: SectionedViewHolder, section: Int, expanded: Boolean) {
         if (holder is LGAHeaderVH) {
-            holder.bind(list[section])
+            holder.bind(list[section], getIsLGASelected(list[section].name))
             holder.caret.setImageResource(if (expanded) R.drawable.arrow_up else R.drawable.arrow_down)
         }
     }
@@ -49,7 +86,7 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
 
     override fun onBindViewHolder(holder: SectionedViewHolder, section: Int, relativePosition: Int, absolutePosition: Int) {
         if (holder is WardItemVH) {
-            holder.bind(list[section].wards[relativePosition] as Ward)
+            holder.bind(list[section].wards[relativePosition] as Ward, getIsWardSelected((list[section].wards[relativePosition] as Ward).name))
         }
     }
 
@@ -75,6 +112,7 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
         val caret: ImageView = itemView.findViewById(R.id.caret)
         val radioButton: RadioButton = itemView.findViewById(R.id.radioButton)
         val title: TextView = itemView.findViewById(R.id.title)
+        var lga: LGA? = null
 
         init {
             itemView.setOnClickListener {
@@ -88,20 +126,22 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
                 }
             }
 
-            radioButton.setOnCheckedChangeListener { compoundButton, b ->
-                if (b) {
-                    adapter?.lastCheckedVH?.radioButton?.isChecked = false
-                    params.putString(Constants.FILTER_CONSTANTS.LGA, title.text.toString().toLowerCase())
-                    params.putInt(Constants.FILTER_CONSTANTS.LAST_CHECKED_POSITION, relativePosition.relativePos())
-                    adapter?.lastCheckedVH = this
-                }
-            }
+
         }
 
-        fun bind(lga: LGA) {
-            val isChecked = (params.getData(Constants.FILTER_CONSTANTS.LGA, null) == lga.name)
+        fun bind(lga: LGA, isChecked: Boolean) {
+            this.lga = lga
             binding.setVariable(BR.item, lga)
             binding.setVariable(BR.checked, isChecked)
+
+            radioButton.setOnCheckedChangeListener { compoundButton, b ->
+                if (b) {
+                    adapter.addVHToCheckedLGAList(lga.name)
+                } else {
+                    adapter.removeVHFromCheckedLGAList(lga.name)
+                }
+            }
+
             binding.executePendingBindings()
         }
 
@@ -120,18 +160,26 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
 
         val checkbox: CheckBox = itemView.findViewById(R.id.checkbox)
         val title: TextView = itemView.findViewById(R.id.title)
+        var ward: Ward? = null
 
         init {
 
-            checkbox.setOnCheckedChangeListener { compoundButton, b ->
-                params.putString(Constants.FILTER_CONSTANTS.WARD, title.text.toString().toLowerCase().toString())
-            }
+
         }
 
-        fun bind(ward: Ward) {
-            val isChecked = (params.getData(Constants.FILTER_CONSTANTS.WARD, null) == ward.name)
+        fun bind(ward: Ward, isChecked: Boolean) {
+            this.ward = ward
             binding.setVariable(BR.item, ward)
             binding.setVariable(BR.checked, isChecked)
+
+            checkbox.setOnCheckedChangeListener { compoundButton, b ->
+                if (b) {
+                    adapter.addVHToCheckedWardList(ward.name)
+                } else {
+                    adapter.removeVHFromCheckedWardList(ward!!.name)
+                }
+            }
+
             binding.executePendingBindings()
         }
 
