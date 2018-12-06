@@ -58,7 +58,7 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(false)
 
         initToolbar(toolbar, "Filters")
 
@@ -106,6 +106,16 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
             getViewModel().filterByAgeGroup(radioBtn.text.toString())
         }
 
+        clear_filters_button.setOnClickListener {
+            filtersAdapter.clearSelection()
+            getViewModel().clearFilters()
+            setResult()
+        }
+
+
+        apply_filters_button.setOnClickListener {
+            setResult()
+        }
 
     }
 

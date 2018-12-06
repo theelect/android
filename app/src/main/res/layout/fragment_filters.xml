@@ -11,105 +11,141 @@
 
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/white"
-                app:tabGravity="fill"
-                app:tabMode="fixed" />
-
-        </android.support.design.widget.AppBarLayout>
-
-        <ViewFlipper
-            android:id="@+id/view_flipper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/expandable_layout"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:childLayout="@layout/layout_child"
-                app:parentLayout="@layout/layout_parent" />
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <RadioGroup
-                android:id="@+id/professions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-            </RadioGroup>
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/white"
+                    app:tabMode="fixed" />
 
+            </android.support.design.widget.AppBarLayout>
 
-            <RadioGroup
-                android:id="@+id/age_groups"
-                android:layout_width="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_height="wrap_content" >
+            <ViewFlipper
+                android:id="@+id/view_flipper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <RadioButton
-                    android:id="@+id/radio_18_30"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/expandable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:childLayout="@layout/layout_child"
+                    app:parentLayout="@layout/layout_parent" />
+
+                <RadioGroup
+                    android:id="@+id/professions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="18-30"
-                    android:checked="true" />
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radio_31_40"
+                </RadioGroup>
+
+
+                <RadioGroup
+                    android:id="@+id/age_groups"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="31-40"
-                    android:checked="true" />
+                    android:layout_margin="16dp">
 
-                <RadioButton
-                    android:id="@+id/radio_41_50"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="41-50"
-                    android:checked="true" />
+                    <RadioButton
+                        android:id="@+id/radio_18_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="18-30" />
 
-                <RadioButton
-                    android:id="@+id/radio_51_60"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="51-60"
-                    android:checked="true" />
+                    <RadioButton
+                        android:id="@+id/radio_31_40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="31-40" />
 
-                <RadioButton
-                    android:id="@+id/radio_61_100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="61-100"
-                    android:checked="true" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radio_41_50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="41-50" />
 
-        </ViewFlipper>
+                    <RadioButton
+                        android:id="@+id/radio_51_60"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="51-60" />
+
+                    <RadioButton
+                        android:id="@+id/radio_61_100"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="61-100" />
+                </RadioGroup>
+
+            </ViewFlipper>
 
 
-    </android.support.design.widget.CoordinatorLayout>
+        </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/clear_filters_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:minWidth="120dp"
+            android:text="CLEAR FILTERS"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/apply_filters_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:minWidth="120dp"
+            android:text="APPLY FILTERS"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

@@ -17,6 +17,7 @@ import com.tonyecoleelection.android.model.admin.StatItem
 import com.tonyecoleelection.android.ui.adapters.base.SingleLayoutAdapter
 import com.tonyecoleelection.android.views.decorators.DividerItemDecoration
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.PercentFormatter
@@ -220,6 +221,7 @@ open class PieChartStatViewHolder(var view: View, var binding: ViewDataBinding) 
     open fun bind(statGroup: StatGroup?) {
         view.stat_pie_chart.isDrawHoleEnabled = false
         view.stat_pie_chart.animateY(1400, Easing.EasingOption.EaseInOutQuad)
+        view.stat_pie_chart.legend.orientation = Legend.LegendOrientation.VERTICAL
 
         val entries = ArrayList<PieEntry>()
 
