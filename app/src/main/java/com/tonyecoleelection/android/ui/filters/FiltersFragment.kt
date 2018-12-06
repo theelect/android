@@ -133,6 +133,9 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
     }
 
     private fun setResult() {
+        getViewModel().setSelectedLGAs(filtersAdapter.getCheckedLGAs())
+        getViewModel().setSelectedWards(filtersAdapter.getCheckedWards())
+
         val data = Intent()
         data.putExtra(FILTER_TASK_DATA, getViewModel().getParams().getParameters())
         activity?.setResult(RESULT_OK, data)

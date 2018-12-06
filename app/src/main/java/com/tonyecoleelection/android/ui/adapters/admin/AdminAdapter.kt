@@ -35,7 +35,6 @@ import java.util.*
  */
 
 
-
 class StatAdapter(val context: Context, var moreBtnClickListener: MoreBtnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var totalStat: StatItem? = null
