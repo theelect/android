@@ -222,6 +222,8 @@ open class PieChartStatViewHolder(var view: View, var binding: ViewDataBinding) 
         view.stat_pie_chart.isDrawHoleEnabled = false
         view.stat_pie_chart.animateY(1400, Easing.EasingOption.EaseInOutQuad)
         view.stat_pie_chart.legend.orientation = Legend.LegendOrientation.VERTICAL
+        view.stat_pie_chart.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+
 
         val entries = ArrayList<PieEntry>()
 
