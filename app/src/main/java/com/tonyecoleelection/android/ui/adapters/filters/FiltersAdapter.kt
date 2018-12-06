@@ -17,11 +17,12 @@ import com.tonyecoleelection.android.views.sectionedadapter.SectionedRecyclerVie
 import com.tonyecoleelection.android.views.sectionedadapter.SectionedViewHolder
 import com.tonyecoleelection.domain.base.Params
 
-class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<SectionedViewHolder>() {
+class FiltersAdapter(val params: Params,
+                     val checkedLGANameList: MutableList<String>,
+                     val checkedWardNameList: MutableList<String>) : SectionedRecyclerViewAdapter<SectionedViewHolder>() {
 
     val list: MutableList<LGA> = mutableListOf()
-    private val checkedLGANameList = mutableListOf<String>()
-    private val checkedWardNameList = mutableListOf<String>()
+
 
     fun getCheckedLGAs(): MutableList<String> {
         return checkedLGANameList
@@ -107,10 +108,15 @@ class FiltersAdapter(val params: Params) : SectionedRecyclerViewAdapter<Sectione
 
     }
 
+    fun clearSelection() {
+        checkedLGANameList.clear()
+        checkedWardNameList.clear()
+    }
+
     class LGAHeaderVH(itemView: View, val adapter: FiltersAdapter, val binding: ViewDataBinding, val params: Params) : SectionedViewHolder(itemView) {
 
         val caret: ImageView = itemView.findViewById(R.id.caret)
-        val radioButton: RadioButton = itemView.findViewById(R.id.radioButton)
+        val radioButton: CheckBox = itemView.findViewById(R.id.radioButton)
         val title: TextView = itemView.findViewById(R.id.title)
         var lga: LGA? = null
 

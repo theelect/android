@@ -118,6 +118,7 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
                 return true
             }
             R.id.clear_filters -> {
+                filtersAdapter.clearSelection()
                 getViewModel().clearFilters()
                 setResult()
                 // do stuff

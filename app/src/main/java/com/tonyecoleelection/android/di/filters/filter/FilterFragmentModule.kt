@@ -2,6 +2,7 @@ package com.tonyecoleelection.android.di.filters.filter
 
 
 import android.arch.lifecycle.ViewModelProviders
+import com.tonyecoleelection.android.di.DIConstants
 import com.tonyecoleelection.android.di.scopes.FragmentScope
 import com.tonyecoleelection.android.ui.adapters.filters.FiltersAdapter
 import com.tonyecoleelection.android.ui.filters.FiltersFragment
@@ -13,6 +14,7 @@ import com.tonyecoleelection.domain.usecase.main.FetchAllOccupationsFromServerUs
 import com.tonyecoleelection.domain.usecase.main.FetchLGADataUseCase
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 /**
  * Created by aliumujib on 14/05/2018.
@@ -44,8 +46,10 @@ class FilterFragmentModule {
 
     @FragmentScope
     @Provides
-    fun providesFiltersAdapter(params: Params): FiltersAdapter {
-        return FiltersAdapter(params)
+    fun providesFiltersAdapter(params: Params,
+                               @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_LGAS_LIST) selectedLGAs: MutableList<String>,
+                               @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_WARDS_LIST) selectedWards: MutableList<String>): FiltersAdapter {
+        return FiltersAdapter(params, selectedLGAs, selectedWards)
     }
 
 

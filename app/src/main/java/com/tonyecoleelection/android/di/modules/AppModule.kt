@@ -14,6 +14,8 @@ import com.tonyecoleelection.android.di.scopes.ApplicationScope
 import com.tonyecoleelection.android.utils.IRestartHelper
 import com.tonyecoleelection.android.utils.RestartHelper
 import com.squareup.picasso.Picasso
+import com.tonyecoleelection.android.di.DIConstants
+import com.tonyecoleelection.constants.Constants
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -80,6 +82,22 @@ class AppModule {
     @Provides
     fun providesRestartHelper(restartHelper: RestartHelper): IRestartHelper {
         return restartHelper
+    }
+
+
+
+    @ApplicationScope
+    @Provides
+    @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_WARDS_LIST)
+    fun providesSelectedWardList(): MutableList<String> {
+        return mutableListOf()
+    }
+
+    @ApplicationScope
+    @Provides
+    @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_LGAS_LIST)
+    fun providesSelectedLGAList(): MutableList<String> {
+        return mutableListOf()
     }
 
 }
