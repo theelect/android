@@ -16,9 +16,11 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/clear_filters_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -64,62 +66,34 @@
                     app:childLayout="@layout/layout_child"
                     app:parentLayout="@layout/layout_parent" />
 
-                <RadioGroup
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/professions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical">
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    android:orientation="vertical"/>
 
-                </RadioGroup>
-
-
-                <RadioGroup
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/age_groups"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp">
+                />
 
-                    <RadioButton
-                        android:id="@+id/radio_18_30"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="18-30" />
-
-                    <RadioButton
-                        android:id="@+id/radio_31_40"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="31-40" />
-
-                    <RadioButton
-                        android:id="@+id/radio_41_50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="41-50" />
-
-                    <RadioButton
-                        android:id="@+id/radio_51_60"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="51-60" />
-
-                    <RadioButton
-                        android:id="@+id/radio_61_100"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="61-100" />
-                </RadioGroup>
 
             </ViewFlipper>
 
 
         </android.support.design.widget.CoordinatorLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/clear_filters_button"

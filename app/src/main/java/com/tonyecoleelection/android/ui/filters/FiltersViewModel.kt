@@ -22,6 +22,7 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
 
     val lgas = mutableLiveDataOf<List<LGA>>()
     val occupations = mutableLiveDataOf<List<String>>()
+    var ageGroups = mutableLiveDataOf<List<String>>()
 
     override fun setUp() {
         super.setUp()
@@ -52,15 +53,20 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
                     hideLoading()
                 }
                 .subscribe({
-                    val formattedOccupations = it.map {
+                   val temp = it.toMutableList()
+                    temp.add(0,Constants.FILTER_CONSTANTS.ALL)
+
+                    val formattedOccupations = temp.map {
                         it.capitalize()
                     }
+
                     occupations.value = formattedOccupations
                 }, {
                     handleError(it)
                     it.printStackTrace()
                 }))
 
+        ageGroups.value = mutableListOf(Constants.FILTER_CONSTANTS.ALL, "18-30", "31-40", "41-50", "51-60", "61-100")
     }
 
 

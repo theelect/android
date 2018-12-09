@@ -73,6 +73,7 @@ interface Constants {
         const val LAST_CHECKED_POSITION = "position"
 
         const val OCCUPATION = "profession"
+        const val ALL: String = "All"
     }
 
 }

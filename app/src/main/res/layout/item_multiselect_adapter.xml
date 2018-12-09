@@ -5,12 +5,12 @@
     <data>
 
         <variable
-            name="item"
-            type="com.tonyecoleelection.android.model.locale.LGA" />
-
-        <variable
             name="checked"
             type="Boolean" />
+
+        <variable
+            name="item"
+            type="String" />
 
     </data>
 
@@ -35,24 +35,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:id="@+id/title"
-            android:text="@{item.nameCapitalized}"
+            android:text="@{item}"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="@+id/checkBox"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toTopOf="@+id/checkBox" />
-
-
-        <ImageView
-            android:id="@+id/caret"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -5,7 +5,6 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -14,16 +13,17 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.RadioButton
 import com.tonyecoleelection.android.R
+import com.tonyecoleelection.android.di.DIConstants
 import com.tonyecoleelection.android.ui.adapters.filters.FiltersAdapter
+import com.tonyecoleelection.android.ui.adapters.filters.MultiSelectAdapter
 import com.tonyecoleelection.android.ui.base.BaseMVVMFragment
 import com.tonyecoleelection.android.ui.filters.FiltersActivity.Companion.FILTER_TASK_DATA
 import com.tonyecoleelection.android.utils.appCompatActivity
 import com.tonyecoleelection.android.utils.common.NotNullObserver
-import com.tonyecoleelection.android.utils.dpToPx
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_filters.*
-import org.jetbrains.anko.textColor
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
@@ -31,6 +31,15 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
     @Inject
     lateinit var filtersAdapter: FiltersAdapter
+
+
+    @Inject
+    @field:[Named(DIConstants.DATA_SHARE_MODULE.PROFESSIONS_FILTER_LIST)]
+    lateinit var professionsAdapter: MultiSelectAdapter
+
+    @Inject
+    @field:[Named(DIConstants.DATA_SHARE_MODULE.AGE_GROUPS_FILTER_LIST)]
+    lateinit var ageGroupsAdapter: MultiSelectAdapter
 
 
     override val layoutResID: Int
@@ -43,6 +52,17 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
         }
     }
+
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        filtersAdapter.clearSelection()
+//    }
+
 
     @Inject
     override fun injectViewModel(viewModel: FiltersViewModel) {
@@ -62,11 +82,14 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
         initToolbar(toolbar, "Filters")
 
-        val manager = LinearLayoutManager(context!!)
-        expandable_layout.layoutManager = manager
+        val lgaFiltersLayoutManager = LinearLayoutManager(context!!)
+        expandable_layout.layoutManager = lgaFiltersLayoutManager
         filtersAdapter.shouldShowHeadersForEmptySections(true)
         filtersAdapter.shouldShowFooters(false)
         expandable_layout.adapter = filtersAdapter
+
+        professions.adapter = professionsAdapter
+        age_groups.adapter = ageGroupsAdapter
 
         val titles = listOf("LGA", "Profession", "Age")
 
@@ -96,15 +119,12 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
         })
 
         getViewModel().occupations.observe(this, NotNullObserver {
-            initRadioButtons(it)
+            professionsAdapter.addData(it)
         })
 
-        age_groups.setOnCheckedChangeListener { radioGroup, i ->
-            val checkedRadioButtonId = age_groups.checkedRadioButtonId
-            val radioBtn = age_groups.findViewById(checkedRadioButtonId) as RadioButton
-
-            getViewModel().filterByAgeGroup(radioBtn.text.toString())
-        }
+        getViewModel().ageGroups.observe(this, NotNullObserver {
+            ageGroupsAdapter.addData(it)
+        })
 
         clear_filters_button.setOnClickListener {
             filtersAdapter.clearSelection()
@@ -112,11 +132,10 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
             setResult()
         }
 
-
         apply_filters_button.setOnClickListener {
             setResult()
         }
-
+        
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -153,25 +172,25 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
         activity?.finish()
     }
 
-    private fun initRadioButtons(list: List<String>) {
-        list.forEachIndexed { index, s ->
-            val radioButton = RadioButton(context)
-            radioButton.textColor = ContextCompat.getColor(context!!, R.color.colorAccent)
-            radioButton.highlightColor = ContextCompat.getColor(context!!, R.color.colorAccent)
-            radioButton.setPadding(context!!.dpToPx(16), context!!.dpToPx(8), context!!.dpToPx(16), context!!.dpToPx(8))
-            radioButton.text = s
-            radioButton.id = index
-            professions.addView(radioButton)
-        }
-
-        //set listener to radio button group
-        professions.setOnCheckedChangeListener { _, _ ->
-            val checkedRadioButtonId = professions.checkedRadioButtonId
-            val radioBtn = professions.findViewById(checkedRadioButtonId) as RadioButton
-            getViewModel().setSelectedOccupation(radioBtn.text.toString())
-        }
-
-    }
+//    private fun initRadioButtons(list: List<String>) {
+//        list.forEachIndexed { index, s ->
+//            val radioButton = RadioButton(context)
+//            radioButton.textColor = ContextCompat.getColor(context!!, R.color.colorAccent)
+//            radioButton.highlightColor = ContextCompat.getColor(context!!, R.color.colorAccent)
+//            radioButton.setPadding(context!!.dpToPx(16), context!!.dpToPx(8), context!!.dpToPx(16), context!!.dpToPx(8))
+//            radioButton.text = s
+//            radioButton.id = index
+//            professions.addView(radioButton)
+//        }
+//
+//        //set listener to radio button group
+//        professions.setOnCheckedChangeListener { _, _ ->
+//            val checkedRadioButtonId = professions.checkedRadioButtonId
+//            val radioBtn = professions.findViewById(checkedRadioButtonId) as RadioButton
+//            getViewModel().setSelectedOccupation(radioBtn.text.toString())
+//        }
+//
+//    }
 
     private fun initToolbar(toolbar: Toolbar, title: String) {
         appCompatActivity().setSupportActionBar(toolbar)

@@ -84,8 +84,6 @@ class AppModule {
         return restartHelper
     }
 
-
-
     @ApplicationScope
     @Provides
     @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_WARDS_LIST)
@@ -97,6 +95,21 @@ class AppModule {
     @Provides
     @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_LGAS_LIST)
     fun providesSelectedLGAList(): MutableList<String> {
+        return mutableListOf()
+    }
+
+
+    @ApplicationScope
+    @Provides
+    @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_PROFESSIONS_LIST)
+    fun providesSelectedProfessionsList(): MutableList<String> {
+        return mutableListOf()
+    }
+
+    @ApplicationScope
+    @Provides
+    @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_AGE_GROUPS_LIST)
+    fun providesSelectedAgeGroupList(): MutableList<String> {
         return mutableListOf()
     }
 

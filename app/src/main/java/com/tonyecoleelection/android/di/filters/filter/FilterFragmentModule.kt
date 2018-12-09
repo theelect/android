@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import com.tonyecoleelection.android.di.DIConstants
 import com.tonyecoleelection.android.di.scopes.FragmentScope
 import com.tonyecoleelection.android.ui.adapters.filters.FiltersAdapter
+import com.tonyecoleelection.android.ui.adapters.filters.MultiSelectAdapter
 import com.tonyecoleelection.android.ui.filters.FiltersFragment
 import com.tonyecoleelection.android.ui.filters.FiltersViewModel
 import com.tonyecoleelection.android.utils.ViewModelFactory
@@ -52,5 +53,19 @@ class FilterFragmentModule {
         return FiltersAdapter(params, selectedLGAs, selectedWards)
     }
 
+
+    @FragmentScope
+    @Named(DIConstants.DATA_SHARE_MODULE.AGE_GROUPS_FILTER_LIST)
+    @Provides
+    fun providesAgeFiltersAdapter(@Named(DIConstants.DATA_SHARE_MODULE.SELECTED_AGE_GROUPS_LIST) selectedWards: MutableList<String>): MultiSelectAdapter {
+        return MultiSelectAdapter(mutableListOf(), selectedWards)
+    }
+
+    @FragmentScope
+    @Named(DIConstants.DATA_SHARE_MODULE.PROFESSIONS_FILTER_LIST)
+    @Provides
+    fun providesProfessionFiltersAdapter(@Named(DIConstants.DATA_SHARE_MODULE.SELECTED_PROFESSIONS_LIST) selectedWards: MutableList<String>): MultiSelectAdapter {
+        return MultiSelectAdapter(mutableListOf(), selectedWards)
+    }
 
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
-import android.widget.RadioButton
 import android.widget.TextView
 import com.tonyecoleelection.android.BR
 import com.tonyecoleelection.android.R
@@ -116,7 +115,7 @@ class FiltersAdapter(val params: Params,
     class LGAHeaderVH(itemView: View, val adapter: FiltersAdapter, val binding: ViewDataBinding, val params: Params) : SectionedViewHolder(itemView) {
 
         val caret: ImageView = itemView.findViewById(R.id.caret)
-        val radioButton: CheckBox = itemView.findViewById(R.id.radioButton)
+        val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
         val title: TextView = itemView.findViewById(R.id.title)
         var lga: LGA? = null
 
@@ -140,7 +139,7 @@ class FiltersAdapter(val params: Params,
             binding.setVariable(BR.item, lga)
             binding.setVariable(BR.checked, isChecked)
 
-            radioButton.setOnCheckedChangeListener { compoundButton, b ->
+            checkBox.setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
                     adapter.addVHToCheckedLGAList(lga.name)
                 } else {
