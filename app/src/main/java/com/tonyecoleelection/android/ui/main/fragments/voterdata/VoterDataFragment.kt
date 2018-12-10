@@ -11,6 +11,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import com.tonyecoleelection.android.R
+import com.tonyecoleelection.android.di.DIConstants
 import com.tonyecoleelection.android.model.pvc.PVCData
 import com.tonyecoleelection.android.ui.adapters.base.SingleLayoutAdapter
 import com.tonyecoleelection.android.ui.base.BaseMVVMFragment
@@ -20,6 +21,7 @@ import com.tonyecoleelection.android.views.decorators.SpacingItemDecoration
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_voter_data.*
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
@@ -29,6 +31,36 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
 
     @Inject
     lateinit var adapter: SingleLayoutAdapter<PVCData>
+
+    @Inject
+    @field:[Named(DIConstants.DATA_SHARE_MODULE.SELECTED_AGE_GROUPS_LIST)]
+    lateinit var selectedAgeGroups: MutableList<String>
+
+    @Inject
+    @field:[Named(DIConstants.DATA_SHARE_MODULE.SELECTED_PROFESSIONS_LIST)]
+    lateinit var selectedOccupations: MutableList<String>
+
+    @Inject
+    @field:[Named(DIConstants.DATA_SHARE_MODULE.SELECTED_WARDS_LIST)]
+    lateinit var selectedWards: MutableList<String>
+
+    @Inject
+    @field:[Named(DIConstants.DATA_SHARE_MODULE.SELECTED_LGAS_LIST)]
+    lateinit var selectedLGAs: MutableList<String>
+
+    override fun onDestroy() {
+        super.onDestroy()
+//        selectedAgeGroups.clear()
+//        selectedOccupations.clear()
+//        selectedWards.clear()
+//        selectedLGAs.clear()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+    }
+
 
     @Inject
     override fun injectViewModel(viewModel: VoterDataViewModel) {
@@ -64,8 +96,16 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
         var name: String? = arguments?.getString(NAME)
         var mode: Int? = arguments?.getInt(MODE)
 
-        if (name != null && mode != null && mode!=0) {
+        if (name != null && mode != null && mode != 0) {
             getViewModel().setNameAndMode(name, mode)
+            selectedLGAs.clear()
+            selectedWards.clear()
+
+            if(mode == 2){
+                selectedLGAs.add(name)
+            }else{
+                selectedWards.add(name)
+            }
         } else {
             getViewModel().runQuery()
         }
@@ -78,7 +118,7 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
                 val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
 
                 if (visibleItemCount + pastVisibleItems >= totalItemCount && !getViewModel().fetchingMore()) {
-                   getViewModel().getMore()
+                    getViewModel().getMore()
                 }
 
             }
@@ -97,7 +137,6 @@ class VoterDataFragment : BaseMVVMFragment<VoterDataViewModel>() {
         super.hideLoading()
         swipe_to_refresh.isRefreshing = false
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

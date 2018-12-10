@@ -67,9 +67,11 @@ interface Constants {
         const val WARD = "ward"
         const val AGE_MIN = "age_min"
         const val AGE_MAX = "age_max"
+        const val AGE = "age"
 
-        const val PAGE_COUNT = 10
+        const val PAGE_COUNT = 40
         const val CURRENT_PAGE = "page"
+        const val PER_PAGE = "perPage"
         const val LAST_CHECKED_POSITION = "position"
 
         const val OCCUPATION = "profession"

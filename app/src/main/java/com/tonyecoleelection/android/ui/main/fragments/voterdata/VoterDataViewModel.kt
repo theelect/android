@@ -25,6 +25,16 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
     val params = Params.create()
     var isFetching: Boolean = false
 
+    override fun setUp() {
+        super.setUp()
+        params.putInt(Constants.FILTER_CONSTANTS.PER_PAGE, Constants.FILTER_CONSTANTS.PAGE_COUNT)
+    }
+
+
+    fun clearFilters(){
+        params.clear()
+    }
+
     fun queryWithFilters(hashMap: HashMap<String, Any>) {
         params.clear()
         for (mutableEntry in hashMap) {
@@ -35,11 +45,13 @@ class VoterDataViewModel(var fetchPVCDataFromCacheUseCase: FetchPVCDataFromServe
 
 
     fun resetPage(){
+        params.putInt(Constants.FILTER_CONSTANTS.PER_PAGE, Constants.FILTER_CONSTANTS.PAGE_COUNT)
         params.putInt(Constants.FILTER_CONSTANTS.CURRENT_PAGE, 1)
     }
 
     fun runQuery() {
-        addDisposable(fetchPVCDataFromCacheUseCase.execute(params)
+        addDisposable(
+                fetchPVCDataFromCacheUseCase.execute(params)
                 .doOnSubscribe {
                     showLoading()
                     isFetching = true

@@ -26,6 +26,8 @@ import android.util.TypedValue
 import android.text.StaticLayout
 import android.text.Layout
 import android.text.TextPaint
+import android.widget.CheckBox
+import android.widget.CompoundButton
 
 
 /**
@@ -40,6 +42,12 @@ inline fun Activity.dpToPx(dp: Int): Int {
 inline fun Context.dpToPx(dp: Int): Int {
     var displayMetrics = resources.displayMetrics
     return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+}
+
+fun CheckBox.setCheckedWithOutTrigger(value: Boolean, listener: CompoundButton.OnCheckedChangeListener) {
+    setOnCheckedChangeListener(null)
+    isChecked = value
+    setOnCheckedChangeListener(listener)
 }
 
 fun Context.getHeightForText(text: String, textSize: Int): Float {

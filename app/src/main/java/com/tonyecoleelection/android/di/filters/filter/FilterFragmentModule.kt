@@ -57,15 +57,15 @@ class FilterFragmentModule {
     @FragmentScope
     @Named(DIConstants.DATA_SHARE_MODULE.AGE_GROUPS_FILTER_LIST)
     @Provides
-    fun providesAgeFiltersAdapter(@Named(DIConstants.DATA_SHARE_MODULE.SELECTED_AGE_GROUPS_LIST) selectedWards: MutableList<String>): MultiSelectAdapter {
-        return MultiSelectAdapter(mutableListOf(), selectedWards)
+    fun providesAgeFiltersAdapter(@Named(DIConstants.DATA_SHARE_MODULE.SELECTED_AGE_GROUPS_LIST) selected: MutableList<String>): MultiSelectAdapter {
+        return MultiSelectAdapter(mutableListOf(), selected)
     }
 
     @FragmentScope
     @Named(DIConstants.DATA_SHARE_MODULE.PROFESSIONS_FILTER_LIST)
     @Provides
-    fun providesProfessionFiltersAdapter(@Named(DIConstants.DATA_SHARE_MODULE.SELECTED_PROFESSIONS_LIST) selectedWards: MutableList<String>): MultiSelectAdapter {
-        return MultiSelectAdapter(mutableListOf(), selectedWards)
+    fun providesProfessionFiltersAdapter(@Named(DIConstants.DATA_SHARE_MODULE.SELECTED_PROFESSIONS_LIST) selected: MutableList<String>): MultiSelectAdapter {
+        return MultiSelectAdapter(mutableListOf(), selected)
     }
 
 }

@@ -103,14 +103,17 @@ class AppModule {
     @Provides
     @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_PROFESSIONS_LIST)
     fun providesSelectedProfessionsList(): MutableList<String> {
-        return mutableListOf()
-    }
+        val list = mutableListOf<String>()
+       // list.add(Constants.FILTER_CONSTANTS.ALL)
+        return list    }
 
     @ApplicationScope
     @Provides
     @Named(DIConstants.DATA_SHARE_MODULE.SELECTED_AGE_GROUPS_LIST)
     fun providesSelectedAgeGroupList(): MutableList<String> {
-        return mutableListOf()
+        val list = mutableListOf<String>()
+       // list.add(Constants.FILTER_CONSTANTS.ALL)
+        return list
     }
 
 }

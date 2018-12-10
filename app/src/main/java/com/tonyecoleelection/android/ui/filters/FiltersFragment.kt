@@ -54,16 +54,6 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
     }
 
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        filtersAdapter.clearSelection()
-//    }
-
-
     @Inject
     override fun injectViewModel(viewModel: FiltersViewModel) {
         super.injectViewModel(viewModel)
@@ -128,6 +118,8 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
 
         clear_filters_button.setOnClickListener {
             filtersAdapter.clearSelection()
+            ageGroupsAdapter.clearSelection()
+            professionsAdapter.clearSelection()
             getViewModel().clearFilters()
             setResult()
         }
@@ -148,6 +140,7 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
             }
             R.id.clear_filters -> {
                 filtersAdapter.clearSelection()
+
                 getViewModel().clearFilters()
                 setResult()
                 // do stuff
@@ -165,6 +158,8 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
     private fun setResult() {
         getViewModel().setSelectedLGAs(filtersAdapter.getCheckedLGAs())
         getViewModel().setSelectedWards(filtersAdapter.getCheckedWards())
+        getViewModel().setSelectedAgeGroups(ageGroupsAdapter.selectedItems)
+        getViewModel().setSelectedOccupations(professionsAdapter.selectedItems)
 
         val data = Intent()
         data.putExtra(FILTER_TASK_DATA, getViewModel().getParams().getParameters())
@@ -172,25 +167,6 @@ class FiltersFragment : BaseMVVMFragment<FiltersViewModel>() {
         activity?.finish()
     }
 
-//    private fun initRadioButtons(list: List<String>) {
-//        list.forEachIndexed { index, s ->
-//            val radioButton = RadioButton(context)
-//            radioButton.textColor = ContextCompat.getColor(context!!, R.color.colorAccent)
-//            radioButton.highlightColor = ContextCompat.getColor(context!!, R.color.colorAccent)
-//            radioButton.setPadding(context!!.dpToPx(16), context!!.dpToPx(8), context!!.dpToPx(16), context!!.dpToPx(8))
-//            radioButton.text = s
-//            radioButton.id = index
-//            professions.addView(radioButton)
-//        }
-//
-//        //set listener to radio button group
-//        professions.setOnCheckedChangeListener { _, _ ->
-//            val checkedRadioButtonId = professions.checkedRadioButtonId
-//            val radioBtn = professions.findViewById(checkedRadioButtonId) as RadioButton
-//            getViewModel().setSelectedOccupation(radioBtn.text.toString())
-//        }
-//
-//    }
 
     private fun initToolbar(toolbar: Toolbar, title: String) {
         appCompatActivity().setSupportActionBar(toolbar)

@@ -7,24 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.CompoundButton
+import android.widget.CompoundButton.OnCheckedChangeListener
 import android.widget.TextView
 import com.tonyecoleelection.android.BR
 import com.tonyecoleelection.android.R
+import com.tonyecoleelection.android.utils.setCheckedWithOutTrigger
 import com.tonyecoleelection.android.views.sectionedadapter.SectionedViewHolder
+import com.tonyecoleelection.constants.Constants
+import kotlinx.android.synthetic.main.list_item_ward.view.*
 
 class MultiSelectAdapter(var items: MutableList<String>,
                          var selectedItems: MutableList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
-    var firstViewHolder: MultiSelectVH? = null
-
+    var multiSelectVH: MultiSelectVH? = null
 
     fun clearSelection() {
         selectedItems.clear()
-    }
-
-    fun deselectFirstViewHolder() {
-        firstViewHolder?.deselect()
     }
 
     fun addData(list: List<String>) {
@@ -41,13 +40,14 @@ class MultiSelectAdapter(var items: MutableList<String>,
     }
 
     override fun onBindViewHolder(p0: RecyclerView.ViewHolder, position: Int) {
-        var isSelected: Boolean = if (position == 0) {
-            selectedItems.isEmpty()
-        } else {
-            getIsItemSelected(items[position])
-        }
+//        var isSelected: Boolean = if (position == 0) {
+//            multiSelectVH = (p0 as MultiSelectVH)
+//            !selectedItems.isEmpty()
+//        } else {
+//            getIsItemSelected(items[position])
+//        }
 
-        (p0 as MultiSelectVH).bind(items[position], isSelected)
+        (p0 as MultiSelectVH).bind(items[position], getIsItemSelected(items[position]))
     }
 
     private fun getIsItemSelected(name: String): Boolean {
@@ -60,29 +60,28 @@ class MultiSelectAdapter(var items: MutableList<String>,
         val title: TextView = itemView.findViewById(R.id.title)
         var name: String? = null
 
+        val checkListener = OnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                adapter.addVHToCheckedList(name!!)
+            } else {
+                adapter.removeVHFromCheckedList(name!!)
+            }
+        }
 
         fun bind(name: String, isChecked: Boolean) {
             this.name = name
+            checkBox.setOnCheckedChangeListener(null)
             binding.setVariable(BR.item, name)
             binding.setVariable(BR.checked, isChecked)
-
-            checkBox.setOnCheckedChangeListener { compoundButton, b ->
-                if (b) {
-                    adapter.addVHToCheckedList(name)
-                } else {
-                    adapter.removeVHFromCheckedList(name)
-                }
-            }
-
+            checkBox.setOnCheckedChangeListener(checkListener)
             binding.executePendingBindings()
         }
 
-        fun deselect() {
-            checkBox.isChecked = false
-        }
 
-        fun select() {
-            checkBox.isChecked = true
+        fun setCheckedIfTitleIsAll(checked: Boolean) {
+            if (this.title.text == Constants.FILTER_CONSTANTS.ALL) {
+                checkBox.isChecked = checked
+            }
         }
 
         companion object {
@@ -96,19 +95,28 @@ class MultiSelectAdapter(var items: MutableList<String>,
 
 
     private fun addVHToCheckedList(name: String) {
-        if (!items.contains(name) && name != "All") {
-            items.add(name)
-        }
-        if(!items.isEmpty()){
-            firstViewHolder?.deselect()
+//
+//        if (name == Constants.FILTER_CONSTANTS.ALL) {
+//            selectedItems.clear()
+//        }else{
+//
+//        }
+//
+//        if (!selectedItems.isEmpty()) {
+//            notifyItemChanged(1, items.lastIndex)
+//        }
+
+        if (!selectedItems.contains(name)) {
+            selectedItems.add(name)
         }
     }
 
     private fun removeVHFromCheckedList(name: String) {
         selectedItems.add(name)
-        if(items.isEmpty()){
-            firstViewHolder?.select()
-        }
+
+//        if (selectedItems.isEmpty()) {
+//            notifyItemChanged(0)
+//        }
     }
 
 }

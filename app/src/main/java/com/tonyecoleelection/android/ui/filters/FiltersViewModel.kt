@@ -53,8 +53,8 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
                     hideLoading()
                 }
                 .subscribe({
-                   val temp = it.toMutableList()
-                    temp.add(0,Constants.FILTER_CONSTANTS.ALL)
+                    val temp = it.toMutableList()
+                    // temp.add(0,Constants.FILTER_CONSTANTS.ALL)
 
                     val formattedOccupations = temp.map {
                         it.capitalize()
@@ -66,7 +66,7 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
                     it.printStackTrace()
                 }))
 
-        ageGroups.value = mutableListOf(Constants.FILTER_CONSTANTS.ALL, "18-30", "31-40", "41-50", "51-60", "61-100")
+        ageGroups.value = mutableListOf("18-30", "31-40", "41-50", "51-60", "61-100")
     }
 
 
@@ -78,10 +78,13 @@ class FiltersViewModel(private val fetchLGADataUseCase: FetchLGADataUseCase,
         filterParams.putString(Constants.FILTER_CONSTANTS.WARD, TextUtils.join(",", ward))
     }
 
-    fun setSelectedOccupation(occupation: String) {
-        filterParams.putString(Constants.FILTER_CONSTANTS.OCCUPATION, occupation.toLowerCase())
+    fun setSelectedOccupations(occupation: List<String>) {
+        filterParams.putString(Constants.FILTER_CONSTANTS.OCCUPATION, TextUtils.join(",", occupation))
     }
 
+    fun setSelectedAgeGroups(ageGroups: List<String>) {
+        filterParams.putString(Constants.FILTER_CONSTANTS.AGE, TextUtils.join(",", ageGroups))
+    }
 
     fun getParams(): Params {
         cleanParams()
