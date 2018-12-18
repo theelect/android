@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tonyecoleelection.android">
 
+<!--
     <uses-permission android:name="android.permission.SEND_SMS" />
+-->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"

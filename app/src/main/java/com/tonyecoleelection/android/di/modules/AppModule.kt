@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.telephony.SmsManager
 import android.util.Log
+import com.google.android.gms.analytics.GoogleAnalytics
+import com.google.android.gms.analytics.Tracker
 import com.tonyecoleelection.android.utils.AppSchedulers
 import com.tonyecoleelection.android.utils.imageloader.ImageLoader
 import com.tonyecoleelection.android.utils.imageloader.PicassoImageLoader
@@ -14,7 +16,10 @@ import com.tonyecoleelection.android.di.scopes.ApplicationScope
 import com.tonyecoleelection.android.utils.IRestartHelper
 import com.tonyecoleelection.android.utils.RestartHelper
 import com.squareup.picasso.Picasso
+import com.tonyecoleelection.android.R
 import com.tonyecoleelection.android.di.DIConstants
+import com.tonyecoleelection.android.utils.tracker.AnalyticsTracker
+import com.tonyecoleelection.android.utils.tracker.IAnalyticsTracker
 import com.tonyecoleelection.constants.Constants
 import dagger.Module
 import dagger.Provides
@@ -115,5 +120,19 @@ class AppModule {
        // list.add(Constants.FILTER_CONSTANTS.ALL)
         return list
     }
+
+    @ApplicationScope
+    @Provides
+    fun providesAnalyticsTracker(analyticsTracker: AnalyticsTracker): IAnalyticsTracker {
+        return analyticsTracker
+    }
+
+
+    @ApplicationScope
+    @Provides
+    fun providesGoogleAnalytics(application: Application): Tracker {
+        return GoogleAnalytics.getInstance(application).newTracker(R.xml.global_tracker)
+    }
+
 
 }

@@ -76,6 +76,10 @@ dependencies {
             project(':constants')
     )
 
+    compile (appDependencies.googleAnalytics){
+        exclude module: 'support-v4'
+    }
+
     testCompile(
             testDependencies.junit,
             testDependencies.assertj,

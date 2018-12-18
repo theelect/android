@@ -24,6 +24,8 @@ import android.R.attr.gravity
 import android.support.design.widget.CoordinatorLayout
 import android.widget.FrameLayout
 import com.onurciner.toastox.ToastOX
+import com.tonyecoleelection.android.utils.tracker.IAnalyticsTracker
+import javax.inject.Inject
 
 
 /**
@@ -34,6 +36,8 @@ abstract class BaseMVVMFragment<V : BaseViewModel> : Fragment() {
 
     private lateinit var viewModel: V
 
+    @Inject
+    lateinit var analyticsTracker: IAnalyticsTracker
 
     open fun getViewModel(): V {
         return viewModel
@@ -51,6 +55,8 @@ abstract class BaseMVVMFragment<V : BaseViewModel> : Fragment() {
         super.onCreate(savedInstanceState)
 
         injectDependencies()
+
+        analyticsTracker.recordScreenView(this.javaClass.canonicalName)
 
     }
 

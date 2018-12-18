@@ -54,8 +54,10 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_marginEnd="16dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:text="@{`DISTRICT CO-ORDINATOR `+viewmodel.userData.ward}"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -165,6 +167,7 @@
                 android:layout_marginBottom="32dp"
                 android:background="@color/white"
                 android:text="VERIFY BY SMS"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/verify_by_app_button"
                 app:layout_constraintStart_toStartOf="@+id/verify_by_app_button" />

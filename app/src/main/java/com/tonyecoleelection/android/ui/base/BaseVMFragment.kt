@@ -19,7 +19,9 @@ import com.tonyecoleelection.android.utils.hideLoading
 import com.tonyecoleelection.android.utils.hideViewLoading
 import com.tonyecoleelection.android.utils.showLoading
 import com.tonyecoleelection.android.utils.showViewLoading
+import com.tonyecoleelection.android.utils.tracker.IAnalyticsTracker
 import com.tonyecoleelection.constants.Status
+import javax.inject.Inject
 
 /**
  * Created by f22labs on 07/03/17.
@@ -29,6 +31,8 @@ abstract class BaseVMFragment<V : BaseViewModel> : Fragment() {
 
     private lateinit var viewModel: V
 
+    @Inject
+    lateinit var analyticsTracker: IAnalyticsTracker
 
     open fun getViewModel(): V {
         return viewModel
@@ -47,6 +51,7 @@ abstract class BaseVMFragment<V : BaseViewModel> : Fragment() {
 
         injectDependencies()
 
+        analyticsTracker.recordScreenView(this.javaClass.canonicalName)
     }
 
 
