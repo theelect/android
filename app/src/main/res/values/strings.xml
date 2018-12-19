@@ -50,5 +50,7 @@
     <string name="navigation_drawer_open">OPEN</string>
     <string name="navigation_drawer_close">CLOSED</string>
     <string name="input_vin">Please input VIN</string>
+    <string name="input_reset_code">Input your reset code</string>
+    <string name="code">RESET CODE</string>
 
 </resources>

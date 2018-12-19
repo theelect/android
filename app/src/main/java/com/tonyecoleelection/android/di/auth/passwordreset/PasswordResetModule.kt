@@ -8,6 +8,7 @@ import com.tonyecoleelection.android.ui.auth.fragments.resetpassword.PasswordRes
 import com.tonyecoleelection.android.utils.ViewModelFactory
 import com.tonyecoleelection.domain.usecase.auth.RequestPasswordResetUseCase
 import com.tonyecoleelection.android.di.scopes.FragmentScope
+import com.tonyecoleelection.domain.usecase.auth.PasswordResetUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -20,8 +21,10 @@ class PasswordResetModule {
 
     @FragmentScope
     @Provides
-    fun providesOnBoardingViewModelFactory(authNavigator: IAuthNavigator, requestPasswordResetUseCase: RequestPasswordResetUseCase): ViewModelFactory<PasswordResetViewModel> {
-        return ViewModelFactory(lazyOf(PasswordResetViewModel(authNavigator, requestPasswordResetUseCase)))
+    fun providesOnBoardingViewModelFactory(authNavigator: IAuthNavigator,
+                                           passwordResetUseCase: PasswordResetUseCase,
+                                           requestPasswordResetUseCase: RequestPasswordResetUseCase): ViewModelFactory<PasswordResetViewModel> {
+        return ViewModelFactory(lazyOf(PasswordResetViewModel(authNavigator, passwordResetUseCase, requestPasswordResetUseCase)))
     }
 
     @FragmentScope

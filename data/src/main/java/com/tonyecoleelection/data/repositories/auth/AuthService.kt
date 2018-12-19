@@ -13,6 +13,12 @@ class AuthService @Inject constructor(var userCache: IUserCache,
                                       var userAccountTypeManager: IUserAccountTypeManager,
                                       var apiService: ApiService) : IAuthService {
 
+    override fun resetUserPassword(hashMap: Map<String, Any>): Observable<String> {
+        return apiService.updateUserPassword(hashMap).map {
+            return@map it.message
+        }
+    }
+
     override fun fetchUserWithToken(): Observable<Boolean> {
         return apiService.fetchUserData().map {
             userAccountTypeManager.saveUserAccountType(it.role ?: "")
@@ -29,7 +35,7 @@ class AuthService @Inject constructor(var userCache: IUserCache,
         }
     }
 
-    override fun resetUserPassword(hashMap: Map<String, Any>): Observable<String> {
+    override fun requestUserPasswordReset(hashMap: Map<String, Any>): Observable<String> {
         return apiService.requestPasswordReset(hashMap).map {
             return@map it.message
         }

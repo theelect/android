@@ -39,6 +39,11 @@ class UseCaseModule {
     }
 
     @Provides
+    fun providesPasswordResetUseCase(schedulers: Schedulers, authService: IAuthService): PasswordResetUseCase {
+        return PasswordResetUseCase(schedulers, authService)
+    }
+
+    @Provides
     fun providesRequestPasswordResetUseCase(schedulers: Schedulers, authService: IAuthService): RequestPasswordResetUseCase {
         return RequestPasswordResetUseCase(schedulers, authService)
     }

@@ -59,6 +59,7 @@ interface Constants {
             val WARD = "ward"
             val LGA = "lga"
             val VIN = "vin"
+            val RESET_CODE = "code"
         }
     }
 

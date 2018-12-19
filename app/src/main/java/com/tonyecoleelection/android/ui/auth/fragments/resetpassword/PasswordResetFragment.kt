@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.tonyecoleelection.android.R
 import com.tonyecoleelection.android.ui.auth.fragments.BaseAuthFragment
+import com.tonyecoleelection.android.utils.common.NotNullObserver
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_password_reset.*
 import javax.inject.Inject
@@ -37,7 +38,16 @@ class PasswordResetFragment : BaseAuthFragment<PasswordResetViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         submit_button.setOnClickListener {
-            getViewModel().resetPassword(email_edit_text.text.toString())
+            getViewModel().requestResetPassword(email_edit_text.text.toString())
+        }
+
+        getViewModel().currentlyDisplayedChild.observe(this, NotNullObserver {
+            view_flipper.displayedChild = it
+        })
+
+
+        submit_new_password_button.setOnClickListener {
+            getViewModel().resetPasswordWithCode(reset_code_edit_text.text.toString(), reset_code_edit_text.text.toString())
         }
 
     }
