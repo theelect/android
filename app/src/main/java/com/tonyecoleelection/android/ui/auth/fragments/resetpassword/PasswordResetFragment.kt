@@ -47,7 +47,7 @@ class PasswordResetFragment : BaseAuthFragment<PasswordResetViewModel>() {
 
 
         submit_new_password_button.setOnClickListener {
-            getViewModel().resetPasswordWithCode(reset_code_edit_text.text.toString(), reset_code_edit_text.text.toString())
+            getViewModel().resetPasswordWithCode(reset_code_edit_text.text.toString(), new_password_edit_text.text.toString())
         }
 
     }
