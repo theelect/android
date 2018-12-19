@@ -24,7 +24,7 @@ interface ApiService {
     @GET("user")
     fun fetchUserData(): Observable<UserEntity>
 
-    @POST("password-reset")
+    @POST("request-password-reset")
     fun requestPasswordReset(@Body body: Map<String, @JvmSuppressWildcards Any>): Observable<GenericResponse<Void>>
 
     @POST("pvc/verifyViaApp")
